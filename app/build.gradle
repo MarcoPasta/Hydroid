@@ -14,6 +14,16 @@ android {
         versionCode 1
         versionName "1.0"
 
+        //Configuring Compiler Options for Room
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,6 +43,7 @@ android {
 }
 
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs"
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

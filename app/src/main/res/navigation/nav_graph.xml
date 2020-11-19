@@ -19,4 +19,9 @@
         android:name="com.luan.hsworms.hydroid.UserInputFragment"
         android:label="user_input_fragment"
         tools:layout="@layout/user_input_fragment" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.luan.hsworms.hydroid.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment" />
 </navigation>
