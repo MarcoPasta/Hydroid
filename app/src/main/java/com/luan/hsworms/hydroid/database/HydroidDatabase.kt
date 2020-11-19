@@ -1,8 +1,8 @@
-package com.luan.hsworms.hydroit.database
+package com.luan.hsworms.hydroid.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.luan.hsworms.hydroit.UserData
+import com.luan.hsworms.hydroid.UserData
 
 @Database(entities = [UserData::class], version = 1)
 abstract class HydroitDatabase: RoomDatabase() {

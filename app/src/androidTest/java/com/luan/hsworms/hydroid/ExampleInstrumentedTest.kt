@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroit
+package com.luan.hsworms.hydroid
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.luan.hsworms.hydroit", appContext.packageName)
+        assertEquals("com.luan.hsworms.hydroid", appContext.packageName)
     }
 }

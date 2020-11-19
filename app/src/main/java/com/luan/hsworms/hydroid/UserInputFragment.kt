@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroit
+package com.luan.hsworms.hydroid
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle

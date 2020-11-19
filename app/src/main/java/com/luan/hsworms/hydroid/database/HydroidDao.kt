@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroit.database
+package com.luan.hsworms.hydroid.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

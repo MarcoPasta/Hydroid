@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroit
+package com.luan.hsworms.hydroid
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
