@@ -9,5 +9,14 @@
         android:id="@+id/logoFragment"
         android:name="com.luan.hsworms.hydroit.LogoFragment"
         android:label="fragment_logo"
-        tools:layout="@layout/fragment_logo" />
+        tools:layout="@layout/fragment_logo" >
+        <action
+            android:id="@+id/action_logoFragment_to_userInputFragment"
+            app:destination="@id/userInputFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInputFragment"
+        android:name="com.luan.hsworms.hydroit.UserInputFragment"
+        android:label="user_input_fragment"
+        tools:layout="@layout/user_input_fragment" />
 </navigation>
