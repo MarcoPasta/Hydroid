@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroit
+package com.luan.hsworms.hydroid
 
 import org.junit.Test
 
