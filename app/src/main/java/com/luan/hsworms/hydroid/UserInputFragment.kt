@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 
 class UserInputFragment : Fragment() {
 
@@ -19,6 +20,10 @@ class UserInputFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+//        val navController = this.findNavController()
+//        navController.navigate(R.id.action_userInputFragment_to_logoFragment)
+
         return inflater.inflate(R.layout.user_input_fragment, container, false)
     }
 

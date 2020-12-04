@@ -3,25 +3,25 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logoFragment">
+    app:startDestination="@id/mainFragment">
 
-    <fragment
-        android:id="@+id/logoFragment"
-        android:name="com.luan.hsworms.hydroid.LogoFragment"
-        android:label="fragment_logo"
-        tools:layout="@layout/fragment_logo" >
-        <action
-            android:id="@+id/action_logoFragment_to_userInputFragment"
-            app:destination="@id/userInputFragment" />
-    </fragment>
     <fragment
         android:id="@+id/userInputFragment"
         android:name="com.luan.hsworms.hydroid.UserInputFragment"
         android:label="user_input_fragment"
-        tools:layout="@layout/user_input_fragment" />
+        tools:layout="@layout/user_input_fragment"/>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.luan.hsworms.hydroid.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_userInputFragment"
+            app:destination="@id/userInputFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/splashScreen"
+        android:name="com.luan.hsworms.hydroid.SplashScreen"
+        android:label="activity_splash_screen"
+        tools:layout="@layout/activity_splash_screen" />
 </navigation>
