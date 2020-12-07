@@ -2,4 +2,10 @@
     <string name="app_name">Hydroid</string>
     <string name="logo_hydroit">Hydroid</string>
     <string name="logo_fragment_background_image">Glass of Water</string>
+    <string name="cancel">cancel</string>
+    <string name="nav_drawer_benutzerdaten">Benutzerdaten</string>
+    <string name="user_data_question">Wählen Sie Ihre Geschlecht und Gewicht</string>
+    <string name="user_data_sex_woman">Weiblich</string>
+    <string name="user_data_sex_man">Männlich</string>
+    <string name="user_input_weight_request">Geben Sie Ihr Gewicht in Kilogramm ein</string>
 </resources>

@@ -6,22 +6,22 @@
     app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/userInputFragment"
-        android:name="com.luan.hsworms.hydroid.UserInputFragment"
-        android:label="user_input_fragment"
-        tools:layout="@layout/user_input_fragment"/>
-    <fragment
         android:id="@+id/mainFragment"
         android:name="com.luan.hsworms.hydroid.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" >
         <action
-            android:id="@+id/action_mainFragment_to_userInputFragment"
-            app:destination="@id/userInputFragment" />
+            android:id="@+id/action_mainFragment_to_userDataDialogFragment"
+            app:destination="@id/userDataDialogFragment" />
     </fragment>
     <activity
         android:id="@+id/splashScreen"
         android:name="com.luan.hsworms.hydroid.SplashScreen"
         android:label="activity_splash_screen"
         tools:layout="@layout/activity_splash_screen" />
+    <fragment
+        android:id="@+id/userDataDialogFragment"
+        android:name="com.luan.hsworms.hydroid.UserDataDialogFragment"
+        android:label="user_data_dialog_fragment"
+        tools:layout="@layout/user_data_dialog_fragment" />
 </navigation>
