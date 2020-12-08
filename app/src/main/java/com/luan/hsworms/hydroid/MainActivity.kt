@@ -35,13 +35,13 @@ class MainActivity : AppCompatActivity() {
         //Add navigation drawer button in the app bar
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
 
-        //Handling Nawigation Drawer Clicks
+        //Handling Navigation Drawer Clicks
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.userDataDialogFragment) {
                 //Ready for implementation if needed
 
-//                val newFragment = UserDataDialogFragment()
-//                newFragment.show(supportFragmentManager, "userdata")
+                val newFragment = UserDataDialogFragment()
+                newFragment.show(supportFragmentManager, "userdata")
             }
         }
     }

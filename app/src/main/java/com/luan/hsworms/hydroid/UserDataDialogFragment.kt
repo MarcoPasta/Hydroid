@@ -35,12 +35,16 @@ import kotlinx.coroutines.NonCancellable.cancel
 //}
 
 class UserDataDialogFragment : DialogFragment() {
-    //When called from the navigation drawer
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var rootView:View = inflater.inflate(R.layout.user_data_dialog_fragment, container, false)
-        return  rootView
 
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
+//    //When called from the navigation drawer
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        var rootView:View = inflater.inflate(R.layout.user_data_dialog_fragment, null)
+//        return  rootView
+//
+//    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         Log.i("onCreateDialog","onCreateDialog")

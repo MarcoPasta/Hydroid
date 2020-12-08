@@ -11,8 +11,11 @@
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" >
         <action
-            android:id="@+id/action_mainFragment_to_userDataDialogFragment"
-            app:destination="@id/userDataDialogFragment" />
+            android:id="@+id/action_mainFragment_to_wetterDialogFragment"
+            app:destination="@id/wetterDialogFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sportFragment"
+            app:destination="@id/sportFragment" />
     </fragment>
     <activity
         android:id="@+id/splashScreen"
@@ -24,4 +27,14 @@
         android:name="com.luan.hsworms.hydroid.UserDataDialogFragment"
         android:label="user_data_dialog_fragment"
         tools:layout="@layout/user_data_dialog_fragment" />
+    <fragment
+        android:id="@+id/wetterDialogFragment"
+        android:name="com.luan.hsworms.hydroid.WetterDialogFragment"
+        android:label="fragment_wetter_dialog"
+        tools:layout="@layout/fragment_wetter_dialog" />
+    <fragment
+        android:id="@+id/sportFragment"
+        android:name="com.luan.hsworms.hydroid.SportFragment"
+        android:label="fragment_sport"
+        tools:layout="@layout/fragment_sport_dialog" />
 </navigation>

@@ -29,6 +29,16 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate<MainFragmentBinding>(inflater,
             R.layout.main_fragment, container, false)
 
+        binding.changeWeather.setOnClickListener{
+            val newFragment = WetterDialogFragment()
+            newFragment.show(parentFragmentManager,"wetter")
+        }
+
+        binding.addSport.setOnClickListener{
+            val newFragment = SportDialogFragment()
+            newFragment.show(parentFragmentManager, "sport")
+        }
+
         return  binding.root
     }
 
