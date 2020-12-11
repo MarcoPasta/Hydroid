@@ -8,7 +8,6 @@
     <string name="user_data_sex_woman">Weiblich</string>
     <string name="user_data_sex_man">Männlich</string>
     <string name="user_input_weight_request">Geben Sie Ihr Gewicht in Kilogramm ein</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="wetterdialog_anfrage">Wählen Sie das heutige Wetter</string>
+    <string name="preference_file_key">com.luan.hsworms.hydroid.PREFERENCE_FILE_KEY</string>
 </resources>

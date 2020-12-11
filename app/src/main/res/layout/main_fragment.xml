@@ -48,6 +48,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+        <!--TODO: Change ID of TextViews -->
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
