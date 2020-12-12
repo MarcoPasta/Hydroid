@@ -1,7 +1,7 @@
 package com.luan.hsworms.hydroid
 
+import android.app.AlertDialog
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import com.luan.hsworms.hydroid.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
@@ -27,6 +26,14 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        //Moved the initialization of view from onActivityCreated to onCreateView, since
+        // onCreateView occurs earlier and in it you can already work with variables from the view
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        //Initializing an object with user data with data from a file
+        viewModel.ourUserData = activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate<MainFragmentBinding>(inflater,
             R.layout.main_fragment, container, false)
@@ -41,21 +48,6 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "sport")
         }
 
-        //Moved the initialization of view from onActivityCreated to onCreateView, since
-        // onCreateView occurs earlier and in it you can already work with variables from the view
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-
-        //Block of OBSERVERS to the Live Data Objects
-        //TODO: Add implementation of observer methods
-
-        viewModel.currentlyDrunkLiquid.observe(viewLifecycleOwner, { newAge ->
-            binding.textView.text = newAge.toString()
-        })
-
-        viewModel.dailyLiquidRequirement.observe(viewLifecycleOwner, { newAge ->
-
-        })
 
         return  binding.root
     }
@@ -65,20 +57,71 @@ class MainFragment : Fragment() {
         Log.i("onActivityCreated", "onActivityCreated")
         super.onActivityCreated(savedInstanceState)
 
-        //Initializing an object with user data with data from a file
-        viewModel.ourUserData = activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+        viewModel.saveData(false,70,70,70)
+        //Calling the function of initializing variables with values from internal storage
+        viewModel.populateViewModel()
 
-        //The dialog is launched at the start of the application, only if the default values of the variables have not changed
+        //The user input dialog is launched at the start of the application,
+        // only if the default value of the weight ("0") have not changed
         //todo: Change the if-condition to ==
-        if(viewModel.ageOfUser.value != 0 || viewModel.weightOfUser.value != 0)
-            userInput()
+        //if(viewModel.weightOfUser.value != 0)
+            showUserInputDialog()
+
+
+        //TODO: Add implementation of observer methods
+        viewModel.weightOfUser.observe(viewLifecycleOwner, { newWeight ->
+            binding.textView.text = newWeight.toString()
+        })
+
+        viewModel.dailyLiquidRequirement.observe(viewLifecycleOwner, { newLiquedRequirement ->
+
+        })
     }
 
 
     //dialogFragment for entering user data
-    fun userInput() {
-        val newFragment = UserDataDialogFragment()
-        newFragment.show(childFragmentManager, "userdata")
-    }
+    fun showUserInputDialog() {
 
+        //Set Dialog variable and inflate ViewModel
+        val dialogView = layoutInflater.inflate(R.layout.user_data_dialog_fragment, null)
+        val dialogBuilder = AlertDialog.Builder(activity)
+            .setView(dialogView)
+            .setTitle(getString(R.string.user_input_dialog_titel))
+        val dialog = dialogBuilder.show()
+
+
+        //Cancel button -> leave the dialog
+        val cancelButton = dialogView.findViewById<Button>(R.id.imageButtonUserCancel)
+        cancelButton.setOnClickListener{
+            dialog.dismiss()
+        }
+
+
+        //Ok Button -> saving the entered parameters in the internal storage
+        val okButton = dialogView.findViewById<Button>(R.id.imageButtonUserOk)
+        okButton.setOnClickListener{
+            val genderSelected = dialogView.findViewById<RadioGroup>(R.id.radioGroupGender).checkedRadioButtonId
+            //If gender == woman =>true else false
+            viewModel.userGenderIsFemale.value = genderSelected.equals(R.id.radioButtonWoman)
+
+            //Checking in case of not entered value for weight
+            if (dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString() != ""){
+                viewModel.weightOfUser.value = dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString().toInt()
+                dialog.dismiss()
+                viewModel.saveData(viewModel.userGenderIsFemale.value!!, viewModel.weightOfUser.value!!,
+                    viewModel.dailyLiquidRequirement.value!!, viewModel.currentlyDrunkLiquid.value!!)
+            }else{
+                //Toast with a suggestion to enter weight
+                Toast.makeText(activity, "Geben Sie ihr Gewicht ein", Toast.LENGTH_SHORT).show()
+            }
+
+            //Logs for checking the correctness of processing the entered values
+            Log.i("inputDialog", viewModel.weightOfUser.value.toString())
+            Log.i("inputDialog", viewModel.userGenderIsFemale.value.toString())
+        }
+    }
 }
+
+
+//val newFragment = UserDataDialogFragment()
+//newFragment.show(childFragmentManager, "userdata")

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/userDataDialogFragment"
+        android:id="@+id/UserDataDialogFragment"
         android:icon="@android:drawable/ic_menu_edit"
         android:title="@string/nav_drawer_benutzerdaten" />
 </menu>

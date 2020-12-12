@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--TODO:Change layout titel-->
 <!--TODO: Add Header-->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
     android:padding="10dp">
 
     <TextView
@@ -16,7 +16,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        android:text="@string/user_data_question"/>
+        android:text="@string/user_data_question"
+        android:textColor="#285E8A"
+        android:textSize="20dp" />
 
 
     <EditText
@@ -24,11 +26,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="100"/>
+        android:hint="Geben Sie ihr Gewicht ein"
+        android:inputType="numberDecimal" />
 
     <RadioGroup
-        android:id="@+id/radioGroupSex"
+        android:id="@+id/radioGroupGender"
         android:layout_width="match_parent"
         android:layout_height="108dp">
 
@@ -36,15 +38,19 @@
             android:id="@+id/radioButtonWoman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="#285E8A"
             android:checked="true"
-            android:text="@string/user_data_sex_woman" />
+            android:text="@string/user_data_sex_woman"
+            android:textColor="#285E8A" />
 
         <RadioButton
             android:id="@+id/radioButtonMan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="#285E8A"
             android:checked="false"
-            android:text="@string/user_data_sex_man" />
+            android:text="@string/user_data_sex_man"
+            android:textColor="#285E8A" />
     </RadioGroup>
 
     <LinearLayout
@@ -66,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="@string/cancel" />
+            android:text="@android:string/cancel" />
     </LinearLayout>
 
 </LinearLayout>

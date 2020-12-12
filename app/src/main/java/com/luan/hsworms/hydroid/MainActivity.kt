@@ -1,5 +1,6 @@
 package com.luan.hsworms.hydroid
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -37,11 +38,16 @@ class MainActivity : AppCompatActivity() {
 
         //Handling Navigation Drawer Clicks
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.userDataDialogFragment) {
+            if (destination.id == R.id.UserDataDialogFragment) {
                 //Ready for implementation if needed
 
-                val newFragment = UserDataDialogFragment()
-                newFragment.show(supportFragmentManager, "userdata")
+//                val newFragment = UserDataDialogFragment()
+//                newFragment.show(supportFragmentManager, "userdata")
+                val dialog = AlertDialog.Builder(this)
+                val dialogView = layoutInflater.inflate(R.layout.user_data_dialog_fragment, null)
+                dialog.setView(dialogView)
+                //dialog.setCancelable(false)
+                dialog.show()
             }
         }
     }

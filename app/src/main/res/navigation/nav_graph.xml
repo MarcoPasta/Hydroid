@@ -23,7 +23,7 @@
         android:label="activity_splash_screen"
         tools:layout="@layout/activity_splash_screen" />
     <fragment
-        android:id="@+id/userDataDialogFragment"
+        android:id="@+id/UserDataDialogFragment"
         android:name="com.luan.hsworms.hydroid.UserDataDialogFragment"
         android:label="user_data_dialog_fragment"
         tools:layout="@layout/user_data_dialog_fragment" />

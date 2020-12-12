@@ -55,10 +55,11 @@ class UserDataDialogFragment : DialogFragment() {
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.user_data_dialog_fragment, null))
+            val userDataDialogView = inflater.inflate(R.layout.user_data_dialog_fragment, null)
+            builder.setView(userDataDialogView)
                 // Add action buttons
                 .setPositiveButton(R.string.cancel,
-                    DialogInterface.OnClickListener { dialog, id ->
+                    DialogInterface.OnClickListener { dialog, id,  ->
                         // sign in the user ...
                     })
 //                .setNegativeButton(R.string.cancel,
@@ -66,6 +67,9 @@ class UserDataDialogFragment : DialogFragment() {
 //                        getDialog()?.cancel()
 //                    })
                 .setTitle("Benutzerdaten")
+
+
+
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
