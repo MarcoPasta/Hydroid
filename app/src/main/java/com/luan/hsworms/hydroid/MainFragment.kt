@@ -48,7 +48,13 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "sport")
         }
 
+        //The user input dialog is launched at the start of the application,
+        // only if the default value of the weight ("0") have not changed
+        //todo: Change the if-condition to ==
+        //if(viewModel.weightOfUser.value != 0)
+        showUserInputDialog()
 
+        Log.i("on create view", viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString())
         return  binding.root
     }
 
@@ -56,17 +62,9 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.i("onActivityCreated", "onActivityCreated")
         super.onActivityCreated(savedInstanceState)
-
-        viewModel.saveData(false,70,70,70)
         //Calling the function of initializing variables with values from internal storage
+        viewModel.clearFile()
         viewModel.populateViewModel()
-
-        //The user input dialog is launched at the start of the application,
-        // only if the default value of the weight ("0") have not changed
-        //todo: Change the if-condition to ==
-        //if(viewModel.weightOfUser.value != 0)
-            showUserInputDialog()
-
 
         //TODO: Add implementation of observer methods
         viewModel.weightOfUser.observe(viewLifecycleOwner, { newWeight ->
@@ -110,13 +108,15 @@ class MainFragment : Fragment() {
                 dialog.dismiss()
                 viewModel.saveData(viewModel.userGenderIsFemale.value!!, viewModel.weightOfUser.value!!,
                     viewModel.dailyLiquidRequirement.value!!, viewModel.currentlyDrunkLiquid.value!!)
+                Toast.makeText(activity, getString(R.string.toast_daten_gesichert), Toast.LENGTH_SHORT).show()
             }else{
                 //Toast with a suggestion to enter weight
-                Toast.makeText(activity, "Geben Sie ihr Gewicht ein", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.toast_gewicht_eingeben), Toast.LENGTH_SHORT).show()
             }
 
             //Logs for checking the correctness of processing the entered values
             Log.i("inputDialog", viewModel.weightOfUser.value.toString())
+            Log.i("inputDialog", viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString())
             Log.i("inputDialog", viewModel.userGenderIsFemale.value.toString())
         }
     }

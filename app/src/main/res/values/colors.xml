@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="hydroit_primary">#2816f2</color>
+    <color name="hydroit_primary_variant">#211b66</color>
+    <color name="hydroit_secondary_variant">#18468c</color>
+    <color name="hydroit_secondary">#1ca4ad</color>
+    211b66
+
 </resources>

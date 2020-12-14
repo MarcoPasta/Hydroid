@@ -4,6 +4,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/UserDataDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -18,7 +19,7 @@
         android:layout_marginBottom="24dp"
         android:text="@string/user_data_question"
         android:textColor="#285E8A"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 
     <EditText
@@ -26,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Geben Sie ihr Gewicht ein"
+        android:hint="@string/edit_text_hint_weight_input"
         android:inputType="numberDecimal" />
 
     <RadioGroup

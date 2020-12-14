@@ -43,6 +43,13 @@ class MainViewModel : ViewModel() {
         editor?.apply()
     }
 
+    fun clearFile(){
+        val editor = ourUserData?.edit()
+        editor?.clear()
+        editor?.apply()
+
+    }
+
 
     //TODO: Add function to clear all user data in internal storage
     //TODO: Add the function of zeroing the value of the drunk liquid

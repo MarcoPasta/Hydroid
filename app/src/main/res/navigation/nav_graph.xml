@@ -16,17 +16,18 @@
         <action
             android:id="@+id/action_mainFragment_to_sportFragment"
             app:destination="@id/sportFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <activity
         android:id="@+id/splashScreen"
         android:name="com.luan.hsworms.hydroid.SplashScreen"
         android:label="activity_splash_screen"
         tools:layout="@layout/activity_splash_screen" />
-    <fragment
-        android:id="@+id/UserDataDialogFragment"
-        android:name="com.luan.hsworms.hydroid.UserDataDialogFragment"
-        android:label="user_data_dialog_fragment"
-        tools:layout="@layout/user_data_dialog_fragment" />
     <fragment
         android:id="@+id/wetterDialogFragment"
         android:name="com.luan.hsworms.hydroid.WetterDialogFragment"
@@ -37,4 +38,14 @@
         android:name="com.luan.hsworms.hydroid.SportFragment"
         android:label="fragment_sport"
         tools:layout="@layout/fragment_sport_dialog" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.luan.hsworms.hydroid.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.luan.hsworms.hydroid.NotificationFragment"
+        android:label="notification_fragment"
+        tools:layout="@layout/notification_fragment" />
 </navigation>
