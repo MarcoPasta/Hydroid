@@ -3,20 +3,49 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logoFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/logoFragment"
-        android:name="com.luan.hsworms.hydroid.LogoFragment"
-        android:label="fragment_logo"
-        tools:layout="@layout/fragment_logo" >
+        android:id="@+id/mainFragment"
+        android:name="com.luan.hsworms.hydroid.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment" >
         <action
-            android:id="@+id/action_logoFragment_to_userInputFragment"
-            app:destination="@id/userInputFragment" />
+            android:id="@+id/action_mainFragment_to_wetterDialogFragment"
+            app:destination="@id/wetterDialogFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sportFragment"
+            app:destination="@id/sportFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
+    <activity
+        android:id="@+id/splashScreen"
+        android:name="com.luan.hsworms.hydroid.SplashScreen"
+        android:label="activity_splash_screen"
+        tools:layout="@layout/activity_splash_screen" />
     <fragment
-        android:id="@+id/userInputFragment"
-        android:name="com.luan.hsworms.hydroid.UserInputFragment"
-        android:label="user_input_fragment"
-        tools:layout="@layout/user_input_fragment" />
+        android:id="@+id/wetterDialogFragment"
+        android:name="com.luan.hsworms.hydroid.WetterDialogFragment"
+        android:label="fragment_wetter_dialog"
+        tools:layout="@layout/fragment_wetter_dialog" />
+    <fragment
+        android:id="@+id/sportFragment"
+        android:name="com.luan.hsworms.hydroid.SportFragment"
+        android:label="fragment_sport"
+        tools:layout="@layout/fragment_sport_dialog" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.luan.hsworms.hydroid.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.luan.hsworms.hydroid.NotificationFragment"
+        android:label="notification_fragment"
+        tools:layout="@layout/notification_fragment" />
 </navigation>
