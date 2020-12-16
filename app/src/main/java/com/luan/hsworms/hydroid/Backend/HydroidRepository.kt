@@ -1,10 +1,9 @@
-package com.luan.hsworms.hydroid
+package com.luan.hsworms.hydroid.Backend
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
-import com.luan.hsworms.hydroid.database.HydroitDao
-import com.luan.hsworms.hydroid.database.HydroitDatabase
+import com.luan.hsworms.hydroid.Backend.HydroitDatabase
 
 private const val DATABASE_NAME = "hydroit-database" //File name for Database
 

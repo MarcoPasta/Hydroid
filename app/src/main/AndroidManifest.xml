@@ -3,7 +3,7 @@
     package="com.luan.hsworms.hydroid">
 
     <application
-        android:name=".HydroidApplication"
+        android:name=".Backend.HydroidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"
-            android:theme="@style/Theme.Hydroit.NoActionBar">
+            android:theme="@style/Theme.Hydroit.NoActionBar"
+            android:screenOrientation="portrait">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 

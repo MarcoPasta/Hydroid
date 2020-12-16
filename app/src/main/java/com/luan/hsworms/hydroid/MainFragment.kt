@@ -32,18 +32,23 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         //Initializing an object with user data with data from a file
-        viewModel.ourUserData = activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+        viewModel.ourUserData = activity?.getSharedPreferences(
+            getString(R.string.preference_file_key),
+            Context.MODE_PRIVATE
+        )
 
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate<MainFragmentBinding>(inflater,
-            R.layout.main_fragment, container, false)
-        
-        binding.changeWeather.setOnClickListener{
+        binding = DataBindingUtil.inflate<MainFragmentBinding>(
+            inflater,
+            R.layout.main_fragment, container, false
+        )
+
+        binding.changeWeather.setOnClickListener {
             val newFragment = WetterDialogFragment()
-            newFragment.show(parentFragmentManager,"wetter")
+            newFragment.show(parentFragmentManager, "wetter")
         }
 
-        binding.addSport.setOnClickListener{
+        binding.addSport.setOnClickListener {
             val newFragment = SportDialogFragment()
             newFragment.show(parentFragmentManager, "sport")
         }
@@ -54,8 +59,11 @@ class MainFragment : Fragment() {
         //if(viewModel.weightOfUser.value != 0)
         showUserInputDialog()
 
-        Log.i("on create view", viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString())
-        return  binding.root
+        Log.i(
+            "on create view",
+            viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString()
+        )
+        return binding.root
     }
 
 
@@ -90,33 +98,50 @@ class MainFragment : Fragment() {
 
         //Cancel button -> leave the dialog
         val cancelButton = dialogView.findViewById<Button>(R.id.imageButtonUserCancel)
-        cancelButton.setOnClickListener{
+        cancelButton.setOnClickListener {
             dialog.dismiss()
         }
 
 
         //Ok Button -> saving the entered parameters in the internal storage
         val okButton = dialogView.findViewById<Button>(R.id.imageButtonUserOk)
-        okButton.setOnClickListener{
-            val genderSelected = dialogView.findViewById<RadioGroup>(R.id.radioGroupGender).checkedRadioButtonId
+        okButton.setOnClickListener {
+            val genderSelected =
+                dialogView.findViewById<RadioGroup>(R.id.radioGroupGender).checkedRadioButtonId
             //If gender == woman =>true else false
-            viewModel.userGenderIsFemale.value = genderSelected.equals(R.id.radioButtonWoman)
+            viewModel.userGenderIsFemale.value = (genderSelected == R.id.radioButtonWoman)
 
             //Checking in case of not entered value for weight
-            if (dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString() != ""){
-                viewModel.weightOfUser.value = dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString().toInt()
+            if (dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString() != "") {
+                viewModel.weightOfUser.value =
+                    dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
+                        .toInt()
                 dialog.dismiss()
-                viewModel.saveData(viewModel.userGenderIsFemale.value!!, viewModel.weightOfUser.value!!,
-                    viewModel.dailyLiquidRequirement.value!!, viewModel.currentlyDrunkLiquid.value!!)
-                Toast.makeText(activity, getString(R.string.toast_daten_gesichert), Toast.LENGTH_SHORT).show()
-            }else{
+                viewModel.saveData(
+                    viewModel.userGenderIsFemale.value!!, viewModel.weightOfUser.value!!,
+                    viewModel.dailyLiquidRequirement.value!!, viewModel.currentlyDrunkLiquid.value!!
+                )
+                Toast.makeText(
+                    activity,
+                    getString(R.string.toast_daten_gesichert),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
                 //Toast with a suggestion to enter weight
-                Toast.makeText(activity, getString(R.string.toast_gewicht_eingeben), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    getString(R.string.toast_gewicht_eingeben),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             //Logs for checking the correctness of processing the entered values
             Log.i("inputDialog", viewModel.weightOfUser.value.toString())
-            Log.i("inputDialog", viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString())
+            Log.i(
+                "inputDialog",
+                viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0)
+                    .toString()
+            )
             Log.i("inputDialog", viewModel.userGenderIsFemale.value.toString())
         }
     }
