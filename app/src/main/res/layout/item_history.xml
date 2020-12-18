@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="#FAF5CC">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/item_liquid_drunk"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
@@ -19,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/item_liquid_requirement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -27,40 +28,40 @@
         android:textColor="@color/hydroit_primary_variant"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/divider2"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/item_liquid_drunk" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/item_procent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="% the daily need"
         android:textColor="@color/hydroit_primary"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/item_weight"
+        app:layout_constraintTop_toTopOf="@+id/item_liquid_drunk" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/item_weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Weight"
         android:textColor="@color/purple_200"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/item_liquid_requirement"
+        app:layout_constraintTop_toBottomOf="@+id/item_procent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/item_image_delete"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/delete_button"
         android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/item_liquid_requirement"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/item_liquid_drunk"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
 
@@ -70,8 +71,8 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/item_image_delete"
+        app:layout_constraintStart_toEndOf="@+id/item_image_delete"
+        app:layout_constraintTop_toTopOf="@+id/item_image_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

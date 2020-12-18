@@ -76,7 +76,7 @@ class MainFragment : Fragment() {
 
         //TODO: Add implementation of observer methods
         viewModel.weightOfUser.observe(viewLifecycleOwner, { newWeight ->
-            binding.textView.text = newWeight.toString()
+            binding.itemLiquidDrunk.text = newWeight.toString()
         })
 
         viewModel.dailyLiquidRequirement.observe(viewLifecycleOwner, { newLiquedRequirement ->

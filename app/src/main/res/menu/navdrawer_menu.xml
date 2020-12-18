@@ -20,6 +20,11 @@
             android:icon="@drawable/ic_notification"
             android:title="@string/nav_drawer_notifications"
             />
+        <item
+            android:id="@+id/historyFragment"
+            android:icon="@drawable/ic_list"
+            android:title="@string/history"
+            />
 
     </group>
 
