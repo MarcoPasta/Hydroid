@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/item_procent"
+            android:id="@+id/item_requirement"
             android:layout_width="89dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

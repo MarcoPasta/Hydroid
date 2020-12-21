@@ -111,11 +111,21 @@ class MainFragment : Fragment() {
             //If gender == woman =>true else false
             viewModel.userGenderIsFemale.value = (genderSelected == R.id.radioButtonWoman)
 
+            var weightTemp: Int = 0
             //Checking in case of not entered value for weight
             if (dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString() != "") {
-                viewModel.weightOfUser.value =
-                    dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
-                        .toInt()
+                weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
+                    .toInt()
+
+                //Correction of entered weight to match value tables
+                if(weightTemp > 140 )
+                    weightTemp = 140
+                if (weightTemp < 20)
+                    weightTemp = 20
+
+                viewModel.weightOfUser.value = weightTemp
+                 //   dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
+                 //       .toInt()
                 dialog.dismiss()
                 viewModel.saveData(
                     viewModel.userGenderIsFemale.value!!, viewModel.weightOfUser.value!!,

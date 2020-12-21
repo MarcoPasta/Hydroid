@@ -8,48 +8,38 @@
     android:background="#FAF5CC">
 
     <TextView
-        android:id="@+id/item_liquidDrunk"
+        android:id="@+id/item_gender"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:text="V of liquid drunk"
+        android:text="Gender"
         android:textColor="@color/hydroit_primary"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/divider2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/item_liquid_requirement"
+        android:id="@+id/item_weight_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="Daily fluid requirement"
-        android:textColor="@color/hydroit_primary_variant"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/divider2"
-        app:layout_constraintTop_toBottomOf="@+id/item_liquidDrunk" />
-
-    <TextView
-        android:id="@+id/item_daily_requirement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="% the daily need"
+        android:text="Weight"
         android:textColor="@color/hydroit_primary"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/item_weight"
-        app:layout_constraintTop_toTopOf="@+id/item_liquidDrunk" />
+        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintTop_toBottomOf="@+id/item_gender" />
 
     <TextView
-        android:id="@+id/item_weight"
+        android:id="@+id/item_requirement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Weight"
-        android:textColor="@color/purple_200"
+        android:text="Requirement"
+        android:textColor="@color/teal_200"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/item_liquid_requirement"
-        app:layout_constraintTop_toBottomOf="@+id/item_daily_requirement" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_gender"
+        app:layout_constraintTop_toTopOf="@+id/item_gender" />
 
     <ImageView
         android:id="@+id/item_image_delete"
@@ -61,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/item_liquid_requirement"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_liquidDrunk"
+        app:layout_constraintTop_toTopOf="@+id/item_gender"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
 

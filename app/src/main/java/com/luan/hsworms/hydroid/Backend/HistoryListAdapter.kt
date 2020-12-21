@@ -1,6 +1,5 @@
 package com.luan.hsworms.hydroid.Backend
 
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,10 +28,10 @@ class HistoryListAdapter(var content:ArrayList<String>):RecyclerView.Adapter<His
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
-        var tvDrunk: TextView = itemView.findViewById(R.id.item_liquid_drunk)
-        var tvRequirement: TextView = itemView.findViewById(R.id.item_liquid_requirement)
-        var tvProcent: TextView = itemView.findViewById(R.id.item_procent)
+        var tvDrunk: TextView = itemView.findViewById(R.id.item_liquidDrunk)
+        var tvLiquidRequirement: TextView = itemView.findViewById(R.id.item_liquid_requirement)
+        var tvRequirement: TextView = itemView.findViewById(R.id.item_daily_requirement)
+        var tvProcent: TextView = itemView.findViewById(R.id.item_weight)
         var imageDelete: ImageView = itemView.findViewById(R.id.item_image_delete)
-
     }
 }
