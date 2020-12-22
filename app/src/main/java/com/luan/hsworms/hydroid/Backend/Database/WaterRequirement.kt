@@ -8,5 +8,5 @@ data class WaterRequirement(
     @PrimaryKey(autoGenerate = true) var idReq:Long,
     var genderWoman:Boolean,
     var weight:Int,
-    var rquirements:Int
+    var requirements:Int
 )
