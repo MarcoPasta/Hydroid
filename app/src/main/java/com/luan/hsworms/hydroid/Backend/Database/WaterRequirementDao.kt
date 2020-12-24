@@ -14,8 +14,8 @@ interface WaterRequirementDao {
     @Update
     suspend fun update(waterRequirement: WaterRequirement)
 
-    @Query("SELECT * FROM WaterRequirement WHERE weight = :weightIn AND genderWoman = :genderIn")
-    suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Boolean):WaterRequirement
+    @Query("SELECT requirements FROM WaterRequirement WHERE weight = :weightIn AND genderWoman = :genderIn")
+    suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Boolean):Int
 
     @Query("SELECT * FROM WaterRequirement")
     suspend fun  getWaterRequirements():List<WaterRequirement>
