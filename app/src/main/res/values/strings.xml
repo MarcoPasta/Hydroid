@@ -20,5 +20,11 @@
     <string name="edit_text_hint_weight_input">Geben Sie ihr Gewicht ein</string>
     <string name="nav_app_bar_close_drawer_description">Navigationsleiste schließen</string>
     <string name="nav_drawer_notifications">Benachrichtigungen</string>
+    <string name="home">Home</string>
+    <string name="header_name">Hydroid</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete_button">Delete</string>
+    <string name="history">History</string>
 
 </resources>

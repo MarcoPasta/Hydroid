@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="#FAF5CC">
+
+    <TextView
+        android:id="@+id/item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="Date"
+        android:textColor="@color/hydroit_primary_variant"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_liquidDrunk"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="V of liquid drunk"
+        android:textColor="@color/hydroit_primary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintTop_toBottomOf="@+id/item_date" />
+
+    <TextView
+        android:id="@+id/item_liquid_requirement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Daily fluid requirement"
+        android:textColor="@color/hydroit_primary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintTop_toBottomOf="@+id/item_liquidDrunk" />
+
+    <TextView
+        android:id="@+id/item_daily_requirement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="% the daily need"
+        android:textColor="@color/hydroit_primary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/item_weight"
+        app:layout_constraintTop_toTopOf="@+id/item_liquidDrunk" />
+
+    <TextView
+        android:id="@+id/item_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Weight"
+        android:textColor="@color/purple_200"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/item_liquid_requirement"
+        app:layout_constraintTop_toBottomOf="@+id/item_daily_requirement" />
+
+    <ImageView
+        android:id="@+id/item_image_delete"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/delete_button"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_liquid_requirement"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_liquidDrunk"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/item_image_delete"
+        app:layout_constraintStart_toEndOf="@+id/item_image_delete"
+        app:layout_constraintTop_toTopOf="@+id/item_image_delete" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
