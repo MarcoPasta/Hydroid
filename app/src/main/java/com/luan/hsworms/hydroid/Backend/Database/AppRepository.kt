@@ -79,6 +79,14 @@ class AppRepository (application: Application) {
         return waterRequirements
     }
 
+    suspend fun getHistoryAll():List<History>?{
+        var history:List<History>? = null
+        withContext(Dispatchers.IO){
+            history = historyDao.getHistoryAll()
+        }
+        return history
+    }
+
     fun getWaterRequirementLiveData(): LiveData<List<WaterRequirement>> = waterRequirementDao.getLiveData()
 
     fun getHistoryLiveData (): LiveData<List<History>> = historyDao.getLiveData()
