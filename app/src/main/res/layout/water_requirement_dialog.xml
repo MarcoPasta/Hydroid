@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="In diesem Dialog können Sie neue Werte zur Berechnung des Wasserbedarfs hinzufügen"
                 android:textColor="@color/hydroit_primary"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -58,27 +58,55 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <RadioGroup
+                android:id="@+id/radioGroupGender"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="108dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/divider">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dialog_edit_text_gender"
+                <RadioButton
+                    android:id="@+id/radioButtonWoman"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Geschlecht" />
+                    android:buttonTint="#285E8A"
+                    android:checked="true"
+                    android:text="@string/user_data_sex_woman"
+                    android:textColor="#285E8A" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonMan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#285E8A"
+                    android:checked="false"
+                    android:text="@string/user_data_sex_man"
+                    android:textColor="#285E8A" />
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_edit_text_weight"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupGender">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_input_edit_text_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Gewicht"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout6"
+                android:id="@+id/dialog_edit_text_amount_of_water"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,33 +114,15 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                app:layout_constraintStart_toStartOf="@+id/dialog_edit_text_weight"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_edit_text_weight">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dialog_edit_text_weight"
+                    android:id="@+id/text_input_edit_text_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Gewicht" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout8"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dialog_edit_text_amount_of_water"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Wassermenge" />
+                    android:hint="Wassermenge"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
@@ -124,8 +134,8 @@
                 android:layout_marginEnd="8dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
+                app:layout_constraintStart_toStartOf="@+id/dialog_edit_text_amount_of_water"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_edit_text_amount_of_water" />
 
             <Button
                 android:id="@+id/dialog_btn_save"

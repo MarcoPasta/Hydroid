@@ -21,9 +21,8 @@ abstract class HydroidDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         application.applicationContext,
                         HydroidDatabase::class.java,
-                        "hydroid.db"
+                        "hydroidDB"
                     )
-                        .createFromAsset("database/hydroid.db")
                         .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance
