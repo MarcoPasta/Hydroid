@@ -145,7 +145,7 @@ class MainFragment : Fragment() {
                 ).show()
             }
 
-            //Logs for checking the correctness of processing the entered values
+            //Logs for checking the correctness of processing the entered values of User Data
             Log.i("inputDialog", viewModel.weightOfUser.value.toString())
             Log.i(
                 "inputDialog",
