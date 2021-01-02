@@ -27,7 +27,7 @@ class AddWaterDialogFragment: DialogFragment() {
     private lateinit var tvQuantityHuge:TextView
 
     //ViewModel
-    private lateinit var addWaterViewModel: AddWaterViewModel
+    private lateinit var mainViewModel: MainViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,8 +47,8 @@ class AddWaterDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addWaterViewModel = ViewModelProvider(requireActivity(),
-        AddWaterViewModelFactory(requireActivity().application)).get(AddWaterViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity(),
+        MainViewModelFactory(requireActivity().application)).get(MainViewModel::class.java)
 
         initButtons()
         initTextView()
@@ -81,7 +81,7 @@ class AddWaterDialogFragment: DialogFragment() {
         tvQuantityBig = rootView.findViewById(R.id.tv_volume_big)
         tvQuantityHuge = rootView.findViewById(R.id.tv_volume_huge)
         tvQuantity = rootView.findViewById(R.id.tv_quantity)
-        tvQuantity.setText(addWaterViewModel.consum.value.toString())
+        tvQuantity.setText(mainViewModel.currentlyDrunkLiquid.value.toString())
     }
 
     private fun saveData(){
