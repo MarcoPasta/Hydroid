@@ -53,6 +53,11 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "sport")
         }
 
+        binding.addWater.setOnClickListener{
+            val newFragment = AddWaterDialogFragment()
+            newFragment.show(parentFragmentManager, "add water")
+        }
+
         //The user input dialog is launched at the start of the application,
         // only if the default value of the weight ("0") have not changed
         //todo: Change the if-condition to ==
