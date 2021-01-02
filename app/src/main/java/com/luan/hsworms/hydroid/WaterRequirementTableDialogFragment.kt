@@ -51,6 +51,7 @@ class WaterRequirementTableDialogFragment : DialogFragment() {
         initEditText()
     }
 
+    //Initializing Dialog Box Buttons and Running Functions when Pressed
     private fun initButtons() {
         btnSave = rootView.findViewById(R.id.dialog_btn_save)
         btnAbort = rootView.findViewById(R.id.dialog_btn_abort)
@@ -59,17 +60,20 @@ class WaterRequirementTableDialogFragment : DialogFragment() {
         btnAbort.setOnClickListener { dismiss() }
     }
 
+    //Initializing Variables by Dialog Components
     private fun initEditText() {
         etWeight = rootView.findViewById(R.id.dialog_edit_text_weight)
         etWater = rootView.findViewById(R.id.dialog_edit_text_amount_of_water)
     }
 
+    //Saving the data entered in the dialog in the database
     private fun saveData() {
         val genderSelected =
             rootView.findViewById<RadioGroup>(R.id.radioGroupGender).checkedRadioButtonId
         //If gender == woman =>true else false
         val gender:Boolean = (genderSelected == R.id.radioButtonWoman)
 
+        //Adding a record to the database, provided that both textViews contain text
         if (!TextUtils.isEmpty(etWeight.editText?.text.toString())
             && !TextUtils.isEmpty(etWater.editText?.text.toString())) {
 
@@ -78,6 +82,8 @@ class WaterRequirementTableDialogFragment : DialogFragment() {
 
             Toast.makeText(requireContext(), "Neue Werte zur Datenbank hinzugefügt", Toast.LENGTH_SHORT).show()
             dismiss()
+
+            //Otherwise, display a message about the need to fill in the fields
         }else{
             Toast.makeText(requireContext(), "Bitte füllen Sie beide Felder aus", Toast.LENGTH_SHORT).show()
         }
