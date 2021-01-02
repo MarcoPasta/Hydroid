@@ -76,8 +76,12 @@ class AddWaterDialogFragment: DialogFragment() {
     }
 
     private fun initTextView(){
+        tvQuantitySmall = rootView.findViewById(R.id.tv_volume_small)
+        tvQuantityMiddle = rootView.findViewById(R.id.tv_volume_middle)
+        tvQuantityBig = rootView.findViewById(R.id.tv_volume_big)
+        tvQuantityHuge = rootView.findViewById(R.id.tv_volume_huge)
         tvQuantity = rootView.findViewById(R.id.tv_quantity)
-        tvQuantity.setText(addWaterViewModel.consum.toString())
+        tvQuantity.setText(addWaterViewModel.consum.value.toString())
     }
 
     private fun saveData(){
