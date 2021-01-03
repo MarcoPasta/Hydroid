@@ -29,7 +29,10 @@ class MainFragment : Fragment() {
 
         //Moved the initialization of view from onActivityCreated to onCreateView, since
         // onCreateView occurs earlier and in it you can already work with variables from the view
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+       // viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(),
+        MainViewModelFactory(requireActivity().application)
+        ).get(MainViewModel::class.java)
 
         //Initializing an object with user data with data from a file
         viewModel.ourUserData = activity?.getSharedPreferences(
@@ -123,10 +126,15 @@ class MainFragment : Fragment() {
                     .toInt()
 
                 //Correction of entered weight to match value tables
-                if(weightTemp > 140 )
-                    weightTemp = 140
+                if(weightTemp > 21 )
+                    weightTemp = 21
                 if (weightTemp < 20)
                     weightTemp = 20
+
+                viewModel.insert("01.01.2000",50, 100, 50/100, weightTemp)
+
+
+
 
                 viewModel.weightOfUser.value = weightTemp
                  //   dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()

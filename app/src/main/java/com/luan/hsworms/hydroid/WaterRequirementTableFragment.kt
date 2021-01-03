@@ -31,8 +31,6 @@ class WaterRequirementTableFragment: Fragment()  {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_water_requirement_table, container, false)
     }
@@ -43,6 +41,7 @@ class WaterRequirementTableFragment: Fragment()  {
 
         initRecyclerView()
 
+        //Displaying information from the database to the screen
         waterRequirementTableViewModel = ViewModelProvider(requireActivity(),
         WaterRequirementTableViewModelFactory(requireActivity().application))
             .get(WaterRequirementTableViewModel::class.java)

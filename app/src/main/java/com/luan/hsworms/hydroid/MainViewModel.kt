@@ -4,9 +4,9 @@ import android.app.Application
 import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luan.hsworms.hydroid.Backend.Database.AppRepository
+import com.luan.hsworms.hydroid.Backend.Database.History
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
@@ -66,7 +66,14 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     fun update(drunk:Int){
         viewModelScope.launch{
-            //TODO:Implementieren update the Value in Database
+            //TODO:Implement update the Value in Database
+        }
+    }
+
+    fun insert(date:String, drunk: Int, requirements:Int, fulfillment:Int, weight: Int){
+        viewModelScope.launch{
+            val history = History(0L, date, drunk, requirements, fulfillment, weight)
+            repository.insertInHistory(history)
         }
     }
 
