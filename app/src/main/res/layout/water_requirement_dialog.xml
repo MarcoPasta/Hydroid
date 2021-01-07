@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_water_requirement_dialog_titel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -37,14 +37,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_water_requirement_dialog_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="In diesem Dialog können Sie neue Werte zur Berechnung des Wasserbedarfs hinzufügen"
                 android:textColor="@color/hydroit_primary"
                 android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintStart_toStartOf="@+id/tv_water_requirement_dialog_titel"
+                app:layout_constraintTop_toBottomOf="@+id/tv_water_requirement_dialog_titel" />
 
             <View
                 android:id="@+id/divider"
@@ -56,7 +56,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_water_requirement_dialog_comment" />
 
             <RadioGroup
                 android:id="@+id/radioGroupGender"
@@ -64,7 +64,7 @@
                 android:layout_height="108dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintStart_toStartOf="@+id/tv_water_requirement_dialog_comment"
                 app:layout_constraintTop_toBottomOf="@+id/divider">
 
                 <RadioButton

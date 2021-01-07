@@ -1,14 +1,18 @@
 package com.luan.hsworms.hydroid
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
 import com.luan.hsworms.hydroid.Backend.WaterRequirementTableAdapter
 
 class WaterRequirementTableFragment: Fragment()  {
@@ -66,17 +70,38 @@ class WaterRequirementTableFragment: Fragment()  {
         rv.adapter = adapter
 
         //Implement ClickListener (Normal and Long)
+        //Change Entity in BD by short click
         adapter.setOnItemClickListener(object: WaterRequirementTableAdapter.OnItemClickListener{
             override fun setOnItemClickListener(position: Int) {
-                TODO("Not yet implemented")
+                val dialog = WaterRequirementTableDialogFragment(adapter.content[position])
+                dialog.show(parentFragmentManager, "update WaterRequirementsDialog")
             }
         })
 
+        //Delete Entity in BD by long click
         adapter.setOnItemLongClickListener(object: WaterRequirementTableAdapter.OnItemLongClickListener{
             override fun setOnItemLongClickListener(position: Int) {
-                TODO("Not yet implemented")
+                startAlarmDialog(adapter.content[position])
             }
         })
+    }
+
+    private fun startAlarmDialog(waterReqirement: WaterRequirement){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.apply {
+            setMessage("Warnung - Eintrag wird gelöscht")
+                setPositiveButton("OKAY", DialogInterface.OnClickListener { _, _ ->
+                    Toast.makeText(requireContext(),
+                        "Eintrag ${waterReqirement.genderWoman} ${waterReqirement.weight} wurde gelöscht",
+                    Toast.LENGTH_SHORT).show()
+                    waterRequirementTableViewModel.delete(waterReqirement)
+                })
+                setNegativeButton("Ablehnen") { dialog, _ ->
+                    dialog.dismiss()
+                }
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     companion object {
