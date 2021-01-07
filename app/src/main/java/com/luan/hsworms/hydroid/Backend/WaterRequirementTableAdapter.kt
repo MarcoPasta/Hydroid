@@ -10,9 +10,13 @@ import com.luan.hsworms.hydroid.R
 
 class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):RecyclerView.Adapter<WaterRequirementTableAdapter.ViewHolder>(){
 
+    //Interface
+    private lateinit var mItemListener:OnItemClickListener
+    private lateinit var mItemLongListener:OnItemLongClickListener
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_water_requirement, parent, false)
-        return  ViewHolder(view)
+        return  ViewHolder(view, mItemListener, mItemLongListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -31,15 +35,49 @@ class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):Rec
         return content.size
     }
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class ViewHolder(itemView: View, mItemListener: OnItemClickListener,
+                     mItemLongClickListener: OnItemLongClickListener): RecyclerView.ViewHolder(itemView){
 
         var tvGender: TextView = itemView.findViewById(R.id.item_gender)
         var tvWeight: TextView = itemView.findViewById(R.id.item_weight_table)
         var tvRequirement: TextView = itemView.findViewById(R.id.item_requirement)
+
+        //Implement 2 ClickListener
+        init {
+            itemView.setOnClickListener {
+                mItemListener?.setOnItemClickListener(adapterPosition)
+            }
+
+            itemView.setOnLongClickListener {
+                mItemLongClickListener?.setOnItemLongClickListener(adapterPosition)
+
+                true
+            }
+        }
     }
 
     fun updateContent(content: ArrayList<WaterRequirement>){
         this.content = content
+        //Update of content
         notifyDataSetChanged()
+    }
+
+
+    ////////////////////////////////////////
+    //Interfaces
+    interface OnItemClickListener{
+        fun setOnItemClickListener(position: Int)
+    }
+
+    fun setOnItemClickListener(mItemListener:OnItemClickListener){
+        this.mItemListener = mItemListener
+    }
+
+    interface OnItemLongClickListener{
+        fun setOnItemLongClickListener(position: Int)
+    }
+
+    fun setOnItemLongClickListener(mLongClickListener: OnItemLongClickListener){
+        this.mItemLongListener = mLongClickListener
     }
 }

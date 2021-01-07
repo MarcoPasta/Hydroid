@@ -64,6 +64,19 @@ class WaterRequirementTableFragment: Fragment()  {
         //val testContent = ArrayList<String>(List(25){"TEST"})
         adapter = WaterRequirementTableAdapter(ArrayList())
         rv.adapter = adapter
+
+        //Implement ClickListener (Normal and Long)
+        adapter.setOnItemClickListener(object: WaterRequirementTableAdapter.OnItemClickListener{
+            override fun setOnItemClickListener(position: Int) {
+                TODO("Not yet implemented")
+            }
+        })
+
+        adapter.setOnItemLongClickListener(object: WaterRequirementTableAdapter.OnItemLongClickListener{
+            override fun setOnItemLongClickListener(position: Int) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
     companion object {

@@ -22,6 +22,8 @@
     <style name="Theme.Hydroit.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="Theme.Hydroit.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+
+    <!--For Dialogs -->
     <style name="FullScreenDialog" parent="Theme.Hydroit">
         <item name="windowNoTitle">true</item>
         <item name="android:layout_width">fill_parent</item>

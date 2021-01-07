@@ -125,13 +125,17 @@ class MainFragment : Fragment() {
                 weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
                     .toInt()
 
-                //Correction of entered weight to match value tables
+                //Correction of entered weight to match the values in table
                 if(weightTemp > 21 )
                     weightTemp = 21
                 if (weightTemp < 20)
                     weightTemp = 20
 
-                viewModel.insert("01.01.2000",50, 100, 50/100, weightTemp)
+
+
+                //Test, will be replaced with "update" function
+                //TODO: implement update of the DB with new data
+                viewModel.insert("01.01.2000",54, 200, (54*100/200), weightTemp)
 
 
 
