@@ -1,10 +1,21 @@
 package com.luan.hsworms.hydroid
 
+import android.app.Application
 import android.content.SharedPreferences
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.luan.hsworms.hydroid.Backend.Database.AppRepository
+import com.luan.hsworms.hydroid.Backend.Database.History
+import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application): AndroidViewModel(application) {
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //Repository
+    private val repository = AppRepository(application)
+    ////////////////////////////////////////////////////////////////////////////////////
+
     //TODO: Encapsulate the Live Data
     var userGenderIsFemale = MutableLiveData<Boolean>()
     var weightOfUser = MutableLiveData<Int>()
@@ -48,6 +59,22 @@ class MainViewModel : ViewModel() {
         editor?.clear()
         editor?.apply()
 
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //Methods to interact with the repository:
+
+    fun update(drunk:Int){
+        viewModelScope.launch{
+            //TODO:Implement update the Value in Database
+        }
+    }
+
+    fun insert(date:String, drunk: Int, requirements:Int, fulfillment:Int, weight: Int){
+        viewModelScope.launch{
+            val history = History(0L, date, drunk, requirements, fulfillment, weight)
+            repository.insertInHistory(history)
+        }
     }
 
 

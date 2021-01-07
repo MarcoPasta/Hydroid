@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.luan.hsworms.hydroid.Backend.Database.History
 import com.luan.hsworms.hydroid.R
 
-class HistoryListAdapter(var content: ArrayList<String>) :
+class HistoryListAdapter(var content: ArrayList<History>) :
     RecyclerView.Adapter<HistoryListAdapter.ViewHolder>() {
 
     //Icons showing whether the daily target is met
@@ -20,7 +21,13 @@ class HistoryListAdapter(var content: ArrayList<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // TODO("Not yet implemented")
+        val history = content[position]
+
+        holder.date.text = history.date
+        holder.tvDrunk.text = history.drunk.toString()
+        holder.tvLiquidRequirement.text = history.requirements.toString()
+        holder.tvFulfillment.text = history.fulfillment.toString()
+        holder.tvWeight.text = history.weight.toString()
     }
 
     override fun getItemCount(): Int {
@@ -32,8 +39,13 @@ class HistoryListAdapter(var content: ArrayList<String>) :
         var date: TextView = itemView.findViewById(R.id.item_date)
         var tvDrunk: TextView = itemView.findViewById(R.id.item_liquidDrunk)
         var tvLiquidRequirement: TextView = itemView.findViewById(R.id.item_liquid_requirement)
-        var tvRequirement: TextView = itemView.findViewById(R.id.item_daily_requirement)
-        var tvProcent: TextView = itemView.findViewById(R.id.item_weight)
+        var tvFulfillment: TextView = itemView.findViewById(R.id.item_daily_requirement)
+        var tvWeight:TextView = itemView.findViewById(R.id.item_weight)
         var imageDelete: ImageView = itemView.findViewById(R.id.item_image_delete)
+    }
+
+    fun updateContent(content: ArrayList<History>){
+        this.content = content
+        notifyDataSetChanged()
     }
 }

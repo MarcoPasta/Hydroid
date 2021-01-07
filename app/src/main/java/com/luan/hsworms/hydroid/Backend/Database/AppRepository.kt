@@ -12,10 +12,9 @@ class AppRepository (application: Application) {
 
     //Now the data is loaded from the local database, later it is possible from the remote server
     init {
-        val dbHistory = HistoryDatabase.createInstance(application)
-        val dbWaterRequirement = WaterRequirementDatabase.createInstance(application)
+        val dbWaterRequirement = HydroidDatabase.createInstance(application)
         waterRequirementDao = dbWaterRequirement.waterRequirementDao
-        historyDao = dbHistory.historyDao
+        historyDao = dbWaterRequirement.historyDao
     }
 
     //implement al methods for History and WaterRequirements

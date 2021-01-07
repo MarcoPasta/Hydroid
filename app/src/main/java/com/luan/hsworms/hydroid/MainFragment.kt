@@ -29,7 +29,10 @@ class MainFragment : Fragment() {
 
         //Moved the initialization of view from onActivityCreated to onCreateView, since
         // onCreateView occurs earlier and in it you can already work with variables from the view
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+       // viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(),
+        MainViewModelFactory(requireActivity().application)
+        ).get(MainViewModel::class.java)
 
         //Initializing an object with user data with data from a file
         viewModel.ourUserData = activity?.getSharedPreferences(
@@ -51,6 +54,11 @@ class MainFragment : Fragment() {
         binding.addSport.setOnClickListener {
             val newFragment = SportDialogFragment()
             newFragment.show(parentFragmentManager, "sport")
+        }
+
+        binding.addWater.setOnClickListener{
+            val newFragment = AddWaterDialogFragment()
+            newFragment.show(parentFragmentManager, "add water")
         }
 
         //The user input dialog is launched at the start of the application,
@@ -117,11 +125,20 @@ class MainFragment : Fragment() {
                 weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
                     .toInt()
 
-                //Correction of entered weight to match value tables
-                if(weightTemp > 140 )
-                    weightTemp = 140
+                //Correction of entered weight to match the values in table
+                if(weightTemp > 21 )
+                    weightTemp = 21
                 if (weightTemp < 20)
                     weightTemp = 20
+
+
+
+                //Test, will be replaced with "update" function
+                //TODO: implement update of the DB with new data
+                viewModel.insert("01.01.2000",54, 200, (54*100/200), weightTemp)
+
+
+
 
                 viewModel.weightOfUser.value = weightTemp
                  //   dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
@@ -145,7 +162,7 @@ class MainFragment : Fragment() {
                 ).show()
             }
 
-            //Logs for checking the correctness of processing the entered values
+            //Logs for checking the correctness of processing the entered values of User Data
             Log.i("inputDialog", viewModel.weightOfUser.value.toString())
             Log.i(
                 "inputDialog",
