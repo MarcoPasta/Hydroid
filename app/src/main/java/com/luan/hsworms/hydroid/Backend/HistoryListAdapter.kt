@@ -16,6 +16,7 @@ class HistoryListAdapter(var content: ArrayList<History>) :
     private lateinit var mItemLongListener:  OnItemLongClickListener
 
     //Icons showing whether the daily target is met
+    //TODO: not yet implemented
     private val statusDrawables = arrayOf(R.drawable.ic_done, R.drawable.ic_not_done)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

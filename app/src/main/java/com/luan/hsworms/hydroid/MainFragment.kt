@@ -2,6 +2,7 @@ package com.luan.hsworms.hydroid
 
 import android.app.AlertDialog
 import android.content.Context
+import android.icu.util.Calendar
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -61,11 +62,20 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "add water")
         }
 
+        //Update of all key values for water demand
+        viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(), viewModel.userGenderIsFemale.value!!)
+
+        //For TEST
+        //viewModel.clearFile()
+
+        //Calling the function of initializing variables with values from internal storage
+        viewModel.populateViewModel()
+
         //The user input dialog is launched at the start of the application,
         // only if the default value of the weight ("0") have not changed
         //todo: Change the if-condition to ==
-        //if(viewModel.weightOfUser.value != 0)
-        showUserInputDialog()
+        if(viewModel.weightOfUser.value == 0)
+            showUserInputDialog()
 
         Log.i(
             "on create view",
@@ -79,8 +89,7 @@ class MainFragment : Fragment() {
         Log.i("onActivityCreated", "onActivityCreated")
         super.onActivityCreated(savedInstanceState)
         //Calling the function of initializing variables with values from internal storage
-        viewModel.clearFile()
-        viewModel.populateViewModel()
+        //viewModel.populateViewModel()
 
         //TODO: Add implementation of observer methods
         viewModel.weightOfUser.observe(viewLifecycleOwner, { newWeight ->
@@ -126,8 +135,9 @@ class MainFragment : Fragment() {
                     .toInt()
 
                 //Correction of entered weight to match the values in table
-                if(weightTemp > 21 )
-                    weightTemp = 21
+                //For now only data for weight from 20 till 22 entered
+                if(weightTemp > 22 )
+                    weightTemp = 22
                 if (weightTemp < 20)
                     weightTemp = 20
 
@@ -135,9 +145,7 @@ class MainFragment : Fragment() {
 
                 //Test, will be replaced with "update" function
                 //TODO: implement update of the DB with new data
-                viewModel.insert("01.01.2000",54, 200, (54*100/200), weightTemp)
-
-
+                //viewModel.insert("01.01.2000",54, 200, (54*100/200), weightTemp)
 
 
                 viewModel.weightOfUser.value = weightTemp
