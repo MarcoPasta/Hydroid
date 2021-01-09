@@ -76,8 +76,8 @@
             android:id="@+id/tv_fulfillment_percents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="30"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="30%"
             app:layout_constraintBottom_toBottomOf="@+id/progressBarFulfillment"
             app:layout_constraintEnd_toEndOf="@+id/progressBarFulfillment"
             app:layout_constraintStart_toStartOf="@+id/progressBarFulfillment"
@@ -96,7 +96,7 @@
             app:layout_constraintStart_toStartOf="@+id/progressBarFulfillment" />
 
         <TextView
-            android:id="@+id/tv_fulfillment_absolut"
+            android:id="@+id/tv_drunk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -114,20 +114,27 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_fulfillment_absolut" />
+            app:layout_constraintTop_toTopOf="@+id/tv_drunk" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/tvDailyRequirement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="600 ml"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toTopOf="@+id/tv_fulfillment_absolut" />
+            app:layout_constraintTop_toTopOf="@+id/tv_drunk" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="%"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toEndOf="@+id/tv_fulfillment_percents"
+            app:layout_constraintTop_toTopOf="@+id/tv_fulfillment_percents" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
-
-
-
