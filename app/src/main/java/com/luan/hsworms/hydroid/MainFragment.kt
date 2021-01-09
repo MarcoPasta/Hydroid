@@ -62,14 +62,15 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "add water")
         }
 
-        //Update of all key values for water demand
-        viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(), viewModel.userGenderIsFemale.value!!)
-
         //For TEST
         //viewModel.clearFile()
 
         //Calling the function of initializing variables with values from internal storage
         viewModel.populateViewModel()
+
+        //Update of all key values for water demand
+        viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
+            viewModel.userGenderIsFemale.value!!)
 
         //The user input dialog is launched at the start of the application,
         // only if the default value of the weight ("0") have not changed

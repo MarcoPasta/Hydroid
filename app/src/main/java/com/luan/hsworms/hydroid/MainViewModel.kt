@@ -81,6 +81,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
             //Search the database for water requirements by weight and gender.
             // In the absence of data, assigning a value of 2500
+            //waterReqirementsUpdate()
+            println("TEST ${dailyLiquidRequirement.value}")//TODO: comment out the string
+            println("TEST2 ${weightOfUser.value}")//TODO: comment out the string
             val waterRequirement: Int? = getWaterRequirementByWeightAndGender(weightIn, genderIn)
             if (waterRequirement != null) {
                 dailyLiquidRequirement.value = waterRequirement

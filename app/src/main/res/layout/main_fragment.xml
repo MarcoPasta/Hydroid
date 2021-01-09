@@ -8,71 +8,123 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-
-        <ImageButton
-            android:id="@+id/addWater"
-            android:layout_width="99dp"
-            android:layout_height="85dp"
-            android:layout_marginBottom="140dp"
-            android:src="@mipmap/water_glass"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_liquid_drunk"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <ImageButton
-            android:id="@+id/changeWeather"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@mipmap/sun"
-            app:layout_constraintBottom_toBottomOf="@+id/addWater"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.433"
-            app:layout_constraintStart_toEndOf="@+id/addWater"
-            app:layout_constraintTop_toTopOf="@+id/addWater" />
-
-        <ImageButton
-            android:id="@+id/addSport"
-            android:layout_width="68dp"
-            android:layout_height="61dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@mipmap/cycling"
-            app:layout_constraintBottom_toBottomOf="@+id/addWater"
-            app:layout_constraintEnd_toStartOf="@+id/addWater"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/addWater" />
+        android:scrollbarSize="20dp">
 
         <!--TODO: Change ID of TextViews -->
+
         <TextView
             android:id="@+id/item_liquid_drunk"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ProzentAnteil"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:text="test"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addWater"
+            app:layout_constraintVertical_bias="0.96" />
+
+        <ImageView
+            android:id="@+id/addSport"
+            android:layout_width="89dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/addWater"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/addWater"
+            app:srcCompat="@mipmap/cycling" />
+
+        <ImageView
+            android:id="@+id/changeWeather"
+            android:layout_width="87dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/addWater"
+            app:layout_constraintTop_toTopOf="@+id/addWater"
+            app:srcCompat="@mipmap/sun" />
+
+        <ImageView
+            android:id="@+id/addWater"
+            android:layout_width="117dp"
+            android:layout_height="133dp"
+            android:layout_marginTop="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:srcCompat="@mipmap/water_glass" />
 
-        <TextView
-            android:id="@+id/item_requirement"
-            android:layout_width="89dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="%"
+        <ProgressBar
+            android:id="@+id/progressBarFulfillment"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/item_liquid_drunk"
+            app:layout_constraintHorizontal_bias="0.513"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499" />
+            app:layout_constraintVertical_bias="0.32"
+            tools:progress="30"
+            android:progress="30"/>
+
+        <TextView
+            android:id="@+id/tv_fulfillment_percents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="30%"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBarFulfillment"
+            app:layout_constraintEnd_toEndOf="@+id/progressBarFulfillment"
+            app:layout_constraintStart_toStartOf="@+id/progressBarFulfillment"
+            app:layout_constraintTop_toTopOf="@+id/progressBarFulfillment" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Tagesfortschritt"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/hydroit_primary"
+            app:layout_constraintBottom_toTopOf="@+id/progressBarFulfillment"
+            app:layout_constraintEnd_toEndOf="@+id/progressBarFulfillment"
+            app:layout_constraintStart_toStartOf="@+id/progressBarFulfillment" />
+
+        <TextView
+            android:id="@+id/tv_fulfillment_absolut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="4dp"
+            android:text="50 ml"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarFulfillment" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_fulfillment_absolut" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="600 ml"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/tv_fulfillment_absolut" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
