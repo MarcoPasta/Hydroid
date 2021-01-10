@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.luan.hsworms.hydroid.MainFragment"
-        android:label="main_fragment"
-        tools:layout="@layout/main_fragment" >
+        android:label="Hydroid / Tagesfortschritt"
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_wetterDialogFragment"
             app:destination="@id/wetterDialogFragment" />
@@ -36,19 +36,19 @@
         tools:layout="@layout/activity_splash_screen" />
     <fragment
         android:id="@+id/wetterDialogFragment"
-        android:name="com.luan.hsworms.hydroid.WetterDialogFragment"
-        android:label="fragment_wetter_dialog"
-        tools:layout="@layout/fragment_wetter_dialog" />
+        android:name="com.luan.hsworms.hydroid.WeatherDialogFragment"
+        android:label="Wettereinstellungen"
+        tools:layout="@layout/fragment_weather_dialog" />
     <fragment
         android:id="@+id/sportFragment"
         android:name="com.luan.hsworms.hydroid.SportFragment"
-        android:label="fragment_sport"
+        android:label="Sport Aktivitäten"
         tools:layout="@layout/fragment_sport_dialog" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.luan.hsworms.hydroid.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        android:label="Einstellungen"
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_waterRequirementTableFragment"
             app:destination="@id/waterRequirementTableFragment" />
@@ -56,17 +56,17 @@
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.luan.hsworms.hydroid.NotificationFragment"
-        android:label="notification_fragment"
+        android:label="Benachrichtigungen"
         tools:layout="@layout/notification_fragment" />
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.luan.hsworms.hydroid.HistoryFragment"
-        android:label="fragment_history"
+        android:label='Datenbank "Geschichte"'
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/waterRequirementTableFragment"
         android:name="com.luan.hsworms.hydroid.WaterRequirementTableFragment"
-        android:label="fragment_water_requirement_table"
+        android:label='Datenbank "Bedarf an Wasser"'
         tools:layout="@layout/fragment_water_requirement_table" />
     <fragment
         android:id="@+id/addWaterDialogFragment"

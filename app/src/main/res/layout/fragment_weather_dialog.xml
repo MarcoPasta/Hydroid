@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SportDialogFragment">
+    tools:context=".WeatherDialogFragment">
 
 
     <androidx.cardview.widget.CardView
@@ -31,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-
                 android:text="Wählen Sie Ihre aktuelle Aktivität"
                 android:textColor="@color/design_default_color_primary"
                 android:textSize="20dp"
@@ -40,32 +39,40 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_joggen"
-                android:layout_width="100dp"
+                android:id="@+id/btn_angenemes_wetter"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Joggen"
+                android:text="Angenehmes Wetter"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <Button
-                android:id="@+id/btn_fitness"
-                android:layout_width="100dp"
+                android:id="@+id/btn_warmes_wettter"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Fitness"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                android:text="Warmes Wetter"
+                app:layout_constraintStart_toStartOf="@+id/btn_angenemes_wetter"
+                app:layout_constraintTop_toBottomOf="@+id/btn_angenemes_wetter" />
 
             <Button
-                android:id="@+id/btn_spatziergang"
+                android:id="@+id/btn_kaelte"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Spatziergang"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_joggen" />
+                android:layout_height="0dp"
+                android:text="Kälte"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_angenemes_wetter"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/btn_angenemes_wetter" />
+
+            <Button
+                android:id="@+id/btn_hitze"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="Hitze"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_warmes_wettter"
+                app:layout_constraintEnd_toEndOf="@+id/btn_kaelte"
+                app:layout_constraintTop_toTopOf="@+id/btn_warmes_wettter" />
 
             <Button
                 android:id="@+id/btn_cancel"
@@ -80,7 +87,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_spatziergang" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_warmes_wettter" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

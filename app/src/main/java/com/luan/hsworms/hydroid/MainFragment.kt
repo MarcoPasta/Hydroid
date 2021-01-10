@@ -2,7 +2,6 @@ package com.luan.hsworms.hydroid
 
 import android.app.AlertDialog
 import android.content.Context
-import android.icu.util.Calendar
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -38,6 +37,8 @@ class MainFragment : Fragment() {
             Context.MODE_PRIVATE
         )
 
+        activity?.actionBar?.setTitle("Hydroid")
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate<MainFragmentBinding>(
             inflater,
@@ -45,7 +46,7 @@ class MainFragment : Fragment() {
         )
 
         binding.changeWeather.setOnClickListener {
-            val newFragment = WetterDialogFragment()
+            val newFragment = WeatherDialogFragment()
             newFragment.show(parentFragmentManager, "wetter")
         }
 
@@ -88,22 +89,15 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         //TODO: Add implementation of observer methods
-        viewModel.weightOfUser.observe(viewLifecycleOwner, { newWeight ->
-            binding.itemLiquidDrunk.text = newWeight.toString()
-        })
-
         viewModel.dailyLiquidRequirement.observe(viewLifecycleOwner, { newLiquedRequirement ->
             binding.tvDailyRequirement.text = newLiquedRequirement.toString()
-            binding.tvFulfillmentPercents.text = (viewModel.currentlyDrunkLiquid.value!!.times(100)
-                    / newLiquedRequirement).toString()
-            binding.progressBarFulfillment.setProgress(viewModel.currentlyDrunkLiquid.value!!.times(100)
-                    / newLiquedRequirement)
+            binding.tvFulfillmentPercents.text = (viewModel.currentlyDrunkLiquid.value!!.times(100) / newLiquedRequirement).toString()
+            binding.progressBarFulfillment.setProgress(viewModel.currentlyDrunkLiquid.value!!.times(100) / newLiquedRequirement)
         })
 
         viewModel.currentlyDrunkLiquid.observe(viewLifecycleOwner, { newDrunkWater ->
             binding.tvDrunk.text = newDrunkWater.toString()
-            binding.tvFulfillmentPercents.text = (newDrunkWater * 100
-                    / viewModel.dailyLiquidRequirement.value!!).toString()
+            binding.tvFulfillmentPercents.text = (newDrunkWater * 100 / viewModel.dailyLiquidRequirement.value!!).toString()
             binding.progressBarFulfillment.setProgress(binding.tvFulfillmentPercents.text.toString().toInt())
         })
     }

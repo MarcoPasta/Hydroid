@@ -1,17 +1,12 @@
 package com.luan.hsworms.hydroid
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 
-class WetterDialogFragment : DialogFragment() {
+class WeatherDialogFragment : DialogFragment() {
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -32,7 +27,7 @@ class WetterDialogFragment : DialogFragment() {
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.fragment_wetter_dialog, null))
+            builder.setView(inflater.inflate(R.layout.fragment_weather_dialog, null))
                 // Add action buttons
 //                .setPositiveButton(R.string.cancel,
 //                    DialogInterface.OnClickListener { dialog, id ->

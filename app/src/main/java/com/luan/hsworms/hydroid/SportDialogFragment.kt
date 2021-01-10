@@ -3,44 +3,88 @@ package com.luan.hsworms.hydroid
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 
 class SportDialogFragment : DialogFragment() {
+    private lateinit var rootView: View
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
-//    //When called from the navigation drawer
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//        var rootView:View = inflater.inflate(R.layout.user_data_dialog_fragment, null)
-//        return  rootView
-//
-//    }
+    //Views
+    private lateinit var btnFitness: Button
+    private lateinit var btnRun: Button
+    private lateinit var btnWalk: Button
+    private lateinit var btnCancel: Button
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        Log.i("onCreateDialog","onCreateDialog")
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            // Get the layout inflater
-            val inflater = requireActivity().layoutInflater;
+    //ViewModel
+    private lateinit var mainViewModel: MainViewModel
 
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.fragment_sport_dialog, null))
-                // Add action buttons
-//                .setPositiveButton(R.string.cancel,
-//                    DialogInterface.OnClickListener { dialog, id ->
-//                        // sign in the user ...
-//                    })
-//                .setNegativeButton(R.string.cancel,
-//                    DialogInterface.OnClickListener { dialog, id ->
-//                        getDialog()?.cancel()
-//                    })
-                .setTitle("Sport")
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View
+    {
+        rootView = inflater.inflate(R.layout.fragment_sport_dialog, container, false)
+        return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mainViewModel = ViewModelProvider(requireActivity(),
+            MainViewModelFactory(requireActivity().application)).get(MainViewModel::class.java)
+
+        initButtons()
+    }
+
+    private fun initButtons(){
+        btnCancel = rootView.findViewById(R.id.btn_cancel)
+        btnFitness = rootView.findViewById(R.id.btn_fitness)
+        btnRun = rootView.findViewById(R.id.btn_joggen)
+        btnWalk = rootView.findViewById(R.id.btn_spatziergang)
+
+        btnCancel.setOnClickListener { dismiss() }
+        btnWalk.setOnClickListener { changeWaterRequirementBecauseOfSport(100) }
+        btnRun.setOnClickListener { changeWaterRequirementBecauseOfSport(500) }
+        btnFitness.setOnClickListener { changeWaterRequirementBecauseOfSport(300) }
+    }
+
+    private fun changeWaterRequirementBecauseOfSport(addWater: Int){
+        mainViewModel.addWaterRequirementBecauseOfSport(addWater)
+        dismiss()
+    }
+
+//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+//        Log.i("onCreateDialog","onCreateDialog")
+//        return activity?.let {
+//            val builder = AlertDialog.Builder(it)
+//            // Get the layout inflater
+//            val inflater = requireActivity().layoutInflater;
+//
+//            // Inflate and set the layout for the dialog
+//            // Pass null as the parent view because its going in the dialog layout
+//            builder.setView(inflater.inflate(R.layout.fragment_sport_dialog, null))
+//                // Add action buttons
+////                .setPositiveButton(R.string.cancel,
+////                    DialogInterface.OnClickListener { dialog, id ->
+////                        // sign in the user ...
+////                    })
+////                .setNegativeButton(R.string.cancel,
+////                    DialogInterface.OnClickListener { dialog, id ->
+////                        getDialog()?.cancel()
+////                    })
+//                .setTitle("Sport")
+//            builder.create()
+//        } ?: throw IllegalStateException("Activity cannot be null")
+//    }
 }
 
 

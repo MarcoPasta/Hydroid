@@ -67,17 +67,17 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         editor?.apply()
     }
 
-
     //Updating data at application start and adding a record about the current day to History, if it has not been created yet
     fun updateDataByStartActivity(weightIn: Long, genderIn: Boolean)
     {
         //Search the database for water requirements by weight and gender. Returns 2500 if didn't find.
-        waterRequirementsUpdate(weightIn, genderIn)
+        if(dailyLiquidRequirement.value == 0){
+            waterRequirementsUpdate(weightIn, genderIn)
+        }
 
         //If there is no record in the database for the current day, then it is created
         addEntityInHistory()
     }
-
 
     //Search the database for water requirements by weight and gender. Returns 2500 if didn't find.
     private fun waterRequirementsUpdate(weightIn: Long, genderIn: Boolean){
@@ -93,7 +93,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-
     //If there is no record in the database for the current day, then it is created
     private  fun addEntityInHistory()
     {
@@ -101,10 +100,13 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             val requirement = dailyLiquidRequirement.value!!
             val drunk = 0
             val history = getHistoryByDate(currentDate())
-
             if(history == null)
             {
                 currentlyDrunkLiquid.value = drunk //A new day has begun, the value of the drink is set to zero
+                saveData(
+                    userGenderIsFemale.value!!, weightOfUser.value!!,
+                    dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!
+                )
                 insert(currentDate(), drunk, requirement,drunk*100/requirement, weightOfUser.value!!)
             }
         }
@@ -113,12 +115,19 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     //Adding the water you drink to the water already drunk today
     fun addDrunkWater(waterIn:Int)
     {
-        println("TEST3 ${waterIn}")
         currentlyDrunkLiquid.value = currentlyDrunkLiquid.value?.plus(waterIn)
-        println("TEST4 ${currentlyDrunkLiquid.value}")
-            update()
-            saveData(userGenderIsFemale.value!!, weightOfUser.value!!,
-                dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
+        updateDrunk()
+        saveData(userGenderIsFemale.value!!, weightOfUser.value!!,
+            dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
+    }
+
+    //Change water requirement because of going for sport
+    fun addWaterRequirementBecauseOfSport(extraRequirement: Int){
+        dailyLiquidRequirement.value = dailyLiquidRequirement.value?.plus(extraRequirement)
+        println("TEST ${dailyLiquidRequirement.value}")
+        updateRequirement()
+        saveData(userGenderIsFemale.value!!, weightOfUser.value!!,
+            dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
     }
 
     //Return the current date in text format
@@ -132,11 +141,19 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     ////////////////////////////////////////////////////////////////////////////////////
     //Methods to interact with the repository:
 
-    fun update(){
+    fun updateDrunk(){
         viewModelScope.launch{
             val history:History? = getHistoryByDate(currentDate())
             history?.drunk = currentlyDrunkLiquid.value!!
-            //history?.drunk = 0
+            history?.fulfillment = currentlyDrunkLiquid.value!! * 100 / dailyLiquidRequirement.value!!
+            repository.updateHistory(history!!)
+        }
+    }
+
+    fun updateRequirement(){
+        viewModelScope.launch{
+            val history:History? = getHistoryByDate(currentDate())
+            history?.requirements = dailyLiquidRequirement.value!!
             history?.fulfillment = currentlyDrunkLiquid.value!! * 100 / dailyLiquidRequirement.value!!
             repository.updateHistory(history!!)
         }
