@@ -2,20 +2,15 @@ package com.luan.hsworms.hydroid
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.icu.util.Calendar
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.luan.hsworms.hydroid.Backend.Database.AppRepository
 import com.luan.hsworms.hydroid.Backend.Database.History
-import com.luan.hsworms.hydroid.Backend.Database.HistoryDao
-import com.luan.hsworms.hydroid.Backend.Database.WaterRequirementDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
@@ -35,7 +30,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     init {
         userGenderIsFemale.value = true
         weightOfUser.value = 0
-        dailyLiquidRequirement.value = 0
+        dailyLiquidRequirement.value = 1
         currentlyDrunkLiquid.value = 0
     }
 
@@ -44,7 +39,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
         userGenderIsFemale.value = ourUserData?.getBoolean(R.string.saved_gender_of_user.toString(), true)
         weightOfUser.value = ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0)
-        dailyLiquidRequirement.value = ourUserData?.getInt(R.string.saved_liquid_requirements_of_user.toString(), 0)
+        dailyLiquidRequirement.value = ourUserData?.getInt(R.string.saved_liquid_requirements_of_user.toString(), 1)
         currentlyDrunkLiquid.value = ourUserData?.getInt(R.string.saved_drunk_liquid_of_user.toString(), 0)
     }
 
@@ -52,7 +47,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun saveData(newGender: Boolean, newWeight: Int, newLiquidRequirements: Int, newDrunkLiquid: Int){
         val editor = ourUserData?.edit()
 
-        editor?.putBoolean(R.string.saved_gender_of_user.toString().toString(), newGender)
+        editor?.putBoolean(R.string.saved_gender_of_user.toString(), newGender)
         editor?.putInt(R.string.saved_weight_of_user.toString(), newWeight)
         editor?.putInt((R.string.saved_liquid_requirements_of_user).toString(), newLiquidRequirements)
         editor?.putInt((R.string.saved_drunk_liquid_of_user).toString(), newDrunkLiquid)
@@ -71,7 +66,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun updateDataByStartActivity(weightIn: Long, genderIn: Boolean)
     {
         //Search the database for water requirements by weight and gender. Returns 2500 if didn't find.
-        if(dailyLiquidRequirement.value == 0){
+        if(dailyLiquidRequirement.value == 0 || dailyLiquidRequirement.value == 1) {
             waterRequirementsUpdate(weightIn, genderIn)
         }
 
@@ -83,14 +78,17 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private fun waterRequirementsUpdate(weightIn: Long, genderIn: Boolean){
         viewModelScope.launch {
             val waterRequirement: Int? = getWaterRequirementByWeightAndGender(weightIn, genderIn)
+
             if (waterRequirement != null)
             {
                 dailyLiquidRequirement.value = waterRequirement
+                saveData(userGenderIsFemale.value!!, weightOfUser.value!!, waterRequirement, currentlyDrunkLiquid.value!!)
             } else
             {
                 dailyLiquidRequirement.value = 2500
             }
         }
+        saveData(userGenderIsFemale.value!!, weightOfUser.value!!, dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
     }
 
     //If there is no record in the database for the current day, then it is created
@@ -122,20 +120,23 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
     //Change water requirement because of going for sport
-    fun addWaterRequirementBecauseOfSport(extraRequirement: Int){
+    fun addWaterRequirementBecauseOfSportOrWeather(extraRequirement: Int){
         dailyLiquidRequirement.value = dailyLiquidRequirement.value?.plus(extraRequirement)
-        println("TEST ${dailyLiquidRequirement.value}")
+
         updateRequirement()
+
         saveData(userGenderIsFemale.value!!, weightOfUser.value!!,
             dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
+
     }
 
     //Return the current date in text format
-    private fun currentDate():String{
+    fun currentDate():String{
         val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy")
         val dateNow = Date()
         return simpleDateFormat.format(dateNow)
     }
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -163,6 +164,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch{
             val history = History(0L, date, drunk, requirements, fulfillment, weight)
             repository.insertInHistory(history)
+            updateRequirement()
         }
     }
 

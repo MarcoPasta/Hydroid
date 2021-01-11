@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?
+    ): View
     {
         viewModel = ViewModelProvider(requireActivity(),
         MainViewModelFactory(requireActivity().application)
@@ -60,26 +60,26 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "add water")
         }
 
-        //For TEST
+        //For Debugging
         //viewModel.clearFile()
 
         //Calling the function of initializing variables with values from internal storage
         viewModel.populateViewModel()
 
-        //Update of all key values for water demand
-        viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
-            viewModel.userGenderIsFemale.value!!)
-
         //The user input dialog is launched at the start of the application,
-        // only if the default value of the weight ("0") have not changed
+        // only if the default value of the weight ("0") has not changed
         //todo: Change the if-condition to ==
         if(viewModel.weightOfUser.value == 0)
+        {
             showUserInputDialog()
+        } else
+        {
+            //Update of all key values for water demand
+            viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
+                viewModel.userGenderIsFemale.value!!)
+        }
 
-        Log.i(
-            "on create view",
-            viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString()
-        )
+        Log.i("on create view", viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString())
         return binding.root
     }
 
@@ -88,7 +88,6 @@ class MainFragment : Fragment() {
         Log.i("onActivityCreated", "onActivityCreated")
         super.onActivityCreated(savedInstanceState)
 
-        //TODO: Add implementation of observer methods
         viewModel.dailyLiquidRequirement.observe(viewLifecycleOwner, { newLiquedRequirement ->
             binding.tvDailyRequirement.text = newLiquedRequirement.toString()
             binding.tvFulfillmentPercents.text = (viewModel.currentlyDrunkLiquid.value!!.times(100) / newLiquedRequirement).toString()
@@ -113,6 +112,8 @@ class MainFragment : Fragment() {
         val dialog = dialogBuilder.show()
 
 
+        println("TEST_5 ${viewModel.weightOfUser.value} ${viewModel.dailyLiquidRequirement.value}")
+
         //Cancel button -> leave the dialog
         val cancelButton = dialogView.findViewById<Button>(R.id.imageButtonUserCancel)
         cancelButton.setOnClickListener {
@@ -135,33 +136,24 @@ class MainFragment : Fragment() {
 
                 //Correction of entered weight to match the values in table
                 //For now only data for weight from 20 till 22 entered
-                if(weightTemp > 22 )
-                    weightTemp = 22
+                if(weightTemp > 23 )
+                    weightTemp = 23
                 if (weightTemp < 20)
                     weightTemp = 20
+
                 viewModel.weightOfUser.value = weightTemp
 
-                dialog.dismiss()
+                //Update of all key values for water demand
+                viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
+                    viewModel.userGenderIsFemale.value!!)
 
-                viewModel.saveData(
-                    viewModel.userGenderIsFemale.value!!, viewModel.weightOfUser.value!!,
-                    viewModel.dailyLiquidRequirement.value!!, viewModel.currentlyDrunkLiquid.value!!
-                )
+                dialog.dismiss()
 
                 Toast.makeText(activity, getString(R.string.toast_daten_gesichert), Toast.LENGTH_SHORT).show()
             } else
             {
                 Toast.makeText(activity, getString(R.string.toast_gewicht_eingeben), Toast.LENGTH_SHORT).show()
             }
-
-            //Logs for checking the correctness of processing the entered values of User Data
-            Log.i("inputDialog", viewModel.weightOfUser.value.toString())
-            Log.i(
-                "inputDialog",
-                viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0)
-                    .toString()
-            )
-            Log.i("inputDialog", viewModel.userGenderIsFemale.value.toString())
         }
     }
 }

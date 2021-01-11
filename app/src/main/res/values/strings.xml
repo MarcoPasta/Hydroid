@@ -26,5 +26,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="delete_button">Delete</string>
     <string name="history">History</string>
+    <string name="preferences_file_weather">com.luan.hsworms.hydroid.PREFERENCE_FILE_WEATHER</string>
 
 </resources>

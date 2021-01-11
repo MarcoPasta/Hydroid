@@ -12,11 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="Gender"
+        android:layout_marginTop="28dp"
+        tools:text="Männlich"
         android:textColor="@color/hydroit_primary"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -24,21 +24,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="Weight"
+        android:layout_marginTop="8dp"
+        tools:text="68"
         android:textColor="@color/hydroit_primary"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
         app:layout_constraintTop_toBottomOf="@+id/item_gender" />
 
     <TextView
         android:id="@+id/item_requirement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Requirement"
+        android:layout_marginStart="4dp"
+        tools:text="600"
         android:textColor="@color/teal_200"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item_gender"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
         app:layout_constraintTop_toTopOf="@+id/item_gender" />
 
     <ImageView
@@ -48,7 +49,7 @@
         android:layout_marginStart="8dp"
         android:contentDescription="@string/delete_button"
         android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/item_liquid_requirement"
+        app:layout_constraintBottom_toBottomOf="@+id/textView20"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/item_gender"
@@ -64,5 +65,35 @@
         app:layout_constraintBottom_toBottomOf="@+id/item_image_delete"
         app:layout_constraintStart_toEndOf="@+id/item_image_delete"
         app:layout_constraintTop_toTopOf="@+id/item_image_delete" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        android:text="Geschlecht:"
+        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Gewicht:"
+        app:layout_constraintBottom_toBottomOf="@+id/item_weight_table"
+        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintTop_toTopOf="@+id/item_weight_table"
+        app:layout_constraintVertical_bias="0.328" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Wasserbedarf:"
+        app:layout_constraintStart_toEndOf="@+id/item_gender"
+        app:layout_constraintTop_toTopOf="@+id/item_gender" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

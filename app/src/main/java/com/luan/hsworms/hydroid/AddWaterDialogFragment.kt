@@ -1,7 +1,6 @@
 package com.luan.hsworms.hydroid
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,7 +80,8 @@ class AddWaterDialogFragment: DialogFragment() {
         tvQuantityBig = rootView.findViewById(R.id.tv_volume_big)
         tvQuantityHuge = rootView.findViewById(R.id.tv_volume_huge)
         tvQuantity = rootView.findViewById(R.id.tv_quantity)
-        tvQuantity.setText(mainViewModel.currentlyDrunkLiquid.value.toString())
+        //tvQuantity.setText(mainViewModel.currentlyDrunkLiquid.value.toString())
+        tvQuantity.setText("0")
     }
 
     private fun saveData(waterIn:Int){
