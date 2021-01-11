@@ -35,11 +35,9 @@ class AddWaterDialogFragment: DialogFragment() {
         setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View
+    {
         rootView = inflater.inflate(R.layout.add_water_dialog, container, false)
         return  rootView
     }
@@ -53,13 +51,14 @@ class AddWaterDialogFragment: DialogFragment() {
         initButtons()
         initTextView()
         initImageViews()
+
+        btnSave.setOnClickListener{ saveData(tvQuantity.text.toString().toInt()) }
     }
 
     private fun initButtons(){
         btnSave = rootView.findViewById(R.id.btn_add_water_ok)
         btnAbort = rootView.findViewById(R.id.btn_add_water_cancel)
 
-        btnSave.setOnClickListener{ saveData() }
         btnAbort.setOnClickListener{ dismiss() }
     }
 
@@ -81,12 +80,12 @@ class AddWaterDialogFragment: DialogFragment() {
         tvQuantityBig = rootView.findViewById(R.id.tv_volume_big)
         tvQuantityHuge = rootView.findViewById(R.id.tv_volume_huge)
         tvQuantity = rootView.findViewById(R.id.tv_quantity)
-        tvQuantity.setText(mainViewModel.currentlyDrunkLiquid.value.toString())
+        //tvQuantity.setText(mainViewModel.currentlyDrunkLiquid.value.toString())
+        tvQuantity.setText("0")
     }
 
-    private fun saveData(){
-
-        //TODO: muss implementiert werden, Verbindung mit DB erstellen
+    private fun saveData(waterIn:Int){
+        mainViewModel.addDrunkWater(waterIn)
         dismiss()
     }
 }

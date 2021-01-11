@@ -99,6 +99,7 @@ class WaterRequirementTableFragment: Fragment()  {
                 setNegativeButton("Ablehnen") { dialog, _ ->
                     dialog.dismiss()
                 }
+            setTitle("Bestätigung der Entfernung des Eintrags")
         }
         val dialog = builder.create()
         dialog.show()

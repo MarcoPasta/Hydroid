@@ -25,11 +25,8 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        //Moved the initialization of view from onActivityCreated to onCreateView, since
-        // onCreateView occurs earlier and in it you can already work with variables from the view
-       // viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+    ): View
+    {
         viewModel = ViewModelProvider(requireActivity(),
         MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
@@ -40,6 +37,8 @@ class MainFragment : Fragment() {
             Context.MODE_PRIVATE
         )
 
+        activity?.actionBar?.setTitle("Hydroid")
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate<MainFragmentBinding>(
             inflater,
@@ -47,7 +46,7 @@ class MainFragment : Fragment() {
         )
 
         binding.changeWeather.setOnClickListener {
-            val newFragment = WetterDialogFragment()
+            val newFragment = WeatherDialogFragment()
             newFragment.show(parentFragmentManager, "wetter")
         }
 
@@ -61,16 +60,26 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "add water")
         }
 
-        //The user input dialog is launched at the start of the application,
-        // only if the default value of the weight ("0") have not changed
-        //todo: Change the if-condition to ==
-        //if(viewModel.weightOfUser.value != 0)
-        showUserInputDialog()
+        //For Debugging
+        //viewModel.clearFile()
 
-        Log.i(
-            "on create view",
-            viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString()
-        )
+        //Calling the function of initializing variables with values from internal storage
+        viewModel.populateViewModel()
+
+        //The user input dialog is launched at the start of the application,
+        // only if the default value of the weight ("0") has not changed
+        //todo: Change the if-condition to ==
+        if(viewModel.weightOfUser.value == 0)
+        {
+            showUserInputDialog()
+        } else
+        {
+            //Update of all key values for water demand
+            viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
+                viewModel.userGenderIsFemale.value!!)
+        }
+
+        Log.i("on create view", viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString())
         return binding.root
     }
 
@@ -78,24 +87,23 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.i("onActivityCreated", "onActivityCreated")
         super.onActivityCreated(savedInstanceState)
-        //Calling the function of initializing variables with values from internal storage
-        viewModel.clearFile()
-        viewModel.populateViewModel()
-
-        //TODO: Add implementation of observer methods
-        viewModel.weightOfUser.observe(viewLifecycleOwner, { newWeight ->
-            binding.itemLiquidDrunk.text = newWeight.toString()
-        })
 
         viewModel.dailyLiquidRequirement.observe(viewLifecycleOwner, { newLiquedRequirement ->
+            binding.tvDailyRequirement.text = newLiquedRequirement.toString()
+            binding.tvFulfillmentPercents.text = (viewModel.currentlyDrunkLiquid.value!!.times(100) / newLiquedRequirement).toString()
+            binding.progressBarFulfillment.setProgress(viewModel.currentlyDrunkLiquid.value!!.times(100) / newLiquedRequirement)
+        })
 
+        viewModel.currentlyDrunkLiquid.observe(viewLifecycleOwner, { newDrunkWater ->
+            binding.tvDrunk.text = newDrunkWater.toString()
+            binding.tvFulfillmentPercents.text = (newDrunkWater * 100 / viewModel.dailyLiquidRequirement.value!!).toString()
+            binding.progressBarFulfillment.setProgress(binding.tvFulfillmentPercents.text.toString().toInt())
         })
     }
 
-
     //dialogFragment for entering user data
-    fun showUserInputDialog() {
-
+    private fun showUserInputDialog()
+    {
         //Set Dialog variable and inflate ViewModel
         val dialogView = layoutInflater.inflate(R.layout.user_data_dialog_fragment, null)
         val dialogBuilder = AlertDialog.Builder(activity)
@@ -104,76 +112,51 @@ class MainFragment : Fragment() {
         val dialog = dialogBuilder.show()
 
 
+        println("TEST_5 ${viewModel.weightOfUser.value} ${viewModel.dailyLiquidRequirement.value}")
+
         //Cancel button -> leave the dialog
         val cancelButton = dialogView.findViewById<Button>(R.id.imageButtonUserCancel)
         cancelButton.setOnClickListener {
             dialog.dismiss()
         }
 
-
         //Ok Button -> saving the entered parameters in the internal storage
         val okButton = dialogView.findViewById<Button>(R.id.imageButtonUserOk)
-        okButton.setOnClickListener {
+
+        okButton.setOnClickListener{
+            //If gender == woman =>true else false
             val genderSelected =
                 dialogView.findViewById<RadioGroup>(R.id.radioGroupGender).checkedRadioButtonId
-            //If gender == woman =>true else false
             viewModel.userGenderIsFemale.value = (genderSelected == R.id.radioButtonWoman)
 
-            var weightTemp: Int = 0
             //Checking in case of not entered value for weight
             if (dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString() != "") {
-                weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
+                var weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
                     .toInt()
 
                 //Correction of entered weight to match the values in table
-                if(weightTemp > 21 )
-                    weightTemp = 21
+                //For now only data for weight from 20 till 22 entered
+                if(weightTemp > 23 )
+                    weightTemp = 23
                 if (weightTemp < 20)
                     weightTemp = 20
 
-
-
-                //Test, will be replaced with "update" function
-                //TODO: implement update of the DB with new data
-                viewModel.insert("01.01.2000",54, 200, (54*100/200), weightTemp)
-
-
-
-
                 viewModel.weightOfUser.value = weightTemp
-                 //   dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
-                 //       .toInt()
-                dialog.dismiss()
-                viewModel.saveData(
-                    viewModel.userGenderIsFemale.value!!, viewModel.weightOfUser.value!!,
-                    viewModel.dailyLiquidRequirement.value!!, viewModel.currentlyDrunkLiquid.value!!
-                )
-                Toast.makeText(
-                    activity,
-                    getString(R.string.toast_daten_gesichert),
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                //Toast with a suggestion to enter weight
-                Toast.makeText(
-                    activity,
-                    getString(R.string.toast_gewicht_eingeben),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
 
-            //Logs for checking the correctness of processing the entered values of User Data
-            Log.i("inputDialog", viewModel.weightOfUser.value.toString())
-            Log.i(
-                "inputDialog",
-                viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0)
-                    .toString()
-            )
-            Log.i("inputDialog", viewModel.userGenderIsFemale.value.toString())
+                //Update of all key values for water demand
+                viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
+                    viewModel.userGenderIsFemale.value!!)
+
+                dialog.dismiss()
+
+                Toast.makeText(activity, getString(R.string.toast_daten_gesichert), Toast.LENGTH_SHORT).show()
+            } else
+            {
+                Toast.makeText(activity, getString(R.string.toast_gewicht_eingeben), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
-
 
 //val newFragment = UserDataDialogFragment()
 //newFragment.show(childFragmentManager, "userdata")

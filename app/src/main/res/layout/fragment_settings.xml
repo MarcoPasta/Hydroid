@@ -16,8 +16,17 @@
                 android:id="@+id/fragment_settings_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Settings"
-                android:textSize="30sp" />
+                android:layout_margin="4dp"
+                android:text="Einstellungen"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="2dp"
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/text_view_water_requirement_table"
@@ -26,9 +35,17 @@
                 android:layout_margin="10dp"
                 android:clickable="true"
                 android:padding="10dp"
-                android:text="Water requirements table"
+                android:text="Wasserbedarfstabelle"
                 android:textColor="@color/hydroit_primary"
+                android:textIsSelectable="true"
                 android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="2dp"
+                android:background="?android:attr/listDivider" />
 
         </LinearLayout>
 

@@ -1,14 +1,20 @@
 package com.luan.hsworms.hydroid
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.luan.hsworms.hydroid.Backend.Database.History
+import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
 import com.luan.hsworms.hydroid.Backend.HistoryListAdapter
+import com.luan.hsworms.hydroid.Backend.WaterRequirementTableAdapter
 
 class HistoryFragment : Fragment() {
 
@@ -57,6 +63,33 @@ class HistoryFragment : Fragment() {
         val testContent = ArrayList<String>(List(25){"TEST"})
         adapter = HistoryListAdapter(ArrayList())
         rv.adapter = adapter
+
+        //Implement LongClickListener
+        //Delete Entity in BD by long click
+        adapter.setOnItemLongClickListener(object: HistoryListAdapter.OnItemLongClickListener{
+            override fun setOnItemLongClickListener(position: Int) {
+                startAlarmDialog(adapter.content[position])
+            }
+        })
+    }
+
+    private fun startAlarmDialog(history: History){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.apply {
+            setMessage("Warnung - Eintrag wird gelöscht")
+            setPositiveButton("OKAY", DialogInterface.OnClickListener { _, _ ->
+                Toast.makeText(requireContext(),
+                    "Eintrag ${history.date} wurde gelöscht",
+                    Toast.LENGTH_SHORT).show()
+                historyViewModel.delete(history)
+            })
+            setNegativeButton("Ablehnen") { dialog, _ ->
+                dialog.dismiss()
+            }
+            setTitle("Bestätigung der Entfernung des Eintrags")
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     companion object {
