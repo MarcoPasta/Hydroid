@@ -42,7 +42,7 @@ class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):Rec
         var tvWeight: TextView = itemView.findViewById(R.id.item_weight_table)
         var tvRequirement: TextView = itemView.findViewById(R.id.item_requirement)
 
-        //Implement 2 ClickListener
+        //Implementation of 2 ClickListener
         init {
             itemView.setOnClickListener {
                 mItemListener?.setOnItemClickListener(adapterPosition)
