@@ -3,6 +3,7 @@ package com.luan.hsworms.hydroid.Backend
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+//TODO: Datei löschen
 @Entity
 data class UserData(
     @PrimaryKey val userID: Int = 1,/**/

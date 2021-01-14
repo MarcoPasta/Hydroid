@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Wählen Sie Ihre aktuelle Aktivität"
+                android:text="Wählen Sie aktuelles Wetter"
                 android:textColor="@color/design_default_color_primary"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
