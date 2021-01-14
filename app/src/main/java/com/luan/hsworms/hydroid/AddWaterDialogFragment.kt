@@ -1,5 +1,7 @@
 package com.luan.hsworms.hydroid
 
+import android.app.Notification
+import android.app.NotificationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 
@@ -68,8 +71,39 @@ class AddWaterDialogFragment: DialogFragment() {
         imgBig = rootView.findViewById(R.id.iv_glass_big)
         imgHuge = rootView.findViewById(R.id.iv_glass_huge)
 
-        imgSmall.setOnClickListener{ tvQuantity.setText(tvQuantitySmall.text) }
-        imgMiddle.setOnClickListener{ tvQuantity.setText(tvQuantityMiddle.text) }
+        imgSmall.setOnClickListener{
+            tvQuantity.setText(tvQuantitySmall.text)
+
+            NotificationActivity.showNotification(
+                "AddSmallWater",
+                1,
+                requireContext(),
+                R.drawable.ic_done,
+                "Glückwunsch!",
+                "Du hast 50ml getrunken!",
+                null,
+                NotificationCompat.PRIORITY_DEFAULT,
+                "AddWater50mlChannel",
+                "Added50MlWater",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+        }
+        imgMiddle.setOnClickListener{
+            tvQuantity.setText(tvQuantityMiddle.text)
+            NotificationActivity.showNotification(
+                "AddMiddleWater",
+                1,
+                requireContext(),
+                R.drawable.ic_done,
+                "Glückwunsch!",
+                "Du hast 100ml getrunken!",
+                null,
+                NotificationCompat.PRIORITY_DEFAULT,
+                "AddWater100mlChannel",
+                "Added100MlWater",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+        }
         imgBig.setOnClickListener{ tvQuantity.setText(tvQuantityBig.text) }
         imgHuge.setOnClickListener{ tvQuantity.setText(tvQuantityHuge.text) }
     }
