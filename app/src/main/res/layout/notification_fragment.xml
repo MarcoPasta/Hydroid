@@ -7,14 +7,66 @@
     tools:context=".NotificationFragment">
 
     <TextView
+        android:id="@+id/noti_fragment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notification"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/noti_fragment_title"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="393dp"
+        android:layout_height="556dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+
+        <Switch
+            android:id="@+id/switch_allow_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="@string/switch_allow_notification"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/allow_send_notification_description"
+            android:layout_width="289dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/switch_allow_noti_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.131"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="162dp" />
+
+        <Switch
+            android:id="@+id/switch_allow_help_drink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100px"
+            android:text="@string/switch_help_drink"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/allow_send_help_drink_description"
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/switch_help_drink_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.092"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/allow_send_help_drink_txt" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

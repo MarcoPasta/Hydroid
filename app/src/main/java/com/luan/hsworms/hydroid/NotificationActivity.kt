@@ -26,6 +26,7 @@ class NotificationActivity  {
         )
         {
             // Build notification
+            // apply allows us to specify more methods within a method
             val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
                 setSmallIcon(smallIcon)
                 setContentTitle(contentTitle)
@@ -36,7 +37,7 @@ class NotificationActivity  {
                 }
             }
 
-            // Create channel (only vaiable for OS > Oreo/8
+            // Create channel (only needed if OS > Oreo/Android 8
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(CHANNEL_ID, channelName, channelImportance).apply {
                     description = channelDescription

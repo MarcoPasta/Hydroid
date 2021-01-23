@@ -90,6 +90,7 @@ class AddWaterDialogFragment: DialogFragment() {
         }
         imgMiddle.setOnClickListener{
             tvQuantity.setText(tvQuantityMiddle.text)
+
             NotificationActivity.showNotification(
                 "AddMiddleWater",
                 1,

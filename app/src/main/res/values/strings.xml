@@ -28,4 +28,17 @@
     <string name="history">History</string>
     <string name="preferences_file_weather">com.luan.hsworms.hydroid.PREFERENCE_FILE_WEATHER</string>
 
+
+    <string name="add_water_text_example">Fügen Sie eine Portion Wasser hinzu, das Sie trinken</string>
+
+
+    <!-- notification_fragment.xml -->
+    <string name="noti_fragment_title">Benachrichtigungen</string>
+    <string name="switch_allow_notification">Benachrichtigungen erhalten</string>
+    <string name="switch_allow_noti_description">Schaltet die Benachrichtigungen, welche die App dir senden darf ein.</string>
+    <string name="switch_help_drink">Hilf mir zu trinken!</string>
+    <string name="switch_help_drink_description">Erinnert dich regelmäßig daran genug über den Tag zu trinken</string>
+
+
+
 </resources>
