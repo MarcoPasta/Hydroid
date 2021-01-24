@@ -11,7 +11,7 @@ class NotificationViewModel : ViewModel() {
     var switchBoolHelpDrink: Boolean = true
 
     // TODO: Implement function model for return switch status
-    fun canNotifyHelpDrink():Boolean {
+    fun canSendNotification():Boolean {
         return if(!switchBoolNotification) false else switchBoolHelpDrink
     }
 }

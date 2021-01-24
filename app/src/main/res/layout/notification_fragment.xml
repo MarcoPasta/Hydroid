@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".NotificationFragment">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/noti_fragment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,10 +17,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="81dp"
+        tools:ignore="MissingConstraints" />-->
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="393dp"
-        android:layout_height="556dp"
+        android:layout_width="389dp"
+        android:layout_height="647dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +38,21 @@
         tools:ignore="MissingConstraints">
 
 
-        <Switch
+        <View
+            android:id="@+id/divider8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="81dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_allow_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="10dp"
             android:text="@string/switch_allow_notification"
             android:textSize="22sp" />
 
@@ -48,11 +67,21 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="162dp" />
 
-        <Switch
+        <View
+            android:id="@+id/divider9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="81dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_allow_help_drink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100px"
+            android:layout_marginTop="10dp"
             android:text="@string/switch_help_drink"
             android:textSize="22sp" />
 
@@ -67,6 +96,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/allow_send_help_drink_txt" />
     </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
