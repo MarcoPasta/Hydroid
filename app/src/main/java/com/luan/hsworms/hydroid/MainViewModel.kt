@@ -24,7 +24,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     var dailyLiquidRequirement = MutableLiveData<Int>()
     var currentlyDrunkLiquid = MutableLiveData<Int>()
 
-    var ourUserData: SharedPreferences? = null//To save user data in internal storage
+    var ourUserData: SharedPreferences? = null      //To save user data in internal storage
 
 
     init {

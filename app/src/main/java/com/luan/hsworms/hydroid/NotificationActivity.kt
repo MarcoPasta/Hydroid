@@ -12,6 +12,7 @@ class NotificationActivity  {
 
     companion object {
         fun showNotification (
+            allowNotification: Boolean,
             CHANNEL_ID: String,
             NOTIFICATION_ID: Int,
             context: Context,
@@ -25,6 +26,10 @@ class NotificationActivity  {
             channelImportance: Int,
         )
         {
+
+            if(!allowNotification)
+                return
+
             // Build notification
             // apply allows us to specify more methods within a method
             val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {

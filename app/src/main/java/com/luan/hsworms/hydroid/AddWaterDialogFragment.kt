@@ -2,6 +2,8 @@ package com.luan.hsworms.hydroid
 
 import android.app.Notification
 import android.app.NotificationManager
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class AddWaterDialogFragment: DialogFragment() {
@@ -31,11 +34,18 @@ class AddWaterDialogFragment: DialogFragment() {
 
     //ViewModel
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var notificationViewModel: NotificationViewModel  // Create a NotificationviewModel object to get access to Notification data
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
+
+        // Instanciate a NotificationViewModel objet to get access to notification switch button states
+        // and load them
+        notificationViewModel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
+        notificationViewModel.notificationPreference = activity?.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
+        notificationViewModel.loadData()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -75,6 +85,7 @@ class AddWaterDialogFragment: DialogFragment() {
             tvQuantity.setText(tvQuantitySmall.text)
 
             NotificationActivity.showNotification(
+                notificationViewModel.switchBoolNotification,   // get the state of switchBoolNotification, if true, Notification is allowed
                 "AddSmallWater",
                 1,
                 requireContext(),
@@ -92,6 +103,7 @@ class AddWaterDialogFragment: DialogFragment() {
             tvQuantity.setText(tvQuantityMiddle.text)
 
             NotificationActivity.showNotification(
+                notificationViewModel.switchBoolNotification,   // get the state of switchBoolNotification, if true, Notification is allowed
                 "AddMiddleWater",
                 1,
                 requireContext(),
