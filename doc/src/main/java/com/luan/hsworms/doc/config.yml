@@ -1,0 +1,28 @@
+site:
+  baseUrl: 'https://0x5245.de/luca/...'
+  about:
+    siteName: Hydroid documentation
+    siteDescription: Monitor your drinking behavior with hydroid
+Editorial:
+  primaryColor: '#499DDE'
+  legacySearch: false
+  social:
+    github: 'MarcoPasta/Hydroid'
+  metaComponents:
+    - type: 'orchidSearch'
+  menu:
+    - type: 'separator'
+      title: 'API Docs'
+    - type: 'sourcedocPages'
+      moduleType: 'kotlindoc'
+      node: 'classes'
+      asSubmenu: true
+      submenuTitle: 'Classes'
+    - type: 'sourcedocPages'
+      moduleType: 'kotlindoc'
+      node: 'packages'
+      asSubmenu: true
+      submenuTitle: 'Packages'
+kotlindoc:
+  sourceDirs:
+    - './../../../../../../../../app/src/main/java'

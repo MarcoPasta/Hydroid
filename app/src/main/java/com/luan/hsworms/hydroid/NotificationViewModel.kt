@@ -11,21 +11,41 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-private const val TAG = "NotifivationViewModel"
 
+/**
+ * Class for storing the switch button statements after the app was closed
+ */
 class NotificationViewModel() : ViewModel() {
 
+    private val TAG = "NotifivationViewModel"
 
+    /**
+     * Boolean for the NotificationFragment switch button that asks if the app is allowed to send the user some notifications
+     */
     var switchBoolNotification: Boolean = false
+
+    /**
+     * Boolean for the button "Help me Drink!" that asks if the app is allowed to recommend the user when he should drink something
+     */
     var switchBoolHelpDrink: Boolean = true
 
+    /**
+     * Object needed to safe the state of the switches locally
+     */
     var notificationPreference: SharedPreferences? = null
 
+    /**
+     * customized getter method for switchBoolHelpDrink
+     * @return Always false when switchBoolNotification is false
+     */
     fun canSendHelpDrinkNotification(): Boolean {
         // if switchBollNotification is false then
         return if(!switchBoolNotification) false else switchBoolHelpDrink
     }
 
+    /**
+     * Saves the state of the switch buttons as sharedPrefences
+     */
     fun saveData() {
         notificationPreference?.edit {
             putBoolean("NOTIFICATION", switchBoolNotification)
@@ -36,6 +56,9 @@ class NotificationViewModel() : ViewModel() {
         Log.d(TAG, "calling saveData() successful")
     }
 
+    /**
+     * loads the saved buttons when loading a fragment
+     */
     fun loadData() {
 
         val savedNotificationSwitch = notificationPreference?.getBoolean("NOTIFICATION", false)

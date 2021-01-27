@@ -15,16 +15,14 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.ViewModel
 import java.util.prefs.PreferenceChangeEvent
 
-
-// Constants for easiert debuggin usage
-private const val NOTIFY_TAG = "NF_Notify"
-private const val HELP_DRINK_TAG = "NF_HelpDrink"
-private const val PREF_TAG = "Preference_call"
-
 class NotificationFragment : Fragment() {
     companion object {
         fun newInstance() = NotificationFragment()
     }
+
+    // Constants for easiert debuggin usage
+    private val NOTIFY_TAG = "NF_Notify"
+    private val HELP_DRINK_TAG = "NF_HelpDrink"
 
     // Initialization of needed variables for interactive ViewModel usage
     private lateinit var notificationViewModel: NotificationViewModel
@@ -82,7 +80,6 @@ class NotificationFragment : Fragment() {
             Log.d(NOTIFY_TAG, notificationViewModel.switchBoolNotification.toString())
         }
 
-
         // OnClickListener for HelpDrink Button
         switchBtnHelpDrink.setOnCheckedChangeListener() { _ , isChecked ->
             // Checks if HelpDrink button is being pressed
@@ -100,7 +97,4 @@ class NotificationFragment : Fragment() {
         }
 
     }
-
-
-
 }
