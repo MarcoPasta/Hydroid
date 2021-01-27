@@ -73,7 +73,12 @@ class NotificationFragment : Fragment() {
             // Saved current state of Notification button
             notificationViewModel.saveData()
             // Debugging
-            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+            if(notificationViewModel.switchBoolNotification)
+                Toast.makeText(context, "Benachrichtigungen sind nun Aktiviert.", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(context, "Benachrichtigungen sind nun Deaktiviert.", Toast.LENGTH_SHORT).show()
+
+
             Log.d(NOTIFY_TAG, notificationViewModel.switchBoolNotification.toString())
         }
 
@@ -86,7 +91,11 @@ class NotificationFragment : Fragment() {
             // Saves current state of HelpDrink button
             notificationViewModel.saveData()
             // Debugging
-            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+            if(notificationViewModel.switchBoolHelpDrink)
+                Toast.makeText(context, "\"Hilf mir trinken!\" ist nun Aktiviert.", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(context, "\"Hilf mir trinken!\" ist nun Deaktiviert.", Toast.LENGTH_SHORT).show()
+
             Log.d(HELP_DRINK_TAG, notificationViewModel.switchBoolHelpDrink.toString())
         }
 

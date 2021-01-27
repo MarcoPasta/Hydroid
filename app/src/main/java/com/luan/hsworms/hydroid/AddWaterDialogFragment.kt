@@ -65,7 +65,24 @@ class AddWaterDialogFragment: DialogFragment() {
         initTextView()
         initImageViews()
 
-        btnSave.setOnClickListener{ saveData(tvQuantity.text.toString().toInt()) }
+        btnSave.setOnClickListener{
+
+            NotificationActivity.showNotification(
+                notificationViewModel.switchBoolNotification,
+                "AddWaterNotification",
+                1,
+                requireContext(),
+                R.drawable.ic_done,
+                "Erfrischend",
+                "Du hast etwas getrunken!",
+                null,
+                NotificationCompat.PRIORITY_DEFAULT,
+                "AddWaterOkayButton",
+                "AddedWaterOnPressOkayButton",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            saveData(tvQuantity.text.toString().toInt())
+        }
     }
 
     private fun initButtons(){
@@ -81,42 +98,8 @@ class AddWaterDialogFragment: DialogFragment() {
         imgBig = rootView.findViewById(R.id.iv_glass_big)
         imgHuge = rootView.findViewById(R.id.iv_glass_huge)
 
-        imgSmall.setOnClickListener{
-            tvQuantity.setText(tvQuantitySmall.text)
-
-            NotificationActivity.showNotification(
-                notificationViewModel.switchBoolNotification,   // get the state of switchBoolNotification, if true, Notification is allowed
-                "AddSmallWater",
-                1,
-                requireContext(),
-                R.drawable.ic_done,
-                "Glückwunsch!",
-                "Du hast 50ml getrunken!",
-                null,
-                NotificationCompat.PRIORITY_DEFAULT,
-                "AddWater50mlChannel",
-                "Added50MlWater",
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-        }
-        imgMiddle.setOnClickListener{
-            tvQuantity.setText(tvQuantityMiddle.text)
-
-            NotificationActivity.showNotification(
-                notificationViewModel.switchBoolNotification,   // get the state of switchBoolNotification, if true, Notification is allowed
-                "AddMiddleWater",
-                1,
-                requireContext(),
-                R.drawable.ic_done,
-                "Glückwunsch!",
-                "Du hast 100ml getrunken!",
-                null,
-                NotificationCompat.PRIORITY_DEFAULT,
-                "AddWater100mlChannel",
-                "Added100MlWater",
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-        }
+        imgSmall.setOnClickListener{ tvQuantity.setText(tvQuantitySmall.text) }
+        imgMiddle.setOnClickListener{ tvQuantity.setText(tvQuantityMiddle.text) }
         imgBig.setOnClickListener{ tvQuantity.setText(tvQuantityBig.text) }
         imgHuge.setOnClickListener{ tvQuantity.setText(tvQuantityHuge.text) }
     }
