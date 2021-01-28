@@ -1,5 +1,5 @@
 site:
-  baseUrl: 'https://0x5245.de/luca/...'
+  baseUrl: 'https://0x5245.de/luca/hydroid/docs'
   about:
     siteName: Hydroid documentation
     siteDescription: Monitor your drinking behavior with hydroid
