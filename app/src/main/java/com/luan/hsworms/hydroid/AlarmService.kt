@@ -28,30 +28,16 @@ class AlarmService: BroadcastReceiver() {
 
         fun setAlarm(context: Context) {
             alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
             alarmIntent = Intent(context, AlarmService::class.java).let { intent ->
                 PendingIntent.getBroadcast(context, 0, intent, 0)
             }
-
-            alarmManager?.let{
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-
-                }else {
-
-                }
-
-            }
-
 
             alarmManager?.set(
                 AlarmManager.ELAPSED_REALTIME,
                 SystemClock.elapsedRealtime() + 10 * 1000,
                 alarmIntent
             )
-          }
-
-
+        }
     }
-
-
-
 }
