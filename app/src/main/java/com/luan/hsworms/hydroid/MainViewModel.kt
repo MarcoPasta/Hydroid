@@ -55,6 +55,20 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         editor?.apply()
     }
 
+    //Here we change the data in the storage, in case of changing the gender
+    fun saveGender(newGender: Boolean){
+        val editor = ourUserData?.edit()
+        editor?.putBoolean(R.string.saved_gender_of_user.toString(), newGender)
+        editor?.apply()
+    }
+
+    //Here we change the data in the storage, in case of changing the weight
+    fun saveWeight(newWeight: Int){
+        val editor = ourUserData?.edit()
+        editor?.putInt(R.string.saved_weight_of_user.toString(), newWeight)
+        editor?.apply()
+    }
+
     //Clear Data for testing
     fun clearFile(){
         val editor = ourUserData?.edit()

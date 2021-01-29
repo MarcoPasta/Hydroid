@@ -5,6 +5,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/menu_background"
         tools:context=".SettingsFragment">
 
         <LinearLayout
@@ -60,34 +61,22 @@
                 android:textSize="18sp" />
 
             <RadioGroup
-                android:layout_width="422dp"
-                android:layout_height="wrap_content">
+                android:id="@+id/rg_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
 
-                <TextView
-                    android:id="@+id/textView24"
+                <RadioButton
+                    android:id="@+id/rb_female"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:text="Weiblich" />
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/rb_male"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
-
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:text="Männlich" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="RadioButton" />
 
             </RadioGroup>
 
@@ -96,6 +85,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_margin="2dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:padding="10dp"
+                android:text="Gewicht ändern"
+                android:textColor="@color/black"
+                android:textIsSelectable="true"
+                android:textSize="18sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_weight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Gewicht"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
         </LinearLayout>
