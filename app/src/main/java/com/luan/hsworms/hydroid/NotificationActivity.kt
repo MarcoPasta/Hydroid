@@ -3,7 +3,9 @@ package com.luan.hsworms.hydroid
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -49,15 +51,14 @@ class NotificationActivity  {
             contentTitle: CharSequence,
             contentText: CharSequence,
             contentBigText: CharSequence?,      // ? -> Parameter is nullable
-            contentPriority: Int,
-            channelName: String,
-            channelDescription: String,
-            channelImportance: Int
-        )
-        {
+            contentPriority: Int
+        ) {
 
             if(!allowNotification)
                 return
+
+            // var intent: Intent? = AlarmService.setNewIntent(context)
+            // var pendingIntent: PendingIntent? = PendingIntent.getActivity(context, 0, intent, 0)
 
             // Build notification
             // apply allows us to specify more methods within a method
@@ -69,10 +70,17 @@ class NotificationActivity  {
                 contentBigText?.let {
                     setStyle(NotificationCompat.BigTextStyle().bigText(it))
                 }
+               /* für den fall das es über mainactivity nicht klappt
+               setContentIntent(pendingIntent)
+                if(pendingIntent != null)
+                    setAutoCancel(true)*/
             }
 
             // Create channel (only needed if OS > Oreo/Android 8
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channelName: String = "Notifications"
+                val channelDescription: String = "Standard Notification System"
+                val channelImportance: Int = NotificationManager.IMPORTANCE_DEFAULT
                 val channel = NotificationChannel(CHANNEL_ID, channelName, channelImportance).apply {
                     description = channelDescription
                 }

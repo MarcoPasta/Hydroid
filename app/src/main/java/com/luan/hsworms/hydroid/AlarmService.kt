@@ -11,14 +11,9 @@ import android.util.Log
 import android.widget.Toast
 
 
-class AlarmService: BroadcastReceiver() {
+class AlarmService() {
 
     private val TAG = "alarmServiceTest"
-
-    override fun onReceive(context: Context?, intent: Intent?) {
-        Toast.makeText(context, "AlarmReceiver called", Toast.LENGTH_SHORT).show()
-        Log.d(TAG, "onReceive: called")
-    }
 
     companion object {
 
@@ -27,9 +22,10 @@ class AlarmService: BroadcastReceiver() {
 
 
         fun setAlarm(context: Context) {
+            Log.d("Alarm", "setAlarm called")
             alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-            alarmIntent = Intent(context, AlarmService::class.java).let { intent ->
+            alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
                 PendingIntent.getBroadcast(context, 0, intent, 0)
             }
 
@@ -38,6 +34,10 @@ class AlarmService: BroadcastReceiver() {
                 SystemClock.elapsedRealtime() + 10 * 1000,
                 alarmIntent
             )
+        }
+
+        fun setNewIntent(context: Context): Intent {
+            return Intent(context, AlarmService::class.java)
         }
     }
 }

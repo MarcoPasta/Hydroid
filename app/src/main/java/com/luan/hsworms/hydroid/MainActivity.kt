@@ -1,10 +1,14 @@
 package com.luan.hsworms.hydroid
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     //AppBar configuration (was passiert, wenn wir clicken)
     private val idSets = setOf(R.id.mainFragment, R.id.settingsFragment, R.id.notificationFragment)
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var notificationViewModel: NotificationViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +49,22 @@ class MainActivity : AppCompatActivity() {
         //Verbinden Menu mit NavController
         navView.setupWithNavController(navController)
 
+        ///////////////////////////////////////////////////////////////////////////
+        // Bereich reserviert für den AlarmManager
+        // Creating an instance of ViewModel Object
+        notificationViewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
+        // Make a reference to object and SharedPreferences
+        notificationViewModel.notificationPreference = getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
+        // Load SharedPreferences
+        notificationViewModel.loadData()
+
+        // If Notifications are allowed, we can create the AlarmManagerStuff
+        if(notificationViewModel.switchBoolNotification)
+            AlarmService.setAlarm(this)
+
+
+        //////////////////////////////////////////////////////////////////////////
+
     }
 
     //Add an Up button in the app bar
@@ -51,5 +72,4 @@ class MainActivity : AppCompatActivity() {
         val navController:NavController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 }
