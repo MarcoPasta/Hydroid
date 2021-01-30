@@ -106,7 +106,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
     //If there is no record in the database for the current day, then it is created
-    private  fun addEntityInHistory()
+    fun addEntityInHistory()
     {
         viewModelScope.launch {
 

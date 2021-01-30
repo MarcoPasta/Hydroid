@@ -27,6 +27,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View
     {
+        //Initializing of ViewModel
         viewModel = ViewModelProvider(requireActivity(),
         MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
@@ -68,7 +69,6 @@ class MainFragment : Fragment() {
 
         //The user input dialog is launched at the start of the application,
         // only if the default value of the weight ("0") has not changed
-        //todo: Change the if-condition to ==
         if(viewModel.weightOfUser.value == 0)
         {
             showUserInputDialog()
@@ -101,6 +101,13 @@ class MainFragment : Fragment() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.addEntityInHistory()
+    }
+
+
+
     //dialogFragment for entering user data
     private fun showUserInputDialog()
     {
@@ -110,9 +117,6 @@ class MainFragment : Fragment() {
             .setView(dialogView)
             .setTitle(getString(R.string.user_input_dialog_titel))
         val dialog = dialogBuilder.show()
-
-
-        println("TEST_5 ${viewModel.weightOfUser.value} ${viewModel.dailyLiquidRequirement.value}")
 
         //Cancel button -> leave the dialog
         val cancelButton = dialogView.findViewById<Button>(R.id.imageButtonUserCancel)
