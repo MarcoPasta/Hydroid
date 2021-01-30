@@ -24,16 +24,20 @@ class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var viewModel: MainViewModel
+    private lateinit var settingsViewModel: SettingsViewModel
 
     private lateinit var rgGender: RadioGroup
     private lateinit var etWeight: TextInputLayout
+    private lateinit var etGlassSmall: TextInputLayout
+    private lateinit var etGlassMiddle: TextInputLayout
+    private lateinit var etGlassBig: TextInputLayout
+    private lateinit var etGlassHuge: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val context = getActivity();
     }
 
-    // lateinit var  view: View
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,20 +49,30 @@ class SettingsFragment : Fragment() {
             MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
 
+        settingsViewModel = ViewModelProvider(requireActivity(),SettingsViewModelFactory(requireActivity().application)
+        ).get(SettingsViewModel::class.java)
+
+        //Initializing an object with user data with data from a file
+        settingsViewModel.glasses = activity?.getSharedPreferences(
+            getString(R.string.preferences_glasses),
+            Context.MODE_PRIVATE
+        )
+
         initWidgets()
+        fillingOfTheFragmentFields()
 
-//        Log.i(sharedPreferences.getInt(R.string.saved_weight_of_user.toString(), 0).toString(), "Schared preference")
-//        Log.i(viewModel.userGenderIsFemale.value.toString(), "User gender")
-        if(viewModel.userGenderIsFemale.value == true){
-            rgGender.check(R.id.rb_female)
-        } else {
-            rgGender.check(R.id.rb_male)
-        }
+        //Initializing an object with user data with data from a file
+        settingsViewModel.glasses = activity?.getSharedPreferences(
+            getString(R.string.preferences_glasses),
+            Context.MODE_PRIVATE
+        )
 
-        etWeight.editText?.setText(viewModel.weightOfUser.value.toString())
+        //Filling temporary variables with values from internal storage
+        settingsViewModel.populateViewModel()
 
         return rootView
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,22 +81,56 @@ class SettingsFragment : Fragment() {
         )
     }
 
+
     override fun onStop() {
         super.onStop()
-        //Save Settings
+        saveSettings()
+    }
+
+
+    private fun initWidgets(){
+        rgGender = rootView.findViewById(R.id.rg_gender)
+        etWeight = rootView.findViewById(R.id.et_weight)
+        etGlassSmall = rootView.findViewById(R.id.et_glass_small)
+        etGlassMiddle = rootView.findViewById(R.id.et_glass_middle)
+        etGlassBig = rootView.findViewById(R.id.et_glass_big)
+        etGlassHuge = rootView.findViewById(R.id.et_glass_huge)
+    }
+
+    private fun fillingOfTheFragmentFields(){
+        if(viewModel.userGenderIsFemale.value == true){
+            rgGender.check(R.id.rb_female)
+        } else {
+            rgGender.check(R.id.rb_male)
+        }
+
+        etWeight.editText?.setText(viewModel.weightOfUser.value.toString())
+        etGlassSmall.editText?.setText(settingsViewModel.glassSmall.value.toString())
+        etGlassMiddle.editText?.setText(settingsViewModel.glassMiddle.value.toString())
+        etGlassBig.editText?.setText(settingsViewModel.glassBig.value.toString())
+        etGlassHuge.editText?.setText(settingsViewModel.glassHuge.value.toString())
+    }
+
+    private fun saveSettings(){
+        //Gender settings
         //If gender == woman =>true else false
         val genderSelected = view?.findViewById<RadioGroup>(R.id.rg_gender)?.checkedRadioButtonId
         viewModel.userGenderIsFemale.value = (genderSelected == R.id.rb_female)
         val gender = viewModel.userGenderIsFemale.value!!
         viewModel.saveGender(gender)
 
+        //Weight settings
         val weight = view?.findViewById<TextInputLayout>(R.id.et_weight)?.editText?.text.toString().toInt()
         viewModel.weightOfUser.value = weight
         viewModel.saveWeight(weight)
-    }
 
-    private fun initWidgets(){
-        rgGender = rootView.findViewById(R.id.rg_gender)
-        etWeight = rootView.findViewById(R.id.et_weight)
+        //Glass volumes
+        settingsViewModel.saveData(etGlassSmall.editText?.text.toString().toInt(),
+            etGlassMiddle.editText?.text.toString().toInt(),
+            etGlassBig.editText?.text.toString().toInt(),
+            etGlassHuge.editText?.text.toString().toInt())
     }
 }
+
+//        Log.i(sharedPreferences.getInt(R.string.saved_weight_of_user.toString(), 0).toString(), "Schared preference")
+//        Log.i(viewModel.userGenderIsFemale.value.toString(), "User gender")
