@@ -124,10 +124,14 @@ class MainFragment : Fragment() {
         val okButton = dialogView.findViewById<Button>(R.id.imageButtonUserOk)
 
         okButton.setOnClickListener{
-            //If gender == woman =>true else false
+            //If gender == woman =>1 else 0
             val genderSelected =
                 dialogView.findViewById<RadioGroup>(R.id.radioGroupGender).checkedRadioButtonId
-            viewModel.userGenderIsFemale.value = (genderSelected == R.id.radioButtonWoman)
+            if(genderSelected == R.id.radioButtonWoman){
+                viewModel.userGenderIsFemale.value = 1
+            }else{
+                viewModel.userGenderIsFemale.value = 0
+            }
 
             //Checking in case of not entered value for weight
             if (dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString() != "") {
@@ -136,10 +140,10 @@ class MainFragment : Fragment() {
 
                 //Correction of entered weight to match the values in table
                 //For now only data for weight from 20 till 22 entered
-                if(weightTemp > 23 )
-                    weightTemp = 23
-                if (weightTemp < 20)
-                    weightTemp = 20
+//                if(weightTemp > 23 )
+//                    weightTemp = 23
+//                if (weightTemp < 20)
+//                    weightTemp = 20
 
                 viewModel.weightOfUser.value = weightTemp
 

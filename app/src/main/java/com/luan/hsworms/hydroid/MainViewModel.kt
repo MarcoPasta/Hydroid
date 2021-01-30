@@ -19,7 +19,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val repository = AppRepository(application)
 
     //TODO: Encapsulate the Live Data
-    var userGenderIsFemale = MutableLiveData<Boolean>()
+    var userGenderIsFemale = MutableLiveData<Int>()
     var weightOfUser = MutableLiveData<Int>()
     var dailyLiquidRequirement = MutableLiveData<Int>()
     var currentlyDrunkLiquid = MutableLiveData<Int>()
@@ -28,7 +28,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
 
     init {
-        userGenderIsFemale.value = true
+        userGenderIsFemale.value = 1
         weightOfUser.value = 0
         dailyLiquidRequirement.value = 1
         currentlyDrunkLiquid.value = 0
@@ -37,17 +37,17 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     //Filling viewModel variables with values from internal storage
     fun populateViewModel(){
 
-        userGenderIsFemale.value = ourUserData?.getBoolean(R.string.saved_gender_of_user.toString(), true)
+        userGenderIsFemale.value = ourUserData?.getInt(R.string.saved_gender_of_user.toString(), 1)
         weightOfUser.value = ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0)
         dailyLiquidRequirement.value = ourUserData?.getInt(R.string.saved_liquid_requirements_of_user.toString(), 1)
         currentlyDrunkLiquid.value = ourUserData?.getInt(R.string.saved_drunk_liquid_of_user.toString(), 0)
     }
 
     //Here we change the data in the storage, in case of changing the actual data
-    fun saveData(newGender: Boolean, newWeight: Int, newLiquidRequirements: Int, newDrunkLiquid: Int){
+    fun saveData(newGender: Int, newWeight: Int, newLiquidRequirements: Int, newDrunkLiquid: Int){
         val editor = ourUserData?.edit()
 
-        editor?.putBoolean(R.string.saved_gender_of_user.toString(), newGender)
+        editor?.putInt(R.string.saved_gender_of_user.toString(), newGender)
         editor?.putInt(R.string.saved_weight_of_user.toString(), newWeight)
         editor?.putInt((R.string.saved_liquid_requirements_of_user).toString(), newLiquidRequirements)
         editor?.putInt((R.string.saved_drunk_liquid_of_user).toString(), newDrunkLiquid)
@@ -56,9 +56,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
     //Here we change the data in the storage, in case of changing the gender
-    fun saveGender(newGender: Boolean){
+    fun saveGender(newGender: Int){
         val editor = ourUserData?.edit()
-        editor?.putBoolean(R.string.saved_gender_of_user.toString(), newGender)
+        editor?.putInt(R.string.saved_gender_of_user.toString(), newGender)
         editor?.apply()
     }
 
@@ -77,7 +77,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
     //Updating data at application start and adding a record about the current day to History, if it has not been created yet
-    fun updateDataByStartActivity(weightIn: Long, genderIn: Boolean)
+    fun updateDataByStartActivity(weightIn: Long, genderIn: Int)
     {
         //Search the database for water requirements by weight and gender. Returns 2500 if didn't find.
         if(dailyLiquidRequirement.value == 0 || dailyLiquidRequirement.value == 1) {
@@ -89,7 +89,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
     //Search the database for water requirements by weight and gender. Returns 2500 if didn't find.
-    private fun waterRequirementsUpdate(weightIn: Long, genderIn: Boolean){
+    private fun waterRequirementsUpdate(weightIn: Long, genderIn: Int){
         viewModelScope.launch {
             val waterRequirement: Int? = getWaterRequirementByWeightAndGender(weightIn, genderIn)
 
@@ -109,11 +109,13 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private  fun addEntityInHistory()
     {
         viewModelScope.launch {
-            val requirement = dailyLiquidRequirement.value!!
+
             val drunk = 0
             val history = getHistoryByDate(currentDate())
             if(history == null)
             {
+                waterRequirementsUpdate(weightOfUser.value!!.toLong(), userGenderIsFemale.value!!)
+                val requirement = dailyLiquidRequirement.value!!
                 currentlyDrunkLiquid.value = drunk //A new day has begun, the value of the drink is set to zero
                 saveData(
                     userGenderIsFemale.value!!, weightOfUser.value!!,
@@ -182,7 +184,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Boolean):Int?{
+    suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int):Int?{
         var waterRequirement:Int? = null
         withContext(Dispatchers.IO){
             waterRequirement = repository.getWaterRequirementByWeightAndGender(weightIn, genderIn)
