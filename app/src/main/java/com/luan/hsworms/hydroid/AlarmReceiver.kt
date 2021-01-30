@@ -21,13 +21,13 @@ class AlarmReceiver: BroadcastReceiver() {
 
         Log.d(TAG, "AlarmReceiver::onReceive called")
         if(context != null) {
-            Log.d(TAG, "sendAlarmNotification() called")
-            sendAlarmNotification(
-                "AlarmManagerChannel",
-                1,
+            Log.d(TAG, "HelpDrinkNotification() called")
+            HelpDrinkNotification(
+                "HelpDrinkNotificationChannel",
+                2,
                 context,
                 R.drawable.ic_home,
-                "Du musst etwas Trinken",
+                "Du musst etwas Trinken!",
                 "Heute schon etwas getrunken?",
                 null,
                 NotificationCompat.PRIORITY_DEFAULT
@@ -36,7 +36,11 @@ class AlarmReceiver: BroadcastReceiver() {
         }
     }
 
-    private fun sendAlarmNotification(
+    // TODO: Create Documentation
+    /**
+     *
+     */
+    private fun HelpDrinkNotification(
         CHANNEL_ID: String,
         NOTIFICATION_ID: Int,
         context: Context,
@@ -47,8 +51,11 @@ class AlarmReceiver: BroadcastReceiver() {
         contentPriority: Int
     ) {
 
-        var intent: Intent? = AlarmService.setNewIntent(context)
-        var pendingIntent: PendingIntent? = PendingIntent.getActivity(context, 0, intent, 0)
+        // val intent: Intent? = AlarmService.setNewIntent(context)
+        val intent: Intent = Intent(context, AddWaterDialogFragment::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
 
         // Build notification
         // apply allows us to specify more methods within a method
@@ -62,8 +69,7 @@ class AlarmReceiver: BroadcastReceiver() {
                 setStyle(NotificationCompat.BigTextStyle().bigText(it))
             }
             setContentIntent(pendingIntent)
-             if(pendingIntent != null)
-                 setAutoCancel(true)
+            setAutoCancel(true)
         }
 
         // Create channel (only needed if OS > Oreo/Android 8

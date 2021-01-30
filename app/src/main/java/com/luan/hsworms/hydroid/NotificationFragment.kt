@@ -21,8 +21,7 @@ class NotificationFragment : Fragment() {
     }
 
     // Constants for easiert debuggin usage
-    private val NOTIFY_TAG = "NF_Notify"
-    private val HELP_DRINK_TAG = "NF_HelpDrink"
+    private val TAG = "NotificationFragment"
 
     // Initialization of needed variables for interactive ViewModel usage
     private lateinit var notificationViewModel: NotificationViewModel
@@ -45,9 +44,9 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d(TAG, "onViewCreated() called")
         notificationViewModel.loadData()
-
+        Log.d(TAG, "loadData() called")
 
         // Give switchButtons their ID
         switchBtnNotification = view.findViewById(R.id.switch_allow_notification)
@@ -71,13 +70,21 @@ class NotificationFragment : Fragment() {
             // Saved current state of Notification button
             notificationViewModel.saveData()
             // Debugging
-            if(notificationViewModel.switchBoolNotification)
-                Toast.makeText(context, "Benachrichtigungen sind nun Aktiviert.", Toast.LENGTH_SHORT).show()
-            else
-                Toast.makeText(context, "Benachrichtigungen sind nun Deaktiviert.", Toast.LENGTH_SHORT).show()
-
-
-            Log.d(NOTIFY_TAG, notificationViewModel.switchBoolNotification.toString())
+            if(notificationViewModel.switchBoolNotification){
+                Toast.makeText(
+                    context,
+                    "Benachrichtigungen sind nun Aktiviert.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d(TAG, "Notification switch active")
+            } else {
+                Toast.makeText(
+                    context,
+                    "Benachrichtigungen sind nun Deaktiviert.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d(TAG, "Notificaton switch inactive")
+            }
         }
 
         // OnClickListener for HelpDrink Button
@@ -88,13 +95,15 @@ class NotificationFragment : Fragment() {
             // Saves current state of HelpDrink button
             notificationViewModel.saveData()
             // Debugging
-            if(notificationViewModel.switchBoolHelpDrink)
+            if(notificationViewModel.switchBoolHelpDrink) {
                 Toast.makeText(context, "\"Hilf mir trinken!\" ist nun Aktiviert.", Toast.LENGTH_SHORT).show()
-            else
+                Log.d(TAG, "HelpDrink switch active & restarting MainActivity")
+                activity?.recreate()
+            }
+             else {
                 Toast.makeText(context, "\"Hilf mir trinken!\" ist nun Deaktiviert.", Toast.LENGTH_SHORT).show()
-
-            Log.d(HELP_DRINK_TAG, notificationViewModel.switchBoolHelpDrink.toString())
+                Log.d(TAG, "HelpDrink switch inactive")
+            }
         }
-
     }
 }

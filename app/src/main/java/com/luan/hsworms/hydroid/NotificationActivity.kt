@@ -57,9 +57,6 @@ class NotificationActivity  {
             if(!allowNotification)
                 return
 
-            // var intent: Intent? = AlarmService.setNewIntent(context)
-            // var pendingIntent: PendingIntent? = PendingIntent.getActivity(context, 0, intent, 0)
-
             // Build notification
             // apply allows us to specify more methods within a method
             val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
@@ -70,10 +67,8 @@ class NotificationActivity  {
                 contentBigText?.let {
                     setStyle(NotificationCompat.BigTextStyle().bigText(it))
                 }
-               /* für den fall das es über mainactivity nicht klappt
-               setContentIntent(pendingIntent)
-                if(pendingIntent != null)
-                    setAutoCancel(true)*/
+                setAutoCancel(true)
+                setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
             }
 
             // Create channel (only needed if OS > Oreo/Android 8

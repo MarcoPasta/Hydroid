@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //////////////////////////////////////////////////////////////////////////
-
+        Log.d(TAG, "End of onCreate")
     }
 
     //Add an Up button in the app bar

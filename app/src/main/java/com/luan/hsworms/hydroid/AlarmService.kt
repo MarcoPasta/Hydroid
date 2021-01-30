@@ -10,7 +10,7 @@ import android.os.SystemClock
 import android.util.Log
 import android.widget.Toast
 
-
+// TODO: Create Documentation
 class AlarmService() {
 
     companion object {
@@ -30,11 +30,11 @@ class AlarmService() {
             alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
                 PendingIntent.getBroadcast(context, 0, intent, 0)
             }
-            Log.d(TAG, "AlarmManager.set() called")
-
-            alarmManager?.set(
-                AlarmManager.ELAPSED_REALTIME,
+            Log.d(TAG, "AlarmManager.setInexactRepeating() called")
+            alarmManager?.setRepeating(
+                AlarmManager.RTC_WAKEUP,
                 SystemClock.elapsedRealtime() + 5 * 1000,
+                1000 * 60,
                 alarmIntent
             )
         }
