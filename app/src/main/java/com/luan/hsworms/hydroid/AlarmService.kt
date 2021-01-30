@@ -13,30 +13,34 @@ import android.widget.Toast
 
 class AlarmService() {
 
-    private val TAG = "alarmServiceTest"
-
     companion object {
+
+        private val TAG = "AlarmService"
 
         var alarmManager : AlarmManager? = null
         private lateinit var alarmIntent: PendingIntent
 
 
         fun setAlarm(context: Context) {
-            Log.d("Alarm", "setAlarm called")
+            Log.d(TAG, "setAlarm called")
+            Log.d(TAG, "AlarmManager created")
             alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            Log.d(TAG, "AlarmIntent created")
 
             alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
                 PendingIntent.getBroadcast(context, 0, intent, 0)
             }
+            Log.d(TAG, "AlarmManager.set() called")
 
             alarmManager?.set(
                 AlarmManager.ELAPSED_REALTIME,
-                SystemClock.elapsedRealtime() + 10 * 1000,
+                SystemClock.elapsedRealtime() + 5 * 1000,
                 alarmIntent
             )
         }
 
         fun setNewIntent(context: Context): Intent {
+            Log.d(TAG, "setNewIntent() called")
             return Intent(context, AlarmService::class.java)
         }
     }

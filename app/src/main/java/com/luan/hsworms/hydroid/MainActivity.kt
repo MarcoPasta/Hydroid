@@ -17,6 +17,8 @@ import com.luan.hsworms.hydroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private val TAG = "MainActivityFile"
+
     //Navigation components
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d(TAG, "onCreate called")
 
         //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
@@ -51,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         ///////////////////////////////////////////////////////////////////////////
         // Bereich reserviert für den AlarmManager
+        Log.d(TAG, "Entering reserved AlarmManager space")
         // Creating an instance of ViewModel Object
         notificationViewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
         // Make a reference to object and SharedPreferences
@@ -59,8 +64,12 @@ class MainActivity : AppCompatActivity() {
         notificationViewModel.loadData()
 
         // If Notifications are allowed, we can create the AlarmManagerStuff
-        if(notificationViewModel.switchBoolNotification)
+        if(notificationViewModel.canSendHelpDrinkNotification()) {
+            Log.d(TAG, "HelpDrink function is enabled")
             AlarmService.setAlarm(this)
+        } else {
+            Log.d(TAG, "HelpDrink is disabled")
+        }
 
 
         //////////////////////////////////////////////////////////////////////////

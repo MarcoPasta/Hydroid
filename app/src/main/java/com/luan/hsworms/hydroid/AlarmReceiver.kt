@@ -15,12 +15,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class AlarmReceiver: BroadcastReceiver() {
+    private val TAG = "AlarmReceiver"
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        Log.d("Alarm", "AlarmReceiver called")
-
+        Log.d(TAG, "AlarmReceiver::onReceive called")
         if(context != null) {
+            Log.d(TAG, "sendAlarmNotification() called")
             sendAlarmNotification(
                 "AlarmManagerChannel",
                 1,
@@ -31,9 +32,9 @@ class AlarmReceiver: BroadcastReceiver() {
                 null,
                 NotificationCompat.PRIORITY_DEFAULT
             )
+            Log.d(TAG, "Notification was send")
         }
     }
-
 
     private fun sendAlarmNotification(
         CHANNEL_ID: String,
@@ -51,6 +52,7 @@ class AlarmReceiver: BroadcastReceiver() {
 
         // Build notification
         // apply allows us to specify more methods within a method
+        Log.d(TAG, "Building Notification...")
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
             setSmallIcon(smallIcon)
             setContentTitle(contentTitle)
@@ -59,7 +61,6 @@ class AlarmReceiver: BroadcastReceiver() {
             contentBigText?.let {
                 setStyle(NotificationCompat.BigTextStyle().bigText(it))
             }
-
             setContentIntent(pendingIntent)
              if(pendingIntent != null)
                  setAutoCancel(true)
