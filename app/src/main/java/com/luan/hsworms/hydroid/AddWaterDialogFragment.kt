@@ -95,11 +95,9 @@ class AddWaterDialogFragment: DialogFragment() {
                 "Erfrischend",
                 "Du hast etwas getrunken!",
                 null,
-                NotificationCompat.PRIORITY_DEFAULT,
-                "AddWaterOkayButton",
-                "AddedWaterOnPressOkayButton",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationCompat.PRIORITY_DEFAULT
             )
+
             saveData(tvQuantity.text.toString().toInt())
         }
     }
