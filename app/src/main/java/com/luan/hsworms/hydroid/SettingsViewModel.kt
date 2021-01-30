@@ -16,18 +16,21 @@ class SettingsViewModel: ViewModel() {
 
 
     init {
-        glassSmall.value = 0
-        glassMiddle.value = 0
-        glassBig.value = 0
-        glassHuge.value = 0
+        glassSmall.value = 50
+        glassMiddle.value = 100
+        glassBig.value = 150
+        glassHuge.value = 200
     }
 
     //Filling viewModel variables with values from internal storage
     fun populateViewModel(){
+
         glassSmall.value = glasses?.getInt((R.string.savedSmallGlass).toString(), 50)
         glassMiddle.value = glasses?.getInt((R.string.savedMiddleGlass).toString(), 100)
         glassBig.value = glasses?.getInt((R.string.savedBigGlass).toString(), 300)
         glassHuge.value = glasses?.getInt((R.string.savedHugeGlass).toString(), 400)
+
+        println("Populate ViewModel       ${glassSmall.value}")
     }
 
     //Here we change the data in the storage, in case of changing the actual data

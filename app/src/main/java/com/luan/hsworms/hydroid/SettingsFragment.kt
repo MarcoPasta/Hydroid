@@ -21,8 +21,6 @@ import com.luan.hsworms.hydroid.databinding.FragmentSettingsBinding
 class SettingsFragment : Fragment() {
     private lateinit var rootView: View
 
-    private lateinit var binding: FragmentSettingsBinding
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var viewModel: MainViewModel
     private lateinit var settingsViewModel: SettingsViewModel
 
@@ -45,6 +43,7 @@ class SettingsFragment : Fragment() {
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_settings, container, false)
 
+        //Initializing of ViewModels
         viewModel = ViewModelProvider(requireActivity(),
             MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
@@ -52,16 +51,8 @@ class SettingsFragment : Fragment() {
         settingsViewModel = ViewModelProvider(requireActivity(),SettingsViewModelFactory(requireActivity().application)
         ).get(SettingsViewModel::class.java)
 
-        //Initializing an object with user data with data from a file
-        settingsViewModel.glasses = activity?.getSharedPreferences(
-            getString(R.string.preferences_glasses),
-            Context.MODE_PRIVATE
-        )
 
-        initWidgets()
-        fillingOfTheFragmentFields()
-
-        //Initializing an object with user data with data from a file
+        //Initializing of SharedPreferences
         settingsViewModel.glasses = activity?.getSharedPreferences(
             getString(R.string.preferences_glasses),
             Context.MODE_PRIVATE
@@ -69,6 +60,11 @@ class SettingsFragment : Fragment() {
 
         //Filling temporary variables with values from internal storage
         settingsViewModel.populateViewModel()
+        println("TEST")
+        println("TEST              ${settingsViewModel.glassBig.value}")
+
+        initWidgets()
+        fillingOfTheFragmentFields()
 
         return rootView
     }
@@ -98,13 +94,17 @@ class SettingsFragment : Fragment() {
     }
 
     private fun fillingOfTheFragmentFields(){
-        if(viewModel.userGenderIsFemale.value == true){
+
+        //Filling of Gender-field
+        if(viewModel.userGenderIsFemale.value == 1){
             rgGender.check(R.id.rb_female)
         } else {
             rgGender.check(R.id.rb_male)
         }
 
+        //Filling of Weight and Water-portions fields
         etWeight.editText?.setText(viewModel.weightOfUser.value.toString())
+
         etGlassSmall.editText?.setText(settingsViewModel.glassSmall.value.toString())
         etGlassMiddle.editText?.setText(settingsViewModel.glassMiddle.value.toString())
         etGlassBig.editText?.setText(settingsViewModel.glassBig.value.toString())
@@ -113,9 +113,12 @@ class SettingsFragment : Fragment() {
 
     private fun saveSettings(){
         //Gender settings
-        //If gender == woman =>true else false
         val genderSelected = view?.findViewById<RadioGroup>(R.id.rg_gender)?.checkedRadioButtonId
-        viewModel.userGenderIsFemale.value = (genderSelected == R.id.rb_female)
+        if(genderSelected == R.id.rb_female){         //If gender == woman =>1 else 0
+            viewModel.userGenderIsFemale.value = 1
+        }else{
+            viewModel.userGenderIsFemale.value = 0
+        }
         val gender = viewModel.userGenderIsFemale.value!!
         viewModel.saveGender(gender)
 

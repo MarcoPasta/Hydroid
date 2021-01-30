@@ -40,7 +40,7 @@ class WaterRequirementTableViewModel(application: Application):AndroidViewModel(
         }
     }
 
-    fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Boolean): Int?{
+    fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int): Int?{
         var waterRequirement: Int? = null
         viewModelScope.launch {
             waterRequirement = repository.getWaterRequirementByWeightAndGender(weightIn, genderIn)

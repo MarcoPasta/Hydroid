@@ -54,7 +54,7 @@ class AppRepository (application: Application) {
         }
     }
 
-    suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Boolean):Int?{
+    suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int):Int?{
         var waterRequirement:Int? = null
         withContext(Dispatchers.IO){
             waterRequirement = waterRequirementDao.getWaterRequirementByWeightAndGender(weightIn, genderIn)
