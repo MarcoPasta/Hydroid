@@ -34,6 +34,7 @@ class AddWaterDialogFragment: DialogFragment() {
 
     //ViewModel
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var settingsViewModel: SettingsViewModel
     private lateinit var notificationViewModel: NotificationViewModel  // Create a NotificationviewModel object to get access to Notification data
 
 
@@ -52,6 +53,7 @@ class AddWaterDialogFragment: DialogFragment() {
     ): View
     {
         rootView = inflater.inflate(R.layout.add_water_dialog, container, false)
+
         return  rootView
     }
 
@@ -61,9 +63,26 @@ class AddWaterDialogFragment: DialogFragment() {
         mainViewModel = ViewModelProvider(requireActivity(),
         MainViewModelFactory(requireActivity().application)).get(MainViewModel::class.java)
 
+        settingsViewModel = ViewModelProvider(requireActivity(),
+            SettingsViewModelFactory(requireActivity().application)).get(SettingsViewModel::class.java)
+
+        //Initializing an object with user data with data from a file
+        settingsViewModel.glasses = activity?.getSharedPreferences(
+            getString(R.string.preferences_glasses),
+            Context.MODE_PRIVATE
+        )
+
+        //Filling temporary variables with values from internal storage
+        settingsViewModel.populateViewModel()
+
         initButtons()
         initTextView()
         initImageViews()
+
+        //Initializing textView with values
+        initTextViewsWithValues()
+
+
 
         btnSave.setOnClickListener{
 
@@ -117,5 +136,12 @@ class AddWaterDialogFragment: DialogFragment() {
     private fun saveData(waterIn:Int){
         mainViewModel.addDrunkWater(waterIn)
         dismiss()
+    }
+
+    private fun initTextViewsWithValues(){
+        tvQuantitySmall.text = settingsViewModel.glassSmall.value.toString()
+        tvQuantityMiddle.text = settingsViewModel.glassMiddle.value.toString()
+        tvQuantityBig.text = settingsViewModel.glassBig.value.toString()
+        tvQuantityHuge.text = settingsViewModel.glassHuge.value.toString()
     }
 }

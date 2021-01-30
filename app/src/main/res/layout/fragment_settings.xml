@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
@@ -107,12 +108,175 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:hint="Gewicht"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:padding="10dp"
+                android:text="Auswahl der Größe der Wasserportionen"
+                android:textColor="@color/black"
+                android:textIsSelectable="true"
+                android:textSize="18sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:text="ml"
+                    android:textColor="@color/hydroit_primary"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_glass_big"
+                    app:layout_constraintStart_toEndOf="@+id/et_glass_big" />
+
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:text="ml"
+                    android:textColor="@color/hydroit_primary"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_glass_huge"
+                    app:layout_constraintStart_toEndOf="@+id/et_glass_huge" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="33dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/water_glass" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="44dp"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:srcCompat="@mipmap/water_glass" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="49dp"
+                    android:layout_height="71dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/imageView2"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    app:srcCompat="@mipmap/water_glass" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="69dp"
+                    android:layout_height="89dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/imageView3"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                    app:srcCompat="@mipmap/water_glass" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_glass_small"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Kleines Glas" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_glass_middle"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintEnd_toEndOf="@+id/et_glass_small"
+                    app:layout_constraintStart_toStartOf="@+id/et_glass_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mittleres Glas" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_glass_big"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                    app:layout_constraintEnd_toEndOf="@+id/et_glass_middle"
+                    app:layout_constraintStart_toStartOf="@+id/et_glass_middle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Großes Glas" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_glass_huge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                    app:layout_constraintEnd_toEndOf="@+id/et_glass_big"
+                    app:layout_constraintStart_toStartOf="@+id/et_glass_big">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Flasche" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:text="ml"
+                    android:textColor="@color/hydroit_primary"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_glass_small"
+                    app:layout_constraintStart_toEndOf="@+id/et_glass_small" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:text="ml"
+                    android:textColor="@color/hydroit_primary"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_glass_middle"
+                    app:layout_constraintStart_toEndOf="@+id/et_glass_middle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider10"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
