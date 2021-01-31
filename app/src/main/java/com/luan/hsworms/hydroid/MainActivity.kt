@@ -53,8 +53,15 @@ class MainActivity : AppCompatActivity() {
         //Verbinden Menu mit NavController
         navView.setupWithNavController(navController)
 
+
+        ////////////////////////////////////////////////////////////////////////////
+        /*
+         * Dieser Bereich gehört der Bundesrepublik Deutschland
+         *
+         */
+
         ///////////////////////////////////////////////////////////////////////////
-        // Bereich reserviert für den AlarmManager
+        // Area Reserve for calling the AlarmManager on Creating the application.
         Log.d(TAG, "Entering reserved AlarmManager space")
         // Creating an instance of ViewModel Object
         notificationViewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
@@ -67,16 +74,17 @@ class MainActivity : AppCompatActivity() {
         if(notificationViewModel.canSendHelpDrinkNotification()) {
             Log.d(TAG, "HelpDrink function is enabled")
 
-            // Hier müssten ggfs die Zeiten geprüft werden
-
+            // Times maybe need to be checked here
+            /* TODO: Insert Hours & Minutes from NotificationViewModel here so it can be used to determin when an
+             *          notification can be sent. 
+             */
             AlarmService.setAlarm(this)
         } else {
             Log.d(TAG, "HelpDrink is disabled")
         }
 
-
-        //////////////////////////////////////////////////////////////////////////
         Log.d(TAG, "End of onCreate")
+        //////////////////////////////////////////////////////////////////////////
     }
 
     //Add an Up button in the app bar

@@ -37,15 +37,14 @@
     <string name="switch_allow_notification">Benachrichtigungen erhalten</string>
     <string name="switch_allow_noti_description">Schaltet die Benachrichtigungen, welche die App dir senden darf ein.</string>
     <string name="switch_help_drink">Hilf mir zu trinken!</string>
-    <string name="switch_help_drink_description">Erinnert dich regelmäßig daran genug über den Tag zu trinken. Du kannst einstellen ab wann die App dir Benachrichtigungen senden darf.</string>
+    <string name="switch_help_drink_description">Erinnert dich regelmäßig daran genug über den Tag zu trinken.</string>
     <string name="preferences_glasses">com.luan.hsworms.hydroid.PREFERENCE_FILE_WEATHER</string>
     <string name="savedSmallGlass">savedSmallGlass</string>
     <string name="savedMiddleGlass">savedMiddleGlass</string>
     <string name="savedBigGlass">savedBigGlass</string>
     <string name="savedHugeGlass">savedHugeGlass</string>
-    <string name="setTimePicker">Ab wann möchtest du Benachrichtigungen erhalten?</string>
-    <string name="displayedNotificationTime">Eingestellte Uhrzeit:</string>
-    <string name="addnotificationtime">addNotificationTime</string>
+
+
 
 
 </resources>

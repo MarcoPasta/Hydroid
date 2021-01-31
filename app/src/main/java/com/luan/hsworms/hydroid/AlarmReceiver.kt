@@ -14,16 +14,27 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
+/*
+ *  TODO: When the User archieves his Day goal the repeating notificaion shall be cancelled
+ *  TODO: Add time the user wants to archieve repeating messages to AlarmReceiver
+ *  TODO: Device if there should be a TimePickerDialog on when notification should end or if we
+ *          should set a constant time for the end of repeating notification
+ *
+ */
+
+
 class AlarmReceiver: BroadcastReceiver() {
     private val TAG = "AlarmReceiver"
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
+        // Debug
         Log.d(TAG, "AlarmReceiver::onReceive called")
-        if(context != null) {
 
+        // Calling the HelpDrink Notification after receiving a signal
+        if(context != null) {
             Log.d(TAG, "HelpDrinkNotification() called")
-            NotificationActivity.HelpDrinkNotification(
+            NotificationActivity.HelpDrinkNotification (
                 "HelpDrinkNotificationChannel",
                 2,
                 context,
@@ -33,14 +44,17 @@ class AlarmReceiver: BroadcastReceiver() {
                 null,
                 NotificationCompat.PRIORITY_DEFAULT
             )
+            // Debug
             Log.d(TAG, "Notification was send")
         }
     }
 
-    // HelpDrinkNotification moved into NotificationActivity.kt
 
-    /* TODO: When the User archieves his Day goal the repeating notificaion shall be cancelled
-    */
+    /*
+     * HelpDrinkNotification moved into NotificationActivity.kt
+     */
+
+
 
 
 

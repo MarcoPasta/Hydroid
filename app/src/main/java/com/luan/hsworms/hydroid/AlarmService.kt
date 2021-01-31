@@ -21,8 +21,12 @@ class AlarmService() {
         var alarmManager : AlarmManager? = null
         private lateinit var alarmIntent: PendingIntent
 
-
+        // Function Template to create an alarmManager and an Alarmintent.
         fun setAlarm(context: Context) {
+
+            // TODO: Add time the user wants to receive repeating notifications as paramater to use in setInexactRepeating()
+
+
             Log.d(TAG, "setAlarm called")
             Log.d(TAG, "AlarmManager created")
             alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -36,8 +40,10 @@ class AlarmService() {
             Log.d(TAG, "AlarmManager.setInexactRepeating() called")
             alarmManager?.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
+                // TODO: Add function to calculate Hours and minute into milliseconds and put concatinate them
+                // This Parameter lets the notification start upon millisecs after 00:00 (i think this is how it works)
                 SystemClock.elapsedRealtime() + 5 * 1000,       // hier muss dann später das TimePicker Objekt hin.
-                1000*5,                                                           // Hier muss das Intervall hin
+                1000*5,                                          // Hier muss das Intervall hin also ca. alle 3-4 Stunden
                 alarmIntent
             )
         }
