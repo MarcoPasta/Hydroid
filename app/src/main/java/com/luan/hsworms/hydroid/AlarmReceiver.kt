@@ -21,8 +21,9 @@ class AlarmReceiver: BroadcastReceiver() {
 
         Log.d(TAG, "AlarmReceiver::onReceive called")
         if(context != null) {
+
             Log.d(TAG, "HelpDrinkNotification() called")
-            HelpDrinkNotification(
+            NotificationActivity.HelpDrinkNotification(
                 "HelpDrinkNotificationChannel",
                 2,
                 context,
@@ -36,60 +37,11 @@ class AlarmReceiver: BroadcastReceiver() {
         }
     }
 
-    // TODO: Create Documentation
-    /**
-     *
-     */
-    private fun HelpDrinkNotification(
-        CHANNEL_ID: String,
-        NOTIFICATION_ID: Int,
-        context: Context,
-        smallIcon: Int,
-        contentTitle: CharSequence,
-        contentText: CharSequence,
-        contentBigText: CharSequence?,      // ? -> Parameter is nullable
-        contentPriority: Int
-    ) {
+    // HelpDrinkNotification moved into NotificationActivity.kt
 
-        // val intent: Intent? = AlarmService.setNewIntent(context)
-        val intent: Intent = Intent(context, AddWaterDialogFragment::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+    /* TODO: When the User archieves his Day goal the repeating notificaion shall be cancelled
+    */
 
-        // Build notification
-        // apply allows us to specify more methods within a method
-        Log.d(TAG, "Building Notification...")
-        val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
-            setSmallIcon(smallIcon)
-            setContentTitle(contentTitle)
-            setContentText(contentText)
-            priority = contentPriority
-            contentBigText?.let {
-                setStyle(NotificationCompat.BigTextStyle().bigText(it))
-            }
-            setContentIntent(pendingIntent)
-            setAutoCancel(true)
-        }
-
-        // Create channel (only needed if OS > Oreo/Android 8
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelName: String = "AlarmManager"
-            val channelDescription: String = "AlarmManager Notification System"
-            val channelImportance: Int = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, channelName, channelImportance).apply {
-                description = channelDescription
-            }
-            val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        // Show notification
-        NotificationManagerCompat.from(context).apply {
-            notify(NOTIFICATION_ID, builder.build())
-        }
-
-    }
 
 
 }

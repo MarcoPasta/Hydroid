@@ -4,12 +4,14 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import java.util.*
 
 
 /**
@@ -30,9 +32,17 @@ class NotificationViewModel() : ViewModel() {
     var switchBoolHelpDrink: Boolean = true
 
     /**
+     *  Variable to safe specified time
+     */
+     // var hour: Int = 1
+     // var minute: Int = 1
+
+
+    /**
      * Object needed to safe the state of the switches locally
      */
     var notificationPreference: SharedPreferences? = null
+    // var timePickerPreference: SharedPreferences? = null
 
     /**
      * customized getter method for switchBoolHelpDrink

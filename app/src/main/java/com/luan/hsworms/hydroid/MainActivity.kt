@@ -66,6 +66,9 @@ class MainActivity : AppCompatActivity() {
         // If Notifications are allowed, we can create the AlarmManagerStuff
         if(notificationViewModel.canSendHelpDrinkNotification()) {
             Log.d(TAG, "HelpDrink function is enabled")
+
+            // Hier müssten ggfs die Zeiten geprüft werden
+
             AlarmService.setAlarm(this)
         } else {
             Log.d(TAG, "HelpDrink is disabled")

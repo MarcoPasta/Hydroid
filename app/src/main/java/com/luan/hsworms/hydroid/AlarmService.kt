@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import android.widget.Toast
+import java.util.*
 
 // TODO: Create Documentation
 class AlarmService() {
@@ -27,14 +28,16 @@ class AlarmService() {
             alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             Log.d(TAG, "AlarmIntent created")
 
+            // Müsste geprüft werden ob hier wiederholende Notifications kommen
+
             alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
                 PendingIntent.getBroadcast(context, 0, intent, 0)
             }
             Log.d(TAG, "AlarmManager.setInexactRepeating() called")
-            alarmManager?.setRepeating(
+            alarmManager?.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
-                SystemClock.elapsedRealtime() + 5 * 1000,
-                1000 * 60,
+                SystemClock.elapsedRealtime() + 5 * 1000,       // hier muss dann später das TimePicker Objekt hin.
+                1000*5,                                                           // Hier muss das Intervall hin
                 alarmIntent
             )
         }
