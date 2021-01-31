@@ -1,5 +1,6 @@
 package com.luan.hsworms.hydroid
 
+import android.app.Activity
 import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
@@ -34,15 +35,15 @@ class NotificationViewModel() : ViewModel() {
     /**
      *  Variable to safe specified time
      */
-     // var hour: Int = 1
-     // var minute: Int = 1
+     var hour: Int = 1
+     var minute: Int = 1
 
 
     /**
      * Object needed to safe the state of the switches locally
      */
     var notificationPreference: SharedPreferences? = null
-    // var timePickerPreference: SharedPreferences? = null
+    var timePickerPreference: SharedPreferences? = null
 
     /**
      * customized getter method for switchBoolHelpDrink
@@ -60,6 +61,8 @@ class NotificationViewModel() : ViewModel() {
         notificationPreference?.edit {
             putBoolean("NOTIFICATION", switchBoolNotification)
             putBoolean("HELPDRINK", switchBoolHelpDrink)
+            putInt("HOUR", hour)
+            putInt("MINUTE", minute)
             apply()
         }
 
@@ -73,6 +76,9 @@ class NotificationViewModel() : ViewModel() {
 
         val savedNotificationSwitch = notificationPreference?.getBoolean("NOTIFICATION", false)
         val savedHelpDrinkSwitch = notificationPreference?.getBoolean("HELPDRINK", false)
+        val savedHour = notificationPreference?.getInt("HOUR", 100)
+        val savedMinute = notificationPreference?.getInt("MINUTE", 100)
+
 
         if (savedNotificationSwitch != null) {
             switchBoolNotification = savedNotificationSwitch
@@ -80,6 +86,14 @@ class NotificationViewModel() : ViewModel() {
 
         if (savedHelpDrinkSwitch != null) {
             switchBoolHelpDrink = savedHelpDrinkSwitch
+        }
+
+        if(savedHour != null){
+            hour = savedHour
+        }
+
+        if(savedMinute != null) {
+            minute = savedMinute
         }
 
         Log.d(TAG, "calling loadData() successful")
