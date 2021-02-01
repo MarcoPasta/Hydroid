@@ -33,6 +33,12 @@ class MainFragment : Fragment() {
         ).get(MainViewModel::class.java)
 
         //Initializing an object with user data with data from a file
+        viewModel.firstStart = activity?.getSharedPreferences(
+            getString(R.string.preferences_file_first_start),
+            Context.MODE_PRIVATE
+        )
+
+        //Initializing an object with data for first start with data from a file
         viewModel.ourUserData = activity?.getSharedPreferences(
             getString(R.string.preference_file_key),
             Context.MODE_PRIVATE
@@ -61,20 +67,24 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "add water")
         }
 
-        //For Debugging
+
+        /////for debugging///////////////////
         //viewModel.clearFile()
+        //viewModel.saveFirstStart(1)
+        /////////////////////////////////////
+
+        //Populate ScharedPreferences to check if the start is first
+        viewModel.populateFirstStart()
 
         //Calling the function of initializing variables with values from internal storage
         viewModel.populateViewModel()
 
-        //The user input dialog is launched at the start of the application,
-        // only if the default value of the weight ("0") has not changed
-        if(viewModel.weightOfUser.value == 0)
-        {
+        //Check if the Strat is first
+        if(viewModel.isFirstStart == 1){//first start
+            viewModel.clearFile()
+            viewModel.saveFirstStart(0)//From now is not first start
             showUserInputDialog()
-        } else
-        {
-            //Update of all key values for water demand
+        }else{//not first start
             viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
                 viewModel.userGenderIsFemale.value!!)
         }
@@ -105,8 +115,6 @@ class MainFragment : Fragment() {
         super.onResume()
         viewModel.addEntityInHistory()
     }
-
-
 
     //dialogFragment for entering user data
     private fun showUserInputDialog()
@@ -142,6 +150,8 @@ class MainFragment : Fragment() {
                 var weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
                     .toInt()
 
+
+
                 // TODO: Hier wird bei jeder eingabe zurück auf 23kg korrigiert
                 //Correction of entered weight to match the values in table
                 //For now only data for weight from 20 till 22 entered
@@ -149,6 +159,7 @@ class MainFragment : Fragment() {
 //                    weightTemp = 23
 //                if (weightTemp < 20)
 //                    weightTemp = 20
+
 
                 viewModel.weightOfUser.value = weightTemp
 
@@ -166,6 +177,3 @@ class MainFragment : Fragment() {
         }
     }
 }
-
-//val newFragment = UserDataDialogFragment()
-//newFragment.show(childFragmentManager, "userdata")

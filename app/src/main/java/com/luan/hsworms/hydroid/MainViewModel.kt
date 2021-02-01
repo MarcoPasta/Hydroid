@@ -23,7 +23,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     var weightOfUser = MutableLiveData<Int>()
     var dailyLiquidRequirement = MutableLiveData<Int>()
     var currentlyDrunkLiquid = MutableLiveData<Int>()
+    var isFirstStart: Int? = 1
 
+
+    var firstStart: SharedPreferences? = null       //Use for first start
     var ourUserData: SharedPreferences? = null      //To save user data in internal storage
 
 
@@ -33,6 +36,17 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         dailyLiquidRequirement.value = 1
         currentlyDrunkLiquid.value = 0
     }
+
+    //Methods for first Start and clear SharedPreferences file
+    fun populateFirstStart(){
+        isFirstStart = firstStart?.getInt(R.string.isFirstStart.toString(), 1)
+    }
+    fun saveFirstStart(firstStart_in: Int){
+        val editor = firstStart?.edit()
+        editor?.putInt(R.string.isFirstStart.toString(), firstStart_in)
+        editor?.apply()
+    }
+
 
     //Filling viewModel variables with values from internal storage
     fun populateViewModel(){

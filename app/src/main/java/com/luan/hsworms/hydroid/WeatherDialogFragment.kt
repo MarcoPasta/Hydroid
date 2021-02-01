@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 
 class WeatherDialogFragment : DialogFragment() {
+
     private lateinit var rootView: View
 
     //Views
@@ -50,6 +51,8 @@ class WeatherDialogFragment : DialogFragment() {
 
         populateVariables()
 
+        println("TEST     ${date}")
+
         return rootView
     }
 
@@ -77,25 +80,17 @@ class WeatherDialogFragment : DialogFragment() {
     }
 
     private fun changeWaterRequirementBecauseOfWeather(addWater: Int){
-        println("TEST1 ${date}   ${waterAddBecauseOfWeather}")
         if (date != mainViewModel.currentDate()){
             mainViewModel.addWaterRequirementBecauseOfSportOrWeather(addWater)
             date = mainViewModel.currentDate()
             waterAddBecauseOfWeather = addWater
             saveData(mainViewModel.currentDate(), waterAddBecauseOfWeather!!)
-            println("TEST2 ${date}   ${waterAddBecauseOfWeather}")
-            println("TEST7 ${weatherData?.getString(R.string.saved_gender_of_user.toString(), "01.01.1970").toString()}" +
-                    "  ${weatherData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString()}")
         } else
         {
-            println("TEST3 ${date}   ${waterAddBecauseOfWeather}")
             mainViewModel.addWaterRequirementBecauseOfSportOrWeather(-1 * waterAddBecauseOfWeather!!)
             mainViewModel.addWaterRequirementBecauseOfSportOrWeather(addWater)
             waterAddBecauseOfWeather = addWater
             saveData(mainViewModel.currentDate(), waterAddBecauseOfWeather!!)
-            println("TEST4 ${date}   ${waterAddBecauseOfWeather}")
-            println("TEST8 ${weatherData?.getString(R.string.saved_gender_of_user.toString(), "01.01.1970").toString()}" +
-                    "  ${weatherData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString()}")
         }
 
         dismiss()
@@ -107,17 +102,21 @@ class WeatherDialogFragment : DialogFragment() {
 //        println("TEST5 ${weatherData?.getString(R.string.saved_gender_of_user.toString(), "01.01.1970").toString()}" +
 //                "  ${weatherData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString()}")
 
-        date = weatherData!!.getString(R.string.saved_gender_of_user.toString(), "01.01.1970")!!
-        waterAddBecauseOfWeather = weatherData?.getInt(R.string.saved_weight_of_user.toString(), 0)!!
-        println("TEST6 ${date}   ${waterAddBecauseOfWeather}")
+        //for the first start make klean up
+        if(weatherData?.getString(R.string.saved_date.toString(), null) == null) {
+            clearFile()
+        }
+
+        date = weatherData!!.getString(R.string.saved_date.toString(), "01.01.1970")!!
+        waterAddBecauseOfWeather = weatherData?.getInt(R.string.saved_water_add_because_of_weather.toString(), 0)!!
     }
 
     //Here we change the data in the storage, in case of changing the actual data
     fun saveData(newDate: String, waterAdd: Int){
         val editor = weatherData?.edit()
 
-        editor?.putString(R.string.saved_gender_of_user.toString(), newDate)
-        editor?.putInt(R.string.saved_weight_of_user.toString(), waterAdd)
+        editor?.putString(R.string.saved_date.toString(), newDate)
+        editor?.putInt(R.string.saved_water_add_because_of_weather.toString(), waterAdd)
 
         editor?.apply()
     }
@@ -127,6 +126,7 @@ class WeatherDialogFragment : DialogFragment() {
         val editor = weatherData?.edit()
         editor?.clear()
         editor?.apply()
+
     }
 }
 
