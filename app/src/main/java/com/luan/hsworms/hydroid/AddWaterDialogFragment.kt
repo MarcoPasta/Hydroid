@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class AddWaterDialogFragment: DialogFragment() {
+    private val TAG = "AddWaterDialogFragment"
+
     private lateinit var rootView: View
 
     //Views
@@ -59,6 +62,7 @@ class AddWaterDialogFragment: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "onViewCreated() called")
 
         mainViewModel = ViewModelProvider(requireActivity(),
         MainViewModelFactory(requireActivity().application)).get(MainViewModel::class.java)
@@ -100,6 +104,7 @@ class AddWaterDialogFragment: DialogFragment() {
 
             saveData(tvQuantity.text.toString().toInt())
         }
+        Log.d(TAG, "End of onViewCreated")
     }
 
     private fun initButtons(){
