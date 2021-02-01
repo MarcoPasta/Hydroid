@@ -38,11 +38,16 @@
     <string name="switch_allow_noti_description">Schaltet die Benachrichtigungen, welche die App dir senden darf ein.</string>
     <string name="switch_help_drink">Hilf mir zu trinken!</string>
     <string name="switch_help_drink_description">Erinnert dich regelmäßig daran genug über den Tag zu trinken</string>
+
+    <string name="preferences_file_first_start">com.luan.hsworms.hydroid.PREFERENCE_FILE_FIRSTSTART</string>
     <string name="preferences_glasses">com.luan.hsworms.hydroid.PREFERENCE_FILE_GLASSES</string>
     <string name="savedSmallGlass">savedSmallGlass</string>
     <string name="savedMiddleGlass">savedMiddleGlass</string>
     <string name="savedBigGlass">savedBigGlass</string>
     <string name="savedHugeGlass">savedHugeGlass</string>
+    <string name="isFirstStart">isFirstStart</string>
+    <string name="saved_date">savedDate</string>
+    <string name="saved_water_add_because_of_weather">savedWaterAddBecauseOfWeather</string>
 
 
 </resources>

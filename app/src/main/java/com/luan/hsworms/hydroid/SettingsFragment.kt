@@ -60,8 +60,6 @@ class SettingsFragment : Fragment() {
 
         //Filling temporary variables with values from internal storage
         settingsViewModel.populateViewModel()
-        println("TEST")
-        println("TEST              ${settingsViewModel.glassBig.value}")
 
         initWidgets()
         fillingOfTheFragmentFields()

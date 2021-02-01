@@ -16,7 +16,10 @@
                 android:shape="ring"
                 android:thicknessRatio="10"
                 android:useLevel="true">
-                <solid android:color="@color/hydroit_primary"/>
+                <gradient
+                android:startColor="@color/menu_background"
+                android:endColor="@color/hydroit_primary"
+                android:type="sweep"/>
             </shape>
         </rotate>
     </item>
