@@ -142,6 +142,7 @@ class MainFragment : Fragment() {
                 var weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
                     .toInt()
 
+                // TODO: Hier wird bei jeder eingabe zurück auf 23kg korrigiert
                 //Correction of entered weight to match the values in table
                 //For now only data for weight from 20 till 22 entered
 //                if(weightTemp > 23 )
