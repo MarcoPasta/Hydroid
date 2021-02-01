@@ -146,22 +146,13 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
                 Log.d(TAG, "HelpDrink switch active & restarting MainActivity")
                 activity?.recreate()
             }
-<<<<<<< HEAD
             else {
-=======
-             else {
->>>>>>> ac5f00f70feb36172d4e833df5f428713c01a46e
                 Toast.makeText(context, "\"Hilf mir trinken!\" ist nun Deaktiviert.", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "HelpDrink switch inactive")
             }
         }
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> ac5f00f70feb36172d4e833df5f428713c01a46e
         // OnClickListener for TimePickerDialog button
         actionButton.setOnClickListener() {
             Log.d(TAG, "ActionButton pressed")
@@ -218,7 +209,6 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
     // Updates the onscreen Text from NotifcationFragment Layout
     private fun updateText() {
         tvTime.text = formatDate(notificationViewModel.hour, notificationViewModel.minute)
-<<<<<<< HEAD
 
     }
 
@@ -241,33 +231,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         val timeNow: Date = Date()
         timeNow.hours = hour
         timeNow.minutes = minute
-=======
->>>>>>> ac5f00f70feb36172d4e833df5f428713c01a46e
-
-        return simpleFormat.format(timeNow)
-    }
-
-    // Saves the time set with TimePickerDialog into SharedPreferences so it can be called and reload again
-    private fun saveTime(toSaveHour: Int, toSaveMinute: Int) {
-        Log.d(TAG, "called saveTime()")
-        notificationViewModel.hour = toSaveHour
-        Log.d(TAG, "saving hour, value: " + notificationViewModel.hour)
-        notificationViewModel.minute = toSaveMinute
-        Log.d(TAG, "saving minute, value: " + notificationViewModel.minute)
-        Log.d(TAG, "calling nVM.saveData()")
-        notificationViewModel.saveData()
-    }
-
-    // Function to format date before output
-    private fun formatDate(hour: Int, minute: Int): String {
-       Log.d(TAG, "formatting date...")
-        val simpleFormat = SimpleDateFormat("HH:mm")
-
-        val timeNow: Date = Date()
-        timeNow.hours = hour
-        timeNow.minutes = minute
 
         return simpleFormat.format(timeNow)
     }
 }
-

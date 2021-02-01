@@ -35,13 +35,8 @@ class NotificationViewModel() : ViewModel() {
     /**
      *  Variable to safe specified time
      */
-<<<<<<< HEAD
     var hour: Int = 1
     var minute: Int = 1
-=======
-     var hour: Int = 1
-     var minute: Int = 1
->>>>>>> ac5f00f70feb36172d4e833df5f428713c01a46e
 
 
     /**

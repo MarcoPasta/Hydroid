@@ -49,19 +49,7 @@ class AlarmReceiver: BroadcastReceiver() {
         }
     }
 
-<<<<<<< HEAD
     /*
      * HelpDrinkNotification moved into NotificationActivity.kt
      */
-=======
-
-    /*
-     * HelpDrinkNotification moved into NotificationActivity.kt
-     */
-
-
-
-
-
->>>>>>> ac5f00f70feb36172d4e833df5f428713c01a46e
 }

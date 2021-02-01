@@ -115,28 +115,11 @@
                 android:id="@+id/textView30"
                 android:layout_width="235dp"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
                 android:text="Eingestellte Uhrzeit"
-=======
-                android:text="@string/displayedNotificationTime"
->>>>>>> ac5f00f70feb36172d4e833df5f428713c01a46e
                 android:textSize="22sp"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-<<<<<<< HEAD
-=======
-
-            <TextView
-                android:id="@+id/setTime"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:text="  __:__"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
->>>>>>> ac5f00f70feb36172d4e833df5f428713c01a46e
 
             <TextView
                 android:id="@+id/setTime"
@@ -161,32 +144,6 @@
                 android:layout_marginBottom="24dp"
                 android:clickable="true"
                 android:contentDescription="ActionButton"
-                android:src="@drawable/ic_ad"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:focusable="true" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-    </LinearLayout>
-
-
-
-
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/addTimePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:clickable="true"
-                android:contentDescription="@string/addnotificationtime"
                 android:src="@drawable/ic_ad"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
