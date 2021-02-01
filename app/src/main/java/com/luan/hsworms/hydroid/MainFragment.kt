@@ -76,11 +76,6 @@ class MainFragment : Fragment() {
         //Populate ScharedPreferences to check if the start is first
         viewModel.populateFirstStart()
 
-        println("TEST     ${viewModel.isFirstStart}")
-        println("TEST     ${viewModel.weightOfUser.value}")
-        var temp = viewModel.ourUserData?.getInt(R.string.saved_gender_of_user.toString(), 1)
-        println("TEST    ${temp}")
-
         //Calling the function of initializing variables with values from internal storage
         viewModel.populateViewModel()
 
@@ -93,23 +88,6 @@ class MainFragment : Fragment() {
             viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
                 viewModel.userGenderIsFemale.value!!)
         }
-
-
-        println("TEST NACH POPULATE    ${viewModel.isFirstStart}")
-        println("TEST NACH POPULATE    ${viewModel.weightOfUser.value}")
-        var temp2 = viewModel.ourUserData?.getInt(R.string.saved_gender_of_user.toString(), 1)
-        println("TEST NACH POPULATE   ${temp2}")
-
-        //The user input dialog is launched at the start of the application,
-        // only if the default value of the weight ("0") has not changed
-//        if(viewModel.weightOfUser.value == 0)
-//        {
-//
-//        } else
-//        {
-            //Update of all key values for water demand
-//
-//        }
 
         Log.i("on create view", viewModel.ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString())
         return binding.root
@@ -136,15 +114,6 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.addEntityInHistory()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        println("TEST DESTROY    ${viewModel.isFirstStart}")
-        println("TEST DESTROY    ${viewModel.weightOfUser.value}")
-        var temp = viewModel.ourUserData?.getInt(R.string.saved_gender_of_user.toString(), 1)
-        println("TEST DESTROY    ${temp}")
-
     }
 
     //dialogFragment for entering user data
@@ -181,13 +150,6 @@ class MainFragment : Fragment() {
                 var weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
                     .toInt()
 
-                //Correction of entered weight to match the values in table
-                //For now only data for weight from 20 till 22 entered
-//                if(weightTemp > 23 )
-//                    weightTemp = 23
-//                if (weightTemp < 20)
-//                    weightTemp = 20
-
                 viewModel.weightOfUser.value = weightTemp
 
                 //Update of all key values for water demand
@@ -204,6 +166,3 @@ class MainFragment : Fragment() {
         }
     }
 }
-
-//val newFragment = UserDataDialogFragment()
-//newFragment.show(childFragmentManager, "userdata")
