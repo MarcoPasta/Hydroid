@@ -29,16 +29,17 @@ class AlarmReceiver: BroadcastReceiver() {
 
         Log.d(TAG, "AlarmReceiver::onReceive called")
 
-        val setEndingTime: Calendar = loadDataAndCreateCalendar(context!!)
+        val setEndingTime: Calendar = loadEndTimer(context!!)
+        val setStartTime: Calendar = loadStartTimer(context!!)
 
 
         // Calling the HelpDrink Notification after receiving a signal
-        Log.d(TAG, "setEndingTime: " + setEndingTime.time + ", currentTime: " + currentTime.time)
-        Log.d(TAG, "setEndingTime: " + setEndingTime.timeInMillis + ", currentTime: " + currentTime.timeInMillis)
+        Log.d(TAG, "|setStartTime: " + setStartTime.time + " | setEndingTime: " + setEndingTime.time + " | currentTime: " + currentTime.time)
+        Log.d(TAG, "|setStartTime: " + setStartTime.timeInMillis + "| setEndingTime: " + setEndingTime.timeInMillis + "| currentTime: " + currentTime.timeInMillis)
 
         // TODO: Get referece from shared preference for starting time.
         // got rid of the context != null here, i don't know why...
-        if ((setEndingTime.timeInMillis > currentTime.timeInMillis) /*&& (currentTime.timeInMillis < startingTime)*/) {
+        if ((setEndingTime.timeInMillis > currentTime.timeInMillis) && (setEndingTime.timeInMillis > setStartTime.timeInMillis)) {
             Log.d(TAG, "HelpDrinkNotification() called")
             NotificationActivity.HelpDrinkNotification(
                 "HelpDrinkNotificationChannel",
@@ -56,20 +57,31 @@ class AlarmReceiver: BroadcastReceiver() {
 
     }
 
-    private fun loadDataAndCreateCalendar(context: Context): Calendar {
+    private fun loadEndTimer(context: Context): Calendar {
         // getting a reference to the the sharedPreference (TEHE)
         val sp = context.applicationContext.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
 
         // Set values into a Calendarobject and return as inline Object
         return Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, sp.getInt("HOUR", 100))
-            set(Calendar.MINUTE, sp.getInt("MINUTE", 100))
+            set(Calendar.HOUR_OF_DAY, sp.getInt("ENDHOUR", 100))
+            set(Calendar.MINUTE, sp.getInt("ENDMINUTE", 100))
             set(Calendar.SECOND, 0)
         }
     }
 
+    private fun loadStartTimer(context: Context): Calendar {
+        // getting a reference to the the sharedPreference (TEHE)
+        val sp = context.applicationContext.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
 
+        // Set values into a Calendarobject and return as inline Object
+        return Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, sp.getInt("STARTHOUR", 100))
+            set(Calendar.MINUTE, sp.getInt("STARTMINUTE", 100))
+            set(Calendar.SECOND, 0)
+        }
+    }
     /*
      * HelpDrinkNotification moved into NotificationActivity.kt
      */

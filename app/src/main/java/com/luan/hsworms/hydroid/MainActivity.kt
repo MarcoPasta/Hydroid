@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -59,48 +58,7 @@ class MainActivity : AppCompatActivity() {
          * Dieser Bereich gehört der Bundesrepublik Deutschland
          *
          */
-
         ///////////////////////////////////////////////////////////////////////////
-        // Area Reserve for calling the AlarmManager on Creating the application.
-        Log.d(TAG, "Entering reserved AlarmManager space")
-        // Creating an instance of ViewModel Object
-        notificationViewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
-        // Make a reference to object and SharedPreferences
-        notificationViewModel.notificationPreference = getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
-        // Load SharedPreferences
-        notificationViewModel.loadData()
-
-
-
-
-
-        /*// If Notifications are allowed, we can create the AlarmManagerStuff
-        if(notificationViewModel.canSendHelpDrinkNotification()) {
-            Log.d(TAG, "HelpDrink function is enabled")
-
-            // Times maybe need to be checked here
-            *//* TODO: Insert Hours & Minutes from NotificationViewModel here so it can be used to determin when an
-             *          notification can be sent.
-             *//*
-            AlarmService.setAlarm(this, notificationViewModel.switchBoolHelpDrink)
-        } else {
-            Log.d(TAG, "HelpDrink is disabled")
-        }*/
-
-
-
-
-
-
-
-        // Start an AlarmService on bootin up, SwitchButton is checked inside function.
-        AlarmService.setHelpDrinkAlarm(
-            this,
-            notificationViewModel.canSendHelpDrinkNotification(),
-            notificationViewModel.hour,
-            notificationViewModel.minute
-        )
-
 
         Log.d(TAG, "End of onCreate")
         //////////////////////////////////////////////////////////////////////////
