@@ -70,18 +70,37 @@ class MainActivity : AppCompatActivity() {
         // Load SharedPreferences
         notificationViewModel.loadData()
 
-        // If Notifications are allowed, we can create the AlarmManagerStuff
+
+
+
+
+        /*// If Notifications are allowed, we can create the AlarmManagerStuff
         if(notificationViewModel.canSendHelpDrinkNotification()) {
             Log.d(TAG, "HelpDrink function is enabled")
 
             // Times maybe need to be checked here
-            /* TODO: Insert Hours & Minutes from NotificationViewModel here so it can be used to determin when an
+            *//* TODO: Insert Hours & Minutes from NotificationViewModel here so it can be used to determin when an
              *          notification can be sent.
-             */
-            AlarmService.setAlarm(this)
+             *//*
+            AlarmService.setAlarm(this, notificationViewModel.switchBoolHelpDrink)
         } else {
             Log.d(TAG, "HelpDrink is disabled")
-        }
+        }*/
+
+
+
+
+
+
+
+        // Start an AlarmService on bootin up, SwitchButton is checked inside function.
+        AlarmService.setHelpDrinkAlarm(
+            this,
+            notificationViewModel.canSendHelpDrinkNotification(),
+            notificationViewModel.hour,
+            notificationViewModel.minute
+        )
+
 
         Log.d(TAG, "End of onCreate")
         //////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,6 @@
 package com.luan.hsworms.hydroid
 
+import android.app.Activity
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -44,6 +45,9 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
     private var nowHour: Int = 0
     private var nowMinute: Int = 0
 
+    // Hoffentlich ein MainActivity Objekt
+   //  private lateinit var mainRestarter: MainActivity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         notificationViewModel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
@@ -68,6 +72,8 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
          * Only important to debug informations about the TextViewTime
          */
         // Log.d(TAG, "loadData() called, hour: " + notificationViewModel.hour + ", minute: " + notificationViewModel.minute)
+
+
 
         // Initializing SwitchButtons
         switchBtnNotification = view.findViewById(R.id.switch_allow_notification)
@@ -95,6 +101,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         // more Debug
         /*Log.d(TAG, "updateText() called")
         Log.d(TAG, "tvTime nach update: " + tvTime.text)*/
+
 
 
         // When button is pressed get the actual state
@@ -149,6 +156,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
             else {
                 Toast.makeText(context, "\"Hilf mir trinken!\" ist nun Deaktiviert.", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "HelpDrink switch inactive")
+                activity?.recreate()
             }
         }
 
@@ -203,6 +211,9 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         ).show()
 
         Log.d(TAG, "Allowed notification time has been changed.")
+
+        // Recreate MainActivity to push changes
+        activity?.recreate()
 
     }
 

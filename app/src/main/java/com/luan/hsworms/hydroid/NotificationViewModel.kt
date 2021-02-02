@@ -43,7 +43,6 @@ class NotificationViewModel() : ViewModel() {
      * Object needed to safe the state of the switches locally
      */
     var notificationPreference: SharedPreferences? = null
-    var timePickerPreference: SharedPreferences? = null
 
     /**
      * customized getter method for switchBoolHelpDrink
