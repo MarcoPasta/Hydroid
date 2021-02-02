@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     //AppBar configuration (was passiert, wenn wir clicken)
     private val idSets = setOf(R.id.mainFragment, R.id.settingsFragment, R.id.notificationFragment)
     private lateinit var appBarConfiguration: AppBarConfiguration
+    // create a variable to get access to shared preference
     private lateinit var notificationViewModel: NotificationViewModel
 
 
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         //Verbinden navControlller und appBarConfiguration
         setupActionBarWithNavController(navController, appBarConfiguration)
-
         //Verbinden Menu mit NavController
         navView.setupWithNavController(navController)
 
@@ -59,7 +59,20 @@ class MainActivity : AppCompatActivity() {
          *
          */
         ///////////////////////////////////////////////////////////////////////////
+        // Area Reserve for calling the AlarmManager on Creating the application.
+        Log.d(TAG, "Entering reserved AlarmManager space")
 
+        // load Data to send an alarm
+        notificationViewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
+        notificationViewModel.notificationPreference = getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
+        notificationViewModel.loadData()
+        // Initial call so the alarm is at least send one time on opening the application.
+        AlarmService.setHelpDrinkAlarm(
+            this,
+            notificationViewModel.canSendHelpDrinkNotification(),
+            notificationViewModel.startHour,
+            notificationViewModel.startMinute
+        )
         Log.d(TAG, "End of onCreate")
         //////////////////////////////////////////////////////////////////////////
     }
