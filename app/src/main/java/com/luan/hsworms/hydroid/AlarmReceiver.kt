@@ -30,7 +30,7 @@ class AlarmReceiver: BroadcastReceiver() {
         Log.d(TAG, "AlarmReceiver::onReceive called")
 
         val setEndingTime: Calendar = loadEndTimer(context!!)
-        val setStartTime: Calendar = loadStartTimer(context!!)
+        val setStartTime: Calendar = loadStartTimer(context)
 
 
         // Calling the HelpDrink Notification after receiving a signal
@@ -39,7 +39,8 @@ class AlarmReceiver: BroadcastReceiver() {
 
         // TODO: Get referece from shared preference for starting time.
         // got rid of the context != null here, i don't know why...
-        if ((setEndingTime.timeInMillis > currentTime.timeInMillis) && (setEndingTime.timeInMillis > setStartTime.timeInMillis)) {
+        if ((setEndingTime.timeInMillis > currentTime.timeInMillis) && (currentTime.timeInMillis > setStartTime.timeInMillis)) {
+            Log.d(TAG, "Zeitüberprüfung war erfolgreich")
             Log.d(TAG, "HelpDrinkNotification() called")
             NotificationActivity.HelpDrinkNotification(
                 "HelpDrinkNotificationChannel",
@@ -53,6 +54,8 @@ class AlarmReceiver: BroadcastReceiver() {
             )
             // Debug
             Log.d(TAG, "Notification was send")
+        } else {
+            Log.d(TAG, "Zeitüberprüfung war nicht erfolgreich")
         }
 
     }
