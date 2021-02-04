@@ -10,10 +10,6 @@ import java.util.*
 
 /*
  *  TODO: When the User archieves his Day goal the repeating notificaion shall be cancelled
- *  TODO: Add time the user wants to archieve repeating messages to AlarmReceiver
- *  TODO: Device if there should be a TimePickerDialog on when notification should end or if we
- *          should set a constant time for the end of repeating notification
- *
  */
 
 

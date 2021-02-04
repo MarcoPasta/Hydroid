@@ -21,9 +21,6 @@ class AlarmService() {
         // Function Template to create an alarmManager and an Alarmintent.
         fun setHelpDrinkAlarm(context: Context, switchState: Boolean, hour: Int, minute: Int) {
 
-            // TODO: Add time the user wants to receive repeating notifications as paramater to use in setInexactRepeating()
-
-
             Log.d(TAG, "setAlarm called")
             Log.d(TAG, "AlarmManager created")
             // Creating an AlarmManager
@@ -51,10 +48,8 @@ class AlarmService() {
                 Log.d(TAG, "AlarmManager.setInexactRepeating() called")
                 alarmManager?.setInexactRepeating(
                     AlarmManager.RTC_WAKEUP,
-                    // TODO: Add function to calculate Hours and minute into milliseconds and put concatinate them
-                    // This Parameter lets the notification start upon millisecs after 00:00 (i think this is how it works)
-                    setExactTime.timeInMillis,                                      // Vom TimePicker konvertierte Zeit
-                    1000 * 60 * 10,                                  // Hier muss das Intervall hin also ca. alle 3-4 Stunden
+                    setExactTime.timeInMillis,                              // Puts saved integer into an calender object and recalculates them into milliseconds
+                    1000 * 60 * 10,                              // Choosing the interval, 10 seconds for testing purposes
                     alarmIntent
                 ).apply {
                     Log.d(TAG, "Alarm has been send")
