@@ -194,6 +194,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
                 Toast.makeText(context, "\"Hilf mir trinken!\" ist nun Deaktiviert.", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "HelpDrink switch inactive")
                 Log.d(TAG, "AlarmService::setHelpDrinkAlarm() called")
+
                 AlarmService.setHelpDrinkAlarm(
                     requireContext(),
                     notificationViewModel.canSendHelpDrinkNotification(),
@@ -208,15 +209,6 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         actionButton.setOnClickListener() {
             Log.d(TAG, "ActionButton pressed")
             onAddButtonClicked()
-
-            if(!clicked)
-                Log.d(TAG, "AlarmService::setHelpDrinkAlarm() called")
-                AlarmService.setHelpDrinkAlarm(
-                    requireContext(),
-                    notificationViewModel.canSendHelpDrinkNotification(),
-                    notificationViewModel.startHour,
-                    notificationViewModel.startMinute
-                )
         }
 
         // OnClickListener for startTimeButton

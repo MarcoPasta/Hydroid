@@ -46,7 +46,7 @@ class AlarmReceiver: BroadcastReceiver() {
                 "HelpDrinkNotificationChannel",
                 2,
                 context,
-                R.drawable.ic_home,
+                R.drawable.ic_drop_48,
                 "Du musst etwas Trinken!",
                 "Heute schon etwas getrunken?",
                 null,
@@ -57,7 +57,6 @@ class AlarmReceiver: BroadcastReceiver() {
         } else {
             Log.d(TAG, "Zeitüberprüfung war nicht erfolgreich")
         }
-
     }
 
     private fun loadEndTimer(context: Context): Calendar {
@@ -85,6 +84,7 @@ class AlarmReceiver: BroadcastReceiver() {
             set(Calendar.SECOND, 0)
         }
     }
+
     /*
      * HelpDrinkNotification moved into NotificationActivity.kt
      */

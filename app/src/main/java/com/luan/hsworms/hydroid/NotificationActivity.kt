@@ -34,7 +34,7 @@ class NotificationActivity  {
          *
          * @param allowNotification     Allows the user to activate notifications. If false this function will be skipped and no notification will be shown.
          * @param CHANNEL_ID
-         * @param NOTIFICATION_ID
+         * @param NOTIFICATION_ID       This ID indicates which notification is been shown. Notifications with the same ID will be overwritten.
          * @param context               Fragment/ViewModel context needed for notification functions. Mostly used with requireContext()
          * @param smallIcon             The little icon displayed on the notification
          * @param contentTitle          The notification title
@@ -44,6 +44,8 @@ class NotificationActivity  {
          * @param channelName
          * @param channelDescription
          * @param channelImportance
+         *
+         *
          */
         fun showNotification (
             allowNotification: Boolean,

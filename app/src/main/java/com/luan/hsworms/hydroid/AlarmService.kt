@@ -58,7 +58,7 @@ class AlarmService() {
                     // TODO: Add function to calculate Hours and minute into milliseconds and put concatinate them
                     // This Parameter lets the notification start upon millisecs after 00:00 (i think this is how it works)
                     setExactTime.timeInMillis,                                      // Vom TimePicker konvertierte Zeit
-                    1000 * 10,                                  // Hier muss das Intervall hin also ca. alle 3-4 Stunden
+                    1000 * 60 * 10,                                  // Hier muss das Intervall hin also ca. alle 3-4 Stunden
                     alarmIntent
                 ).apply {
                     Log.d(TAG, "Alarm has been send")
