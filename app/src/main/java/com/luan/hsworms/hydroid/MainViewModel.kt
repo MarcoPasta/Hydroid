@@ -2,6 +2,7 @@ package com.luan.hsworms.hydroid
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -15,6 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
+
+    val TAG: String = "MainViewModel"
 
     //Repository
     private val repository = AppRepository(application)
@@ -96,7 +99,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun updateDataByStartActivity(weightIn: Long, genderIn: Int)
     {
         //Search the database for water requirements by weight and gender. Returns 2500 if didn't find.
-        if(dailyLiquidRequirement.value == 0 || dailyLiquidRequirement.value == 1) {
+        if(dailyLiquidRequirement.value == 0 || dailyLiquidRequirement.value == 1 || dailyLiquidRequirement.value == 500) {
             waterRequirementsUpdate(weightIn, genderIn)
         }
 
@@ -108,14 +111,15 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private fun waterRequirementsUpdate(weightIn: Long, genderIn: Int){
         viewModelScope.launch {
             val waterRequirement: Int? = getWaterRequirementByWeightAndGender(weightIn, genderIn)
-
+            Log.d(TAG, "waterRequirementsUpdate ${waterRequirement}")
+            println("TEST waterRequirementsUpdate                 ${waterRequirement}       ")
             if (waterRequirement != null)
             {
                 dailyLiquidRequirement.value = waterRequirement
                 saveData(userGenderIsFemale.value!!, weightOfUser.value!!, waterRequirement, currentlyDrunkLiquid.value!!)
             } else
             {
-                dailyLiquidRequirement.value = 2500
+                dailyLiquidRequirement.value = 500
             }
         }
         saveData(userGenderIsFemale.value!!, weightOfUser.value!!, dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
