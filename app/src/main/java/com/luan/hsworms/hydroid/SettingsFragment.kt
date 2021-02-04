@@ -17,6 +17,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.luan.hsworms.hydroid.databinding.FragmentSettingsBinding
+import kotlin.math.roundToInt
 
 class SettingsFragment : Fragment() {
     private lateinit var rootView: View
@@ -126,10 +127,10 @@ class SettingsFragment : Fragment() {
         viewModel.saveWeight(weight)
 
         //Glass volumes
-        settingsViewModel.saveData(etGlassSmall.editText?.text.toString().toInt(),
-            etGlassMiddle.editText?.text.toString().toInt(),
-            etGlassBig.editText?.text.toString().toInt(),
-            etGlassHuge.editText?.text.toString().toInt())
+        settingsViewModel.saveData(etGlassSmall.editText?.text.toString().toFloat().roundToInt(),
+            etGlassMiddle.editText?.text.toString().toFloat().roundToInt(),
+            etGlassBig.editText?.text.toString().toFloat().roundToInt(),
+            etGlassHuge.editText?.text.toString().toFloat().roundToInt())
     }
 }
 
