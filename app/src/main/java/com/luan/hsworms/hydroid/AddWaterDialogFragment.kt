@@ -1,9 +1,6 @@
 package com.luan.hsworms.hydroid
 
-import android.app.Notification
-import android.app.NotificationManager
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,8 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.luan.hsworms.hydroid.Backend.Notifications.NotificationActivity
 
 class AddWaterDialogFragment: DialogFragment() {
     private val TAG = "AddWaterDialogFragment"

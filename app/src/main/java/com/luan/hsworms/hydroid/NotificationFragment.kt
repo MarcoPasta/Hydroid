@@ -4,7 +4,6 @@ import android.app.TimePickerDialog
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,9 +14,9 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.luan.hsworms.hydroid.Backend.Notifications.AlarmService
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.concurrent.schedule
 
 class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
     companion object {

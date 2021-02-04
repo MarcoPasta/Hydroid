@@ -1,14 +1,10 @@
-package com.luan.hsworms.hydroid
+package com.luan.hsworms.hydroid.Backend.Notifications
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.SystemClock
 import android.util.Log
-import android.widget.Toast
 import java.util.*
 
 // TODO: Create Documentation

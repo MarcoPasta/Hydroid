@@ -1,6 +1,5 @@
-package com.luan.hsworms.hydroid
+package com.luan.hsworms.hydroid.Backend.Notifications
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,6 +9,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.luan.hsworms.hydroid.AddWaterDialogFragment
 
 /**
  * Notification Class-Model for systemnotifications.

@@ -1,10 +1,11 @@
-package com.luan.hsworms.hydroid
+package com.luan.hsworms.hydroid.Backend.Notifications
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.luan.hsworms.hydroid.R
 import java.util.*
 
 /*

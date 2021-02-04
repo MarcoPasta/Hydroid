@@ -38,7 +38,18 @@
     <string name="switch_allow_noti_description">Schaltet die Benachrichtigungen, welche die App dir senden darf ein.</string>
     <string name="switch_help_drink">Hilf mir zu trinken!</string>
     <string name="switch_help_drink_description">Erinnert dich regelmäßig daran genug über den Tag zu trinken</string>
+    <string name="notification_startTime_Tv">Startzeit</string>
+    <string name="notification_endTime_Tv">Endzeitpunkt</string>
+    <string name="setStartTime_Tv">__:__</string>
+    <string name="setEndTime_Tv">__:__</string>
+    <string name="actionbutton_description">ActionButton</string>
+    <string name="endtimebutton_description">EndTimeButton</string>
+    <string name="addEndTimeText_Tv">Endzeitpunkt hinzufügen</string>
+    <string name="addStartTimeButton_description">StartTimeButton</string>
+    <string name="addStartTimeText_Tv">Startzeitpunkt hinzufügen</string>
 
+
+    <!-- -->
     <string name="preferences_file_first_start">com.luan.hsworms.hydroid.PREFERENCE_FILE_FIRSTSTART</string>
     <string name="preferences_glasses">com.luan.hsworms.hydroid.PREFERENCE_FILE_GLASSES</string>
     <string name="savedSmallGlass">savedSmallGlass</string>
@@ -48,8 +59,5 @@
     <string name="isFirstStart">isFirstStart</string>
     <string name="saved_date">savedDate</string>
     <string name="saved_water_add_because_of_weather">savedWaterAddBecauseOfWeather</string>
-
-
-
 
 </resources>
