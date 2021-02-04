@@ -17,6 +17,7 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var waterRequirementTableViewModel: WaterRequirementTableViewModel
 
     companion object {
         fun newInstance() = MainFragment()
@@ -43,6 +44,10 @@ class MainFragment : Fragment() {
             getString(R.string.preference_file_key),
             Context.MODE_PRIVATE
         )
+
+        waterRequirementTableViewModel = ViewModelProvider(requireActivity(),
+            WaterRequirementTableViewModelFactory(requireActivity().application))
+            .get(WaterRequirementTableViewModel::class.java)
 
         activity?.actionBar?.setTitle("Hydroid")
 
@@ -82,9 +87,10 @@ class MainFragment : Fragment() {
         //Check if the Strat is first
         if(viewModel.isFirstStart == 1){//first start
             viewModel.clearFile()
+            //viewModel.fillingTheWaterRequirementTableAtTheFirstStart()
             viewModel.saveFirstStart(0)//From now is not first start
             showUserInputDialog()
-        }else{//not first start
+        }else{//not first start was realised in SplashScreenActivity
             viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
                 viewModel.userGenderIsFemale.value!!)
         }
@@ -113,7 +119,10 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        //TODO: Zwei Einträge in DB lösen
         viewModel.addEntityInHistory()
+
     }
 
     //dialogFragment for entering user data
