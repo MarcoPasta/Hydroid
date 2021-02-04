@@ -1,18 +1,11 @@
 package com.luan.hsworms.hydroid
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import java.util.*
 
 /*
  *  TODO: When the User archieves his Day goal the repeating notificaion shall be cancelled
@@ -24,21 +17,36 @@ import androidx.lifecycle.ViewModelProvider
 
 
 class AlarmReceiver: BroadcastReceiver() {
+
     private val TAG = "AlarmReceiver"
+
+    // Create an Calendar object that represents the current time
+    private val currentTime: Calendar = Calendar.getInstance().apply {
+        AlarmService.timeinMillis = System.currentTimeMillis()
+    }
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        // Debug
         Log.d(TAG, "AlarmReceiver::onReceive called")
 
+        val setEndingTime: Calendar = loadEndTimer(context!!)
+        val setStartTime: Calendar = loadStartTimer(context)
+
+
         // Calling the HelpDrink Notification after receiving a signal
-        if(context != null) {
+        Log.d(TAG, "|setStartTime: " + setStartTime.time + " | setEndingTime: " + setEndingTime.time + " | currentTime: " + currentTime.time)
+        Log.d(TAG, "|setStartTime: " + setStartTime.timeInMillis + "| setEndingTime: " + setEndingTime.timeInMillis + "| currentTime: " + currentTime.timeInMillis)
+
+        // TODO: Get referece from shared preference for starting time.
+        // got rid of the context != null here, i don't know why...
+        if ((setEndingTime.timeInMillis > currentTime.timeInMillis) && (currentTime.timeInMillis > setStartTime.timeInMillis)) {
+            Log.d(TAG, "Zeitüberprüfung war erfolgreich")
             Log.d(TAG, "HelpDrinkNotification() called")
-            NotificationActivity.HelpDrinkNotification (
+            NotificationActivity.HelpDrinkNotification(
                 "HelpDrinkNotificationChannel",
                 2,
                 context,
-                R.drawable.ic_home,
+                R.drawable.ic_drop_48,
                 "Du musst etwas Trinken!",
                 "Heute schon etwas getrunken?",
                 null,
@@ -46,6 +54,34 @@ class AlarmReceiver: BroadcastReceiver() {
             )
             // Debug
             Log.d(TAG, "Notification was send")
+        } else {
+            Log.d(TAG, "Zeitüberprüfung war nicht erfolgreich")
+        }
+    }
+
+    private fun loadEndTimer(context: Context): Calendar {
+        // getting a reference to the the sharedPreference (TEHE)
+        val sp = context.applicationContext.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
+
+        // Set values into a Calendarobject and return as inline Object
+        return Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, sp.getInt("ENDHOUR", 100))
+            set(Calendar.MINUTE, sp.getInt("ENDMINUTE", 100))
+            set(Calendar.SECOND, 0)
+        }
+    }
+
+    private fun loadStartTimer(context: Context): Calendar {
+        // getting a reference to the the sharedPreference (TEHE)
+        val sp = context.applicationContext.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
+
+        // Set values into a Calendarobject and return as inline Object
+        return Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, sp.getInt("STARTHOUR", 100))
+            set(Calendar.MINUTE, sp.getInt("STARTMINUTE", 100))
+            set(Calendar.SECOND, 0)
         }
     }
 

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -28,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     //AppBar configuration (was passiert, wenn wir clicken)
     private val idSets = setOf(R.id.mainFragment, R.id.settingsFragment, R.id.notificationFragment)
     private lateinit var appBarConfiguration: AppBarConfiguration
+    // create a variable to get access to shared preference
     private lateinit var notificationViewModel: NotificationViewModel
 
 
@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         //Verbinden navControlller und appBarConfiguration
         setupActionBarWithNavController(navController, appBarConfiguration)
-
         //Verbinden Menu mit NavController
         navView.setupWithNavController(navController)
 
@@ -59,30 +58,21 @@ class MainActivity : AppCompatActivity() {
          * Dieser Bereich gehört der Bundesrepublik Deutschland
          *
          */
-
         ///////////////////////////////////////////////////////////////////////////
         // Area Reserve for calling the AlarmManager on Creating the application.
         Log.d(TAG, "Entering reserved AlarmManager space")
-        // Creating an instance of ViewModel Object
+
+        // load Data to send an alarm
         notificationViewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
-        // Make a reference to object and SharedPreferences
         notificationViewModel.notificationPreference = getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
-        // Load SharedPreferences
         notificationViewModel.loadData()
-
-        // If Notifications are allowed, we can create the AlarmManagerStuff
-        if(notificationViewModel.canSendHelpDrinkNotification()) {
-            Log.d(TAG, "HelpDrink function is enabled")
-
-            // Times maybe need to be checked here
-            /* TODO: Insert Hours & Minutes from NotificationViewModel here so it can be used to determin when an
-             *          notification can be sent.
-             */
-            AlarmService.setAlarm(this)
-        } else {
-            Log.d(TAG, "HelpDrink is disabled")
-        }
-
+        // Initial call so the alarm is at least send one time on opening the application.
+        AlarmService.setHelpDrinkAlarm(
+            this,
+            notificationViewModel.canSendHelpDrinkNotification(),
+            notificationViewModel.startHour,
+            notificationViewModel.startMinute
+        )
         Log.d(TAG, "End of onCreate")
         //////////////////////////////////////////////////////////////////////////
     }

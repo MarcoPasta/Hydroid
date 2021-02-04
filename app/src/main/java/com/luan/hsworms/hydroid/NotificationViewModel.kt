@@ -1,18 +1,9 @@
 package com.luan.hsworms.hydroid
 
-import android.app.Activity
-import android.app.Application
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.edit
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import java.util.*
 
 
 /**
@@ -33,17 +24,18 @@ class NotificationViewModel() : ViewModel() {
     var switchBoolHelpDrink: Boolean = true
 
     /**
-     *  Variable to safe specified time
+     *  Variable to safe user specified starting and ending time.
      */
-    var hour: Int = 1
-    var minute: Int = 1
+    var startHour: Int = 1
+    var startMinute: Int = 1
+    var endHour: Int = 1
+    var endMinute: Int = 1
 
 
     /**
      * Object needed to safe the state of the switches locally
      */
     var notificationPreference: SharedPreferences? = null
-    var timePickerPreference: SharedPreferences? = null
 
     /**
      * customized getter method for switchBoolHelpDrink
@@ -61,8 +53,11 @@ class NotificationViewModel() : ViewModel() {
         notificationPreference?.edit {
             putBoolean("NOTIFICATION", switchBoolNotification)
             putBoolean("HELPDRINK", switchBoolHelpDrink)
-            putInt("HOUR", hour)
-            putInt("MINUTE", minute)
+            putInt("STARTHOUR", startHour)
+            putInt("STARTMINUTE", startMinute)
+            putInt("ENDHOUR", endHour)
+            putInt("ENDMINUTE", endMinute)
+
             apply()
         }
 
@@ -76,8 +71,10 @@ class NotificationViewModel() : ViewModel() {
 
         val savedNotificationSwitch = notificationPreference?.getBoolean("NOTIFICATION", false)
         val savedHelpDrinkSwitch = notificationPreference?.getBoolean("HELPDRINK", false)
-        val savedHour = notificationPreference?.getInt("HOUR", 100)
-        val savedMinute = notificationPreference?.getInt("MINUTE", 100)
+        val savedStartHour = notificationPreference?.getInt("STARTHOUR", 100)
+        val savedStartMinute = notificationPreference?.getInt("STARTMINUTE", 100)
+        val savedEndingHour = notificationPreference?.getInt("ENDHOUR", 100)
+        val savedEndingMinute = notificationPreference?.getInt("ENDMINUTE", 100)
 
 
         if (savedNotificationSwitch != null) {
@@ -88,14 +85,21 @@ class NotificationViewModel() : ViewModel() {
             switchBoolHelpDrink = savedHelpDrinkSwitch
         }
 
-        if(savedHour != null){
-            hour = savedHour
+        if(savedStartHour != null){
+            startHour = savedStartHour
         }
 
-        if(savedMinute != null) {
-            minute = savedMinute
+        if(savedStartMinute != null) {
+            startMinute = savedStartMinute
         }
 
+        if(savedEndingHour != null) {
+            endHour = savedEndingHour
+        }
+
+        if(savedEndingMinute != null) {
+            endMinute = savedEndingMinute
+        }
         Log.d(TAG, "calling loadData() successful")
     }
 }
