@@ -18,6 +18,9 @@ import com.luan.hsworms.hydroid.Backend.WaterRequirementTableAdapter
 
 class HistoryFragment : Fragment() {
 
+    /**
+     * To initialize objects with findViewById
+     */
     private lateinit var rootView:View
 
     //RecyclerView

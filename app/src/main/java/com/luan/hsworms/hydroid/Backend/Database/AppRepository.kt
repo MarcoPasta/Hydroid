@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Through this class, the rest of the classes will be able to access data from the room database.
+ */
 class AppRepository (application: Application) {
 
     private val waterRequirementDao: WaterRequirementDao
