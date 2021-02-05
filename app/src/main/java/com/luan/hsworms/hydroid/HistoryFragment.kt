@@ -1,21 +1,20 @@
 package com.luan.hsworms.hydroid
 
-import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.luan.hsworms.hydroid.Backend.Database.History
-import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
 import com.luan.hsworms.hydroid.Backend.HistoryListAdapter
-import com.luan.hsworms.hydroid.Backend.WaterRequirementTableAdapter
 
+/**
+ * Class for fragment HistoryFragment. Which is the output of the record from the Database History table. And also provides for deleting these records by implementing LongClickListener
+ */
 class HistoryFragment : Fragment() {
 
     /**
@@ -50,11 +49,14 @@ class HistoryFragment : Fragment() {
 
         initRecyclerView()
 
-        //Displaying information from the database to the screen
+        //Initializing of HistoryViewModel
         historyViewModel = ViewModelProvider(requireActivity(),
             HistoryViewModelFactory(requireActivity().application)).get(HistoryViewModel::class.java)
 
-        historyViewModel.getHistoryLiveData().observe(viewLifecycleOwner, Observer {
+        /**
+         *         History LiveData observer
+         */
+        historyViewModel.getHistoryLiveData().observe(viewLifecycleOwner, {
             items ->
             adapter.updateContent(ArrayList(items))
         })
@@ -62,13 +64,13 @@ class HistoryFragment : Fragment() {
 
     private fun initRecyclerView(){
         rv = rootView.findViewById(R.id.history_rv)
-        //Temporary placeholder
-        val testContent = ArrayList<String>(List(25){"TEST"})
+
         adapter = HistoryListAdapter(ArrayList())
         rv.adapter = adapter
 
-        //Implement LongClickListener
-        //Delete Entity in BD by long click
+        /**
+         * LongClickListener Delete Entity in BD by long click
+         */
         adapter.setOnItemLongClickListener(object: HistoryListAdapter.OnItemLongClickListener{
             override fun setOnItemLongClickListener(position: Int) {
                 startAlarmDialog(adapter.content[position])
@@ -76,16 +78,23 @@ class HistoryFragment : Fragment() {
         })
     }
 
+    /**
+     * Start of a dialog called by LongClickListener processing, which allows deleting the selected record from the database when the ok button is clicked.
+     *
+     * @param history Entry of History data base table
+     */
     private fun startAlarmDialog(history: History){
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.apply {
             setMessage("Warnung - Eintrag wird gelöscht")
-            setPositiveButton("OKAY", DialogInterface.OnClickListener { _, _ ->
-                Toast.makeText(requireContext(),
+            setPositiveButton("OKAY") { _, _ ->
+                Toast.makeText(
+                    requireContext(),
                     "Eintrag ${history.date} wurde gelöscht",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 historyViewModel.delete(history)
-            })
+            }
             setNegativeButton("Ablehnen") { dialog, _ ->
                 dialog.dismiss()
             }
@@ -93,24 +102,5 @@ class HistoryFragment : Fragment() {
         }
         val dialog = builder.create()
         dialog.show()
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HistoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HistoryFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
     }
 }

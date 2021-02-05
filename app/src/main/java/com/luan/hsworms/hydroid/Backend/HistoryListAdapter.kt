@@ -3,7 +3,6 @@ package com.luan.hsworms.hydroid.Backend
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.luan.hsworms.hydroid.Backend.Database.History
@@ -15,14 +14,11 @@ import com.luan.hsworms.hydroid.R
 class HistoryListAdapter(var content: ArrayList<History>) :
     RecyclerView.Adapter<HistoryListAdapter.ViewHolder>() {
 
-    //Interface
+    /**
+     * Interface for LongClickListener
+     */
     private lateinit var mItemLongListener:  OnItemLongClickListener
 
-    /**
-     * Create a ViewHolder
-     *
-     * @return ViewHolder
-     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         /**
          * layout inflate
@@ -33,8 +29,14 @@ class HistoryListAdapter(var content: ArrayList<History>) :
 
     /**
      * Populating Layout Objects with Values from the History Database Table
+     *
+     * @param holder ViewHolder object
+     * @param position Position of object, to be filled
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        /**
+         * History object on the position [position]
+         */
         val history = content[position]
 
         holder.date.text = history.date
@@ -63,7 +65,6 @@ class HistoryListAdapter(var content: ArrayList<History>) :
         var tvLiquidRequirement: TextView = itemView.findViewById(R.id.item_liquid_requirement)
         var tvFulfillment: TextView = itemView.findViewById(R.id.item_daily_requirement)
         var tvWeight:TextView = itemView.findViewById(R.id.item_weight)
-        var imageDelete: ImageView = itemView.findViewById(R.id.item_image_delete)
 
         //Implement longClickListener
         init {
@@ -75,6 +76,11 @@ class HistoryListAdapter(var content: ArrayList<History>) :
         }
     }
 
+    /**
+     * Updating the recycler with new data
+     *
+     * @param content new content (ArrayList of History database table records)
+     */
     fun updateContent(content: ArrayList<History>){
         this.content = content
         //Update of content
@@ -82,11 +88,25 @@ class HistoryListAdapter(var content: ArrayList<History>) :
     }
 
     ////////////////////////////////////////
-    //Interface
+    //Interfaces
+    /**
+     * Implementation of interface for LongClickListener
+     */
     interface OnItemLongClickListener{
+
+        /**
+         * Implementation of LongClickListener for a specific position
+         *
+         * @param position  Position, click on which will be processed
+         */
         fun setOnItemLongClickListener(position: Int)
     }
 
+    /**
+     * Implementation of clicksListener
+     *
+     * @param mLongClickListener interface for LongClickListener
+     */
     fun setOnItemLongClickListener(mLongClickListener: OnItemLongClickListener){
         this.mItemLongListener = mLongClickListener
     }
