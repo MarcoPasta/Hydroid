@@ -13,15 +13,15 @@ import android.widget.*
 import androidx.databinding.DataBindingUtil
 import com.luan.hsworms.hydroid.databinding.MainFragmentBinding
 
+/**
+ * A class for handling events related to the main screen of the program.
+ */
 class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var waterRequirementTableViewModel: WaterRequirementTableViewModel
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,10 +49,10 @@ class MainFragment : Fragment() {
             WaterRequirementTableViewModelFactory(requireActivity().application))
             .get(WaterRequirementTableViewModel::class.java)
 
-        activity?.actionBar?.setTitle("Hydroid")
+        activity?.actionBar?.title = "Hydroid"
 
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate<MainFragmentBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.main_fragment, container, false
         )
@@ -78,16 +78,16 @@ class MainFragment : Fragment() {
         //viewModel.saveFirstStart(1)
         /////////////////////////////////////
 
+
         //Populate ScharedPreferences to check if the start is first
         viewModel.populateFirstStart()
 
         //Calling the function of initializing variables with values from internal storage
         viewModel.populateViewModel()
 
-        //Check if the Strat is first
+        //Check if the Start is first
         if(viewModel.isFirstStart == 1){//first start
             viewModel.clearFile()
-            //viewModel.fillingTheWaterRequirementTableAtTheFirstStart()
             viewModel.saveFirstStart(0)//From now is not first start
             showUserInputDialog()
         }else{//not first start was realised in SplashScreenActivity
@@ -99,33 +99,34 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Log.i("onActivityCreated", "onActivityCreated")
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.i("onViewCreated", "onViewCreated")
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel.dailyLiquidRequirement.observe(viewLifecycleOwner, { newLiquedRequirement ->
             binding.tvDailyRequirement.text = newLiquedRequirement.toString()
             binding.tvFulfillmentPercents.text = (viewModel.currentlyDrunkLiquid.value!!.times(100) / newLiquedRequirement).toString()
-            binding.progressBarFulfillment.setProgress(viewModel.currentlyDrunkLiquid.value!!.times(100) / newLiquedRequirement)
+            binding.progressBarFulfillment.progress = viewModel.currentlyDrunkLiquid.value!!.times(100) / newLiquedRequirement
         })
 
         viewModel.currentlyDrunkLiquid.observe(viewLifecycleOwner, { newDrunkWater ->
             binding.tvDrunk.text = newDrunkWater.toString()
             binding.tvFulfillmentPercents.text = (newDrunkWater * 100 / viewModel.dailyLiquidRequirement.value!!).toString()
-            binding.progressBarFulfillment.setProgress(binding.tvFulfillmentPercents.text.toString().toInt())
+            binding.progressBarFulfillment.progress = binding.tvFulfillmentPercents.text.toString().toInt()
         })
     }
 
+
     override fun onResume() {
         super.onResume()
-
-        //TODO: Zwei Einträge in DB lösen
+        //The function is called in this callback function in case, when the date changed, the application
+        // was not closed and when it was resumed, a new day was recorded in the Database History table
         viewModel.addEntityInHistory()
-
     }
 
-    //dialogFragment for entering user data
+    /**
+     * This function will be called at the first start of the program to display a dialog in which the user can enter his gender and weight.
+     */
     private fun showUserInputDialog()
     {
         //Set Dialog variable and inflate ViewModel
@@ -154,25 +155,15 @@ class MainFragment : Fragment() {
                 viewModel.userGenderIsFemale.value = 0
             }
 
-            //Checking in case of not entered value for weight
+            //Checking in case of not entered value for weight.
+            //If not, there will be a Toast with a proposal to enter the weight
             if (dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString() != "") {
-                var weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
+                val weightTemp =  dialogView.findViewById<TextView>(R.id.editTextUserWeight).text.toString()
                     .toInt()
-
-
-
-                // TODO: Hier wird bei jeder eingabe zurück auf 23kg korrigiert
-                //Correction of entered weight to match the values in table
-                //For now only data for weight from 20 till 22 entered
-//                if(weightTemp > 23 )
-//                    weightTemp = 23
-//                if (weightTemp < 20)
-//                    weightTemp = 20
-
 
                 viewModel.weightOfUser.value = weightTemp
 
-                //Update of all key values for water demand
+                //Update of all values
                 viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
                     viewModel.userGenderIsFemale.value!!)
 

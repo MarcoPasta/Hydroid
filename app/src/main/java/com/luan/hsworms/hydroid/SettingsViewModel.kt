@@ -4,6 +4,9 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
+/**
+ * ViewModel class for SettingsFrament
+ */
 class SettingsViewModel: ViewModel() {
 
     //TODO: Encapsulate the Live Data
@@ -22,18 +25,25 @@ class SettingsViewModel: ViewModel() {
         glassHuge.value = 200
     }
 
-    //Filling viewModel variables with values from internal storage
+    /**
+     * Filling viewModel variables (Four preset user volumes of water) with values from internal storage (SharedPreferences)
+     */
     fun populateViewModel(){
 
         glassSmall.value = glasses?.getInt((R.string.savedSmallGlass).toString(), 50)
         glassMiddle.value = glasses?.getInt((R.string.savedMiddleGlass).toString(), 100)
-        glassBig.value = glasses?.getInt((R.string.savedBigGlass).toString(), 300)
-        glassHuge.value = glasses?.getInt((R.string.savedHugeGlass).toString(), 400)
-
-        println("Populate ViewModel       ${glassSmall.value}")
+        glassBig.value = glasses?.getInt((R.string.savedBigGlass).toString(), 150)
+        glassHuge.value = glasses?.getInt((R.string.savedHugeGlass).toString(), 200)
     }
 
-    //Here we change the data in the storage, in case of changing the actual data
+    /**
+     * Here we change the data in the local storage(SharedPreferences), in case of changing the actual data (Preset volumes of water for consumption)
+     *
+     * @param small  samll glass
+     * @param middle middle glass
+     * @param big    big glass
+     * @param huge   bottle
+     */
     fun saveData(small: Int, middle: Int, big: Int, huge: Int){
         val editor = glasses?.edit()
 
