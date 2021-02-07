@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 
 /**
  * ViewModel class for SettingsFrament
+ *
+ * @author Andrej Alpatov
  */
 class SettingsViewModel: ViewModel() {
 

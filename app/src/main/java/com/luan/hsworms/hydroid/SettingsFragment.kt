@@ -14,6 +14,8 @@ import kotlin.math.roundToInt
 
 /**
  * Class for handling user actions in the "User settings" section of the menu. The user gets a clickable link to the WaterRequirementTable, the ability to change user weight and gender, as well as the standard volumes of liquid that appear in the AddWaterDialog.
+ *
+ * @author Andrej Alpatov
  */
 class SettingsFragment : Fragment() {
     private lateinit var rootView: View

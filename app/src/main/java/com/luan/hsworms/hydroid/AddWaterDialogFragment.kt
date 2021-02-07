@@ -2,7 +2,6 @@ package com.luan.hsworms.hydroid
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,10 @@ import com.luan.hsworms.hydroid.Backend.Notifications.NotificationActivity
 
 /**
  * Handling user actions when invoking a AddWaterDialog. In this dialog, the user has the opportunity to choose from four different volumes of liquid to be added to the already drunk.
+ *
+ * @author Andrej Alpatov
  */
 class AddWaterDialogFragment: DialogFragment() {
-    private val TAG = "AddWaterDialogFragment"
 
     private lateinit var rootView: View
 
@@ -63,7 +63,7 @@ class AddWaterDialogFragment: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated() called")
+        //Log.d(TAG, "onViewCreated() called")
 
         //Initializing of MainViewModel
         mainViewModel = ViewModelProvider(requireActivity(),
@@ -94,6 +94,7 @@ class AddWaterDialogFragment: DialogFragment() {
 
         btnSave.setOnClickListener{
 
+            //TODO: Lassen wir Notifications here?
             NotificationActivity.showNotification(
                 notificationViewModel.switchBoolNotification,
                 "AddWaterNotification",
@@ -109,7 +110,7 @@ class AddWaterDialogFragment: DialogFragment() {
             //Storing data in variables and local storage (SharedPreferences)
             saveData(tvQuantity.text.toString().toInt())
         }
-        Log.d(TAG, "End of onViewCreated")
+        //Log.d(TAG, "End of onViewCreated")
     }
 
     /**

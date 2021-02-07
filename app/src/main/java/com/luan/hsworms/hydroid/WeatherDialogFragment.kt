@@ -10,6 +10,11 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 
+/**
+ * This class handles events associated with the WeatherDilogFragment dialog box. In this dialog, the user can select one of four preset weather conditions that affect the need for water. In the class, these changes are processed and the results are saved.
+ *
+ * @author Andrej Alpatov
+ */
 class WeatherDialogFragment : DialogFragment() {
 
     private lateinit var rootView: View
@@ -24,9 +29,9 @@ class WeatherDialogFragment : DialogFragment() {
     //ViewModel
     private lateinit var mainViewModel: MainViewModel
 
-    var weatherData: SharedPreferences? = null//To save user data in internal storage
+    private var weatherData: SharedPreferences? = null//To save the last weather conditions
     var date:String
-    var waterAddBecauseOfWeather: Int
+    private var waterAddBecauseOfWeather: Int
 
     init {
         date = ""
@@ -39,6 +44,7 @@ class WeatherDialogFragment : DialogFragment() {
         setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
     }
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         rootView = inflater.inflate(R.layout.fragment_weather_dialog, container, false)
@@ -49,12 +55,13 @@ class WeatherDialogFragment : DialogFragment() {
             Context.MODE_PRIVATE
         )
 
+        //Populate variables (last weather conditions) from internal storage (SharedPreferences) and
+        // deleate old file, if exists, at the first start
         populateVariables()
-
-        println("TEST     ${date}")
 
         return rootView
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,9 +69,14 @@ class WeatherDialogFragment : DialogFragment() {
         mainViewModel = ViewModelProvider(requireActivity(),
             MainViewModelFactory(requireActivity().application)).get(MainViewModel::class.java)
 
+        //Initializing All Dialog Box Buttons. Implementing and setting a click handler
         initButtons()
     }
 
+
+    /**
+     * Initializing All Dialog Box Buttons (Cancel button and four weather selection buttons). Implementing and setting a click handler
+     */
     private fun initButtons(){
         btnCancel = rootView.findViewById(R.id.btn_cancel)
         btnHeat = rootView.findViewById(R.id.btn_hitze)
@@ -79,30 +91,37 @@ class WeatherDialogFragment : DialogFragment() {
         btnHeat.setOnClickListener { changeWaterRequirementBecauseOfWeather(300) }
     }
 
+
+    /**
+     * Adds to the daily water requirement, an additional amount passed as a parameter. Closes the dialog.
+     *
+     * @param addWater The amount of water to be added to the standard daily requirement due to weather conditions (type: Int)
+     */
     private fun changeWaterRequirementBecauseOfWeather(addWater: Int){
-        if (date != mainViewModel.currentDate()){
+        if (date != mainViewModel.currentDate()){//It is the first change of weather today
             mainViewModel.addWaterRequirementBecauseOfSportOrWeather(addWater)
             date = mainViewModel.currentDate()
             waterAddBecauseOfWeather = addWater
-            saveData(mainViewModel.currentDate(), waterAddBecauseOfWeather!!)
-        } else
+            saveData(mainViewModel.currentDate(), waterAddBecauseOfWeather)
+        } else //It is not the first change of weather today
         {
-            mainViewModel.addWaterRequirementBecauseOfSportOrWeather(-1 * waterAddBecauseOfWeather!!)
+            mainViewModel.addWaterRequirementBecauseOfSportOrWeather(-1 * waterAddBecauseOfWeather)
             mainViewModel.addWaterRequirementBecauseOfSportOrWeather(addWater)
             waterAddBecauseOfWeather = addWater
-            saveData(mainViewModel.currentDate(), waterAddBecauseOfWeather!!)
+            saveData(mainViewModel.currentDate(), waterAddBecauseOfWeather)
         }
 
         dismiss()
     }
 
-    //Filling Variables with values from internal storage
-    fun populateVariables()
-    {
-//        println("TEST5 ${weatherData?.getString(R.string.saved_gender_of_user.toString(), "01.01.1970").toString()}" +
-//                "  ${weatherData?.getInt(R.string.saved_weight_of_user.toString(), 0).toString()}")
 
-        //for the first start make klean up
+    //Filling Variables with values from internal storage
+    /**
+     * Cleaning the local storage (the last weather conditions set for the current day are stored, namely the additional need for water) in the case of the first launch of the application. Writing new data in variables
+     */
+    private fun populateVariables()
+    {
+        //for the first start сleaning storage
         if(weatherData?.getString(R.string.saved_date.toString(), null) == null) {
             clearFile()
         }
@@ -111,8 +130,14 @@ class WeatherDialogFragment : DialogFragment() {
         waterAddBecauseOfWeather = weatherData?.getInt(R.string.saved_water_add_because_of_weather.toString(), 0)!!
     }
 
-    //Here we change the data in the storage, in case of changing the actual data
-    fun saveData(newDate: String, waterAdd: Int){
+
+    /**
+     *  Here we change the data (current date and additional amount of water) in the storage, in case of changing the actual data.
+     *
+     *  @param newDate      date, to be saved (type: String)
+     *  @param waterAdd     additional amount of water (type: Int)
+     */
+    private fun saveData(newDate: String, waterAdd: Int){
         val editor = weatherData?.edit()
 
         editor?.putString(R.string.saved_date.toString(), newDate)
@@ -121,12 +146,15 @@ class WeatherDialogFragment : DialogFragment() {
         editor?.apply()
     }
 
-    //Clear Data for testing
-    fun clearFile(){
+
+    //Clear Data for debugging
+    /**
+     * Cleaning up local storage (weather data)
+     */
+    private fun clearFile(){
         val editor = weatherData?.edit()
         editor?.clear()
         editor?.apply()
-
     }
 }
 

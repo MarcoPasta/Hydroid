@@ -10,9 +10,16 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
+import kotlin.math.roundToInt
 
-//Incoming parameter for the class in the case of using a dialog to change values
-class WaterRequirementTableDialogFragment(var waterRequirement: WaterRequirement? = null) : DialogFragment() {
+/**
+ *This class is used for the WaterRequirementTableDialog dialog box. Which is used to add and modify records in the WaterRequirement table of the database.
+ *
+ * @param waterRequirement Record in the database table WaterRequirement. Used when you need to change a database record. (type: WaterRequirement?)
+ * @author Andrej Alpatov
+ */
+//
+class WaterRequirementTableDialogFragment(private var waterRequirement: WaterRequirement? = null) : DialogFragment() {
     private lateinit var rootView: View
 
     //Views
@@ -40,7 +47,7 @@ class WaterRequirementTableDialogFragment(var waterRequirement: WaterRequirement
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         rootView = inflater.inflate(R.layout.water_requirement_dialog, container, false)
 
         return rootView
@@ -52,6 +59,7 @@ class WaterRequirementTableDialogFragment(var waterRequirement: WaterRequirement
         WaterRequirementTableViewModelFactory(requireActivity().application)
         ).get(WaterRequirementTableViewModel::class.java)
 
+        //Initializing all layout objects
         initButtons()
         initEditText()
         initRadioButton()
@@ -68,14 +76,17 @@ class WaterRequirementTableDialogFragment(var waterRequirement: WaterRequirement
                 rgGender.check(R.id.radioButtonMan)
             }
 
+            //Filling layout objects
             etWeight.editText?.setText(waterRequirement?.weight.toString())
             etWater.editText?.setText(waterRequirement?.requirements.toString())
-            tvTitel.setText("Datensatz ändern")
-            tvComment.setText("In diesem Dialog können Sie die Werte ändern")
+            tvTitel.text = "Datensatz ändern"
+            tvComment.text = "In diesem Dialog können Sie die Werte ändern"
         }
     }
 
-    //Initializing Dialog Box Buttons and Running Functions when Pressed
+    /**
+     * Initializing Dialog Box Buttons Ok and cancel. Implementation of ClickListener
+     */
     private fun initButtons() {
         btnSave = rootView.findViewById(R.id.dialog_btn_save)
         btnAbort = rootView.findViewById(R.id.dialog_btn_abort)
@@ -84,22 +95,32 @@ class WaterRequirementTableDialogFragment(var waterRequirement: WaterRequirement
         btnAbort.setOnClickListener { dismiss() }
     }
 
-    //Initializing Variables by Dialog Components
+    /**
+     * Initializing of EditText Objects for weight and water amount
+     */
     private fun initEditText() {
         etWeight = rootView.findViewById(R.id.dialog_edit_text_weight)
         etWater = rootView.findViewById(R.id.dialog_edit_text_amount_of_water)
     }
 
+    /**
+     * Initializing of RadioGroup Object
+     */
     private fun initRadioButton(){
         rgGender = rootView.findViewById(R.id.radioGroupGender)
     }
 
+    /**
+     * Initializing of TextView Objects for titel and Comment
+     */
     private fun initTextView(){
         tvTitel = rootView.findViewById(R.id.tv_water_requirement_dialog_titel)
         tvComment = rootView.findViewById(R.id.tv_water_requirement_dialog_comment)
     }
 
-    //Saving the data entered in the dialog in the database
+    /**
+     * Saving the data entered or changed in the dialog in the database
+     */
     private fun saveData() {
         val genderSelected =
             rootView.findViewById<RadioGroup>(R.id.radioGroupGender).checkedRadioButtonId
@@ -112,16 +133,17 @@ class WaterRequirementTableDialogFragment(var waterRequirement: WaterRequirement
 
                 if (waterRequirement != null){//In case of entity change
 
-                    waterRequirement?.requirements = etWater.editText?.text.toString()!!.toInt()
-                    waterRequirement?.weight = etWeight.editText?.text.toString()!!.toInt()
+                    waterRequirement?.requirements = etWater.editText?.text.toString().toFloat().roundToInt()
+                    waterRequirement?.weight = etWeight.editText?.text.toString().toFloat().roundToInt()
                     waterRequirement?.genderWoman = gender
 
                     waterRequirementTableViewModel.update(waterRequirement!!)
                     dismiss()
 
                 } else{//In case of add new entity
-                    waterRequirementTableViewModel.insert(gender,  etWeight.editText?.text.toString()!!.toInt(),
-                        etWater.editText?.text.toString()!!.toInt())
+                    waterRequirementTableViewModel.insert(gender,
+                        etWeight.editText?.text.toString().toFloat().roundToInt(),
+                        etWater.editText?.text.toString().toFloat().roundToInt())
 
                     Toast.makeText(requireContext(), "Neue Werte zur Datenbank hinzugefügt", Toast.LENGTH_SHORT).show()
                     dismiss()

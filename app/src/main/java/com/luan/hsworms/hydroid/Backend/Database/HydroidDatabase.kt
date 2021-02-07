@@ -7,6 +7,8 @@ import androidx.room.RoomDatabase
 
 /**
  * A room database class that includes two tables: History, WaterRequirement
+ *
+ * @author Andrej Alpatov
  */
 @Database(entities = [WaterRequirement::class, History::class], version = 1, exportSchema = false)
 abstract class HydroidDatabase : RoomDatabase() {

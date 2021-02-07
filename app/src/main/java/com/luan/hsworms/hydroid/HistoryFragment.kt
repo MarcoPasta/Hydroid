@@ -14,6 +14,8 @@ import com.luan.hsworms.hydroid.Backend.HistoryListAdapter
 
 /**
  * Class for fragment HistoryFragment. Which is the output of the record from the Database History table. And also provides for deleting these records by implementing LongClickListener
+ *
+ * @author Andrej Alpatov
  */
 class HistoryFragment : Fragment() {
 

@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey
 
 /**
  * Data class for table History
+ *
+ * @author Andrej Alpatov
  */
 @Entity
 data class History(

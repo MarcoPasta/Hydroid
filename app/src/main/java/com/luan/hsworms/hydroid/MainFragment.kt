@@ -15,6 +15,8 @@ import com.luan.hsworms.hydroid.databinding.MainFragmentBinding
 
 /**
  * A class for handling events related to the main screen of the program.
+ *
+ * @author Andrej Alpatov
  */
 class MainFragment : Fragment() {
 
@@ -23,6 +25,7 @@ class MainFragment : Fragment() {
     private lateinit var waterRequirementTableViewModel: WaterRequirementTableViewModel
 
 
+    //TODO: MainActivity dokumentieren
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

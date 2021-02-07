@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelStore
 
 /**
  * The SplashScreen class is always executed when the application starts and shows the splash screen. At the first start, the database table WaterRequirement is filled. After a set time, you go to the main screen (MainFragment) of the application.
+ *
+ * @author Andrej Alpatov
  */
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {

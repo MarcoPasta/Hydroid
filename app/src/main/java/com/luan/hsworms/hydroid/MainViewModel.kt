@@ -17,6 +17,8 @@ import java.util.*
 
 /**
  * MainViewModel class for MainFragment
+ *
+ * @author Andrej Alpatov
  */
 class MainViewModel(application: Application): AndroidViewModel(application) {
 

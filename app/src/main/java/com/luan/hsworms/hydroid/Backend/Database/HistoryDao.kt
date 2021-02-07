@@ -5,6 +5,8 @@ import androidx.room.*
 
 /**
  * Interface for accessing database History table records (Data Access Object)
+ *
+ * @author Andrej Alpatov
  */
 @Dao
 interface HistoryDao {
