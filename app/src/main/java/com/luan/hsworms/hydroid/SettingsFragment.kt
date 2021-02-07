@@ -1,24 +1,22 @@
 package com.luan.hsworms.hydroid
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.renderscript.ScriptGroup
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
-import com.luan.hsworms.hydroid.databinding.FragmentSettingsBinding
 import kotlin.math.roundToInt
 
+/**
+ * Class for handling user actions in the "User settings" section of the menu. The user gets a clickable link to the WaterRequirementTable, the ability to change user weight and gender, as well as the standard volumes of liquid that appear in the AddWaterDialog.
+ *
+ * @author Andrej Alpatov
+ */
 class SettingsFragment : Fragment() {
     private lateinit var rootView: View
 
@@ -32,23 +30,22 @@ class SettingsFragment : Fragment() {
     private lateinit var etGlassBig: TextInputLayout
     private lateinit var etGlassHuge: TextInputLayout
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val context = getActivity();
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
+        // Layout inflate
         rootView = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        //Initializing of ViewModels
+        //Initializing of MainViewModel
         viewModel = ViewModelProvider(requireActivity(),
             MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
 
+        //Initializing of SettingsViewModel
         settingsViewModel = ViewModelProvider(requireActivity(),SettingsViewModelFactory(requireActivity().application)
         ).get(SettingsViewModel::class.java)
 
@@ -59,10 +56,12 @@ class SettingsFragment : Fragment() {
             Context.MODE_PRIVATE
         )
 
-        //Filling temporary variables with values from internal storage
+        // Filling temporary variables with values from internal storage (SharedPreferences)
         settingsViewModel.populateViewModel()
 
+        //Initializing of widgets
         initWidgets()
+        //Populating Menu Fields with Saved Values
         fillingOfTheFragmentFields()
 
         return rootView
@@ -79,10 +78,13 @@ class SettingsFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+        //Saving data when the user leaves this menu section
         saveSettings()
     }
 
-
+    /**
+     * Initialising of widgets
+     */
     private fun initWidgets(){
         rgGender = rootView.findViewById(R.id.rg_gender)
         etWeight = rootView.findViewById(R.id.et_weight)
@@ -92,6 +94,9 @@ class SettingsFragment : Fragment() {
         etGlassHuge = rootView.findViewById(R.id.et_glass_huge)
     }
 
+    /**
+     * Filling of the fragment fields
+     */
     private fun fillingOfTheFragmentFields(){
 
         //Filling of Gender-field
@@ -101,15 +106,19 @@ class SettingsFragment : Fragment() {
             rgGender.check(R.id.rb_male)
         }
 
-        //Filling of Weight and Water-portions fields
+        //Filling of Weight fields
         etWeight.editText?.setText(viewModel.weightOfUser.value.toString())
 
+        //Filling of Water-portions
         etGlassSmall.editText?.setText(settingsViewModel.glassSmall.value.toString())
         etGlassMiddle.editText?.setText(settingsViewModel.glassMiddle.value.toString())
         etGlassBig.editText?.setText(settingsViewModel.glassBig.value.toString())
         etGlassHuge.editText?.setText(settingsViewModel.glassHuge.value.toString())
     }
 
+    /**
+     * Saving data specified in the "User Settings" menu section in variables and in local storage (SharedPreferences)
+     */
     private fun saveSettings(){
         //Gender settings
         val genderSelected = view?.findViewById<RadioGroup>(R.id.rg_gender)?.checkedRadioButtonId
@@ -122,7 +131,7 @@ class SettingsFragment : Fragment() {
         viewModel.saveGender(gender)
 
         //Weight settings
-        val weight = view?.findViewById<TextInputLayout>(R.id.et_weight)?.editText?.text.toString().toInt()
+        val weight = view?.findViewById<TextInputLayout>(R.id.et_weight)?.editText?.text.toString().toFloat().roundToInt()
         viewModel.weightOfUser.value = weight
         viewModel.saveWeight(weight)
 
@@ -133,6 +142,3 @@ class SettingsFragment : Fragment() {
             etGlassHuge.editText?.text.toString().toFloat().roundToInt())
     }
 }
-
-//        Log.i(sharedPreferences.getInt(R.string.saved_weight_of_user.toString(), 0).toString(), "Schared preference")
-//        Log.i(viewModel.userGenderIsFemale.value.toString(), "User gender")

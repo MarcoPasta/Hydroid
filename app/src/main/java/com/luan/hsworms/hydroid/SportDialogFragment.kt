@@ -8,6 +8,11 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 
+/**
+ * This class handles events associated with the SportDilogFragment dialog box. With this dialog, the user can select one of three possible physical activities and thereby increase the daily water requirement. Additional water demand is preset and cannot be changed by the user.
+ *
+ * @author Andrej Alpatov
+ */
 class SportDialogFragment : DialogFragment() {
     private lateinit var rootView: View
 
@@ -39,9 +44,13 @@ class SportDialogFragment : DialogFragment() {
         mainViewModel = ViewModelProvider(requireActivity(),
             MainViewModelFactory(requireActivity().application)).get(MainViewModel::class.java)
 
+        //Initializing buttons and click handlers
         initButtons()
     }
 
+    /**
+     * Initializing buttons and setting click handlers for the three sports activity select buttons and the cancel button.
+     */
     private fun initButtons(){
         btnCancel = rootView.findViewById(R.id.btn_cancel)
         btnFitness = rootView.findViewById(R.id.btn_fitness)
@@ -54,6 +63,11 @@ class SportDialogFragment : DialogFragment() {
         btnFitness.setOnClickListener { changeWaterRequirementBecauseOfSport(300) }
     }
 
+    /**
+     * Increase in daily water demand by adding the value received as an input parameter and saving the new value to live date variables, local storage(SharedPreferences) and database.
+     *
+     * @param addWater The amount of water to add to the current daily requirement (type: Int)
+     */
     private fun changeWaterRequirementBecauseOfSport(addWater: Int){
         mainViewModel.addWaterRequirementBecauseOfSportOrWeather(addWater)
         dismiss()

@@ -1,6 +1,5 @@
 package com.luan.hsworms.hydroid
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
 import com.luan.hsworms.hydroid.Backend.WaterRequirementTableAdapter
 
+/**
+ * A class for working with a Water Requirement Table menu section, containing a RecyclerView with records from the WaterRequirement table in the database. Implementing the ability to change, delete records from the database using Сliсks on entries. Use ActionButton to add new entries.
+ *
+ * @author Andrej Alpatov
+ */
 class WaterRequirementTableFragment: Fragment()  {
     private lateinit var rootView: View
 
@@ -50,7 +53,8 @@ class WaterRequirementTableFragment: Fragment()  {
         WaterRequirementTableViewModelFactory(requireActivity().application))
             .get(WaterRequirementTableViewModel::class.java)
 
-        waterRequirementTableViewModel.getLiveWaterRequirement().observe(viewLifecycleOwner, Observer{
+        //update content in case of changes
+        waterRequirementTableViewModel.getLiveWaterRequirement().observe(viewLifecycleOwner, {
             items ->
             adapter.updateContent(ArrayList(items))
         })
@@ -62,15 +66,17 @@ class WaterRequirementTableFragment: Fragment()  {
             }
     }
 
+    /**
+     * Initializing of RecyclerView. Implementing click and long click handlers
+     */
     private fun initRecyclerView(){
         rv = rootView.findViewById(R.id.water_rv)
-        //Temporary placeholder
-        //val testContent = ArrayList<String>(List(25){"TEST"})
         adapter = WaterRequirementTableAdapter(ArrayList())
         rv.adapter = adapter
 
-        //Implement ClickListener (Normal and Long)
-        //Change Entity in BD by short click
+        /**
+         * Implement ClickListener. Change Entity in BD by short click
+         */
         adapter.setOnItemClickListener(object: WaterRequirementTableAdapter.OnItemClickListener{
             override fun setOnItemClickListener(position: Int) {
                 val dialog = WaterRequirementTableDialogFragment(adapter.content[position])
@@ -78,7 +84,9 @@ class WaterRequirementTableFragment: Fragment()  {
             }
         })
 
-        //Delete Entity in BD by long click
+        /**
+         * Implement LongClickListener. Delete Entity in BD by long click
+         */
         adapter.setOnItemLongClickListener(object: WaterRequirementTableAdapter.OnItemLongClickListener{
             override fun setOnItemLongClickListener(position: Int) {
                 startAlarmDialog(adapter.content[position])
@@ -86,40 +94,27 @@ class WaterRequirementTableFragment: Fragment()  {
         })
     }
 
+    /**
+     * Displays a dialog warning about deleting a record in the database. With two buttons "ok" and "cancel"
+     */
     private fun startAlarmDialog(waterReqirement: WaterRequirement){
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.apply {
             setMessage("Warnung - Eintrag wird gelöscht")
-                setPositiveButton("OKAY", DialogInterface.OnClickListener { _, _ ->
-                    Toast.makeText(requireContext(),
+                setPositiveButton("OKAY") { _, _ ->
+                    Toast.makeText(
+                        requireContext(),
                         "Eintrag ${waterReqirement.genderWoman} ${waterReqirement.weight} wurde gelöscht",
-                    Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                     waterRequirementTableViewModel.delete(waterReqirement)
-                })
-                setNegativeButton("Ablehnen") { dialog, _ ->
+                }
+            setNegativeButton("Ablehnen") { dialog, _ ->
                     dialog.dismiss()
                 }
             setTitle("Bestätigung der Entfernung des Eintrags")
         }
         val dialog = builder.create()
         dialog.show()
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HistoryFragment.
-         */
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WaterRequirementTableFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
     }
 }
