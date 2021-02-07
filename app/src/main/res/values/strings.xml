@@ -139,8 +139,7 @@
     <string name="nav_drawer_benutzerdaten">Benutzereinstellungen</string>
     <string name="nav_drawer_notifications">Benachrichtigungen</string>
     <string name="history">History</string>
-
-
+    <string name="toast_user_data_dont_entered">Sie haben keine Daten eingegeben. Die Standardwerte werden festgelegt. Sie können sie im Abschnitt \"Benutzereinstellungen\" ändern. Sie werden ab dem nächsten Tag wirksam.</string>
 
 
 </resources>

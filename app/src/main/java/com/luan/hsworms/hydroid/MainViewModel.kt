@@ -22,7 +22,7 @@ import java.util.*
  */
 class MainViewModel(application: Application): AndroidViewModel(application) {
 
-    private  val TAG: String = "MainViewModel"
+    private val TAG: String = "MainViewModel"
 
     //Repository
     private val repository = AppRepository(application)
@@ -49,8 +49,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     init {
         userGenderIsFemale.value = 1
-        weightOfUser.value = 0
-        dailyLiquidRequirement.value = 1
+        weightOfUser.value = 60
+        dailyLiquidRequirement.value = 1800
         currentlyDrunkLiquid.value = 0
     }
 
@@ -79,8 +79,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun populateViewModel(){
 
         userGenderIsFemale.value = ourUserData?.getInt(R.string.saved_gender_of_user.toString(), 1)
-        weightOfUser.value = ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 0)
-        dailyLiquidRequirement.value = ourUserData?.getInt(R.string.saved_liquid_requirements_of_user.toString(), 1)
+        weightOfUser.value = ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 60)
+        dailyLiquidRequirement.value = ourUserData?.getInt(R.string.saved_liquid_requirements_of_user.toString(), 1800)
         currentlyDrunkLiquid.value = ourUserData?.getInt(R.string.saved_drunk_liquid_of_user.toString(), 0)
     }
 
@@ -142,16 +142,16 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      */
     fun updateDataByStartActivity(weightIn: Long, genderIn: Int)
     {
-        //Search the database for water requirements by weight and gender. Returns 500 if didn't find.
-        if(dailyLiquidRequirement.value == 1 || dailyLiquidRequirement.value == 500) {
+        //Search the database for water requirements by weight and gender. Setss 1800 if didn't find.
+        //if(dailyLiquidRequirement.value == 1 || dailyLiquidRequirement.value == 500) {
             waterRequirementsUpdate(weightIn, genderIn)
-        }
+        //}
         //If there is no record in the database for the current day, then it is created
         addEntityInHistory()
     }
 
     /**
-     * Search the database for water requirements by weight and gender and stores itin liva data variable. Saves 500 if didn't find.
+     * Search the database for water requirements by weight and gender and stores itin liva data variable. Saves 1800 if didn't find.
      *
      * @param weightIn user weight (type: Int)
      * @param genderIn user gender (type: Int) 1 - female, 0 - male
@@ -160,19 +160,20 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
             val waterRequirement: Int? = getWaterRequirementByWeightAndGender(weightIn, genderIn)
             Log.d(TAG, "waterRequirementsUpdate $waterRequirement")
-            if (waterRequirement != null)
+            if (waterRequirement != null) //if found
             {
                 dailyLiquidRequirement.value = waterRequirement
-            } else
+            } else //if not found
             {
-                dailyLiquidRequirement.value = 500
+                dailyLiquidRequirement.value = 1800
             }
         }
+        //Save data in local storage
         saveData(userGenderIsFemale.value!!, weightOfUser.value!!, dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
     }
 
     /**
-     * If there is no record in the database table History for the current day, then it is createdю The live date variables will also be updated. The amount of liquid you drink will be set to zero as a new day begins.
+     * If there is no record in the database table History for the current day, then it is created. The live date variables will also be updated. The amount of liquid you drink will be set to zero as a new day begins.
      */
     fun addEntityInHistory()
     {
@@ -210,9 +211,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun addDrunkWater(waterIn:Int)
     {
         currentlyDrunkLiquid.value = currentlyDrunkLiquid.value?.plus(waterIn)
-        updateDrunk()
         saveData(userGenderIsFemale.value!!, weightOfUser.value!!,
             dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
+        updateDrunk()
     }
 
     /**
@@ -265,9 +266,14 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private fun updateDrunk(){
         viewModelScope.launch{
             val history:History? = getHistoryByDate(currentDate())
-            history?.drunk = currentlyDrunkLiquid.value!!
-            history?.fulfillment = currentlyDrunkLiquid.value!! * 100 / dailyLiquidRequirement.value!!
-            repository.updateHistory(history!!)
+            if (history != null){
+                history.drunk = currentlyDrunkLiquid.value!!
+                history.fulfillment = currentlyDrunkLiquid.value!! * 100 / dailyLiquidRequirement.value!!
+                repository.updateHistory(history)
+            } else
+            {
+                addEntityInHistory()
+            }
         }
     }
 
