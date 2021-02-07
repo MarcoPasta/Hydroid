@@ -21,7 +21,8 @@
                 android:layout_margin="4dp"
                 android:text="@string/einstellungen"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/dark_grey" />
 
             <View
                 android:id="@+id/divider5"
@@ -73,13 +74,15 @@
                     android:id="@+id/rb_female"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/weiblich" />
+                    android:text="@string/weiblich"
+                    android:textColor="@color/dark_grey" />
 
                 <RadioButton
                     android:id="@+id/rb_male"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/maennlich" />
+                    android:text="@string/maennlich"
+                    android:textColor="@color/dark_grey" />
 
             </RadioGroup>
 

@@ -91,8 +91,8 @@ class MainFragment : Fragment() {
         //Check if the Start is first
         if(viewModel.isFirstStart == 1){//first start
             viewModel.clearFile()
-            viewModel.saveFirstStart(0)//From now is not first start
-            showUserInputDialog()
+            //viewModel.saveFirstStart(0)//From now is not first start
+            //showUserInputDialog()
         }else{//not first start was realised in SplashScreenActivity
             viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
                 viewModel.userGenderIsFemale.value!!)
@@ -124,9 +124,17 @@ class MainFragment : Fragment() {
         super.onResume()
         //The function is called in this callback function in case, when the date changed, the application
         // was not closed and when it was resumed, a new day was recorded in the Database History table
-        viewModel.addEntityInHistory()
+
+        if(viewModel.isFirstStart == 1) {//first start
+            viewModel.saveFirstStart(0)//From now is not first start
+            showUserInputDialog()
+            //viewModel.updateDataByStartActivity(60, 1)
+        }else{
+            viewModel.addEntityInHistory()
+        }
     }
 
+    //TODO: Implementing the showUserInputDialog in a separate class
     /**
      * This function will be called at the first start of the program to display a dialog in which the user can enter his gender and weight.
      */
@@ -139,10 +147,19 @@ class MainFragment : Fragment() {
             .setTitle(getString(R.string.user_input_dialog_titel))
         val dialog = dialogBuilder.show()
 
+        //Prevents the dialog from closing by clicking outside its borders
+        dialog.setCancelable(false)
+
         //Cancel button -> leave the dialog
         val cancelButton = dialogView.findViewById<Button>(R.id.imageButtonUserCancel)
         cancelButton.setOnClickListener {
             dialog.dismiss()
+
+            //Update of all values
+            viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
+                viewModel.userGenderIsFemale.value!!)
+
+            Toast.makeText(activity, getString(R.string.toast_user_data_dont_entered), Toast.LENGTH_LONG).show()
         }
 
         //Ok Button -> saving the entered parameters in the internal storage
