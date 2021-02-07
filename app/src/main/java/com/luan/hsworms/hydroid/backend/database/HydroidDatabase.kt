@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroid.Backend.Database
+package com.luan.hsworms.hydroid.backend.database
 
 import android.app.Application
 import androidx.room.Database

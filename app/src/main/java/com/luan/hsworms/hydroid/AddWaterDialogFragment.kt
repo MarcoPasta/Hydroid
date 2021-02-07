@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.luan.hsworms.hydroid.Backend.Notifications.NotificationActivity
+import com.luan.hsworms.hydroid.backend.notifications.NotificationActivity
 
 /**
  * Handling user actions when invoking a AddWaterDialog. In this dialog, the user has the opportunity to choose from four different volumes of liquid to be added to the already drunk.
@@ -93,20 +93,6 @@ class AddWaterDialogFragment: DialogFragment() {
 
 
         btnSave.setOnClickListener{
-
-            //TODO: Lassen wir Notifications here?
-            NotificationActivity.showNotification(
-                notificationViewModel.switchBoolNotification,
-                "AddWaterNotification",
-                1,
-                requireContext(),
-                R.drawable.ic_done,
-                "Erfrischend",
-                "Du hast etwas getrunken!",
-                null,
-                NotificationCompat.PRIORITY_DEFAULT
-            )
-
             //Storing data in variables and local storage (SharedPreferences)
             saveData(tvQuantity.text.toString().toInt())
         }

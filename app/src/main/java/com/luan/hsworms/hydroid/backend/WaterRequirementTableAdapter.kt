@@ -1,11 +1,11 @@
-package com.luan.hsworms.hydroid.Backend
+package com.luan.hsworms.hydroid.backend
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
+import com.luan.hsworms.hydroid.backend.database.WaterRequirement
 import com.luan.hsworms.hydroid.R
 
 /**

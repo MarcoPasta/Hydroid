@@ -3,7 +3,7 @@
     package="com.luan.hsworms.hydroid">
 
     <application
-        android:name=".Backend.HydroidApplication"
+        android:name=".backend.HydroidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,7 +27,7 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
-        <receiver android:name=".Backend.Notifications.AlarmReceiver"/>
+        <receiver android:name=".backend.notifications.AlarmReceiver"/>
 
         <meta-data
             android:name="preloaded_fonts"

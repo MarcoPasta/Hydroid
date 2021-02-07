@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--TODO:Change layout titel-->
-<!--TODO: Add Header-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -41,7 +39,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="#285E8A"
             android:checked="true"
-            android:text="@string/user_data_sex_woman"
+            android:text="@string/weiblich"
             android:textColor="#285E8A" />
 
         <RadioButton
@@ -50,7 +48,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="#285E8A"
             android:checked="false"
-            android:text="@string/user_data_sex_man"
+            android:text="@string/maennlich"
             android:textColor="#285E8A" />
     </RadioGroup>
 
@@ -65,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="OK" />
+            android:text="@string/ok" />
 
         <Button
             android:id="@+id/imageButtonUserCancel"
@@ -73,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="@android:string/cancel" />
+            android:text="@string/cancel" />
     </LinearLayout>
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroid.Backend.Notifications
+package com.luan.hsworms.hydroid.backend.notifications
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -48,8 +48,8 @@ class AlarmService() {
                 Log.d(TAG, "AlarmManager.setInexactRepeating() called")
                 alarmManager?.setInexactRepeating(
                     AlarmManager.RTC_WAKEUP,
-                    setExactTime.timeInMillis,                              // Puts saved integer into an calender object and recalculates them into milliseconds
-                    1000 * 60 * 10,                              // Choosing the interval, 10 seconds for testing purposes
+                    setExactTime.timeInMillis + AlarmManager.INTERVAL_HALF_HOUR,                              // Puts saved integer into an calender object and recalculates them into milliseconds
+                    AlarmManager.INTERVAL_HOUR * 3,                              // Choosing the interval, 10 seconds for testing purposes
                     alarmIntent
                 ).apply {
                     Log.d(TAG, "Alarm has been send")

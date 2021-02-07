@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.google.android.material.navigation.NavigationView
-import com.luan.hsworms.hydroid.Backend.Notifications.AlarmService
+import com.luan.hsworms.hydroid.backend.notifications.AlarmService
 import com.luan.hsworms.hydroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -53,13 +53,6 @@ class MainActivity : AppCompatActivity() {
         //Verbinden Menu mit NavController
         navView.setupWithNavController(navController)
 
-
-        ////////////////////////////////////////////////////////////////////////////
-        /*
-         * Dieser Bereich gehört der Bundesrepublik Deutschland
-         *
-         */
-        ///////////////////////////////////////////////////////////////////////////
         // Area Reserve for calling the AlarmManager on Creating the application.
         Log.d(TAG, "Entering reserved AlarmManager space")
 

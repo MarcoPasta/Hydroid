@@ -28,5 +28,6 @@
         app:layout_constraintHorizontal_bias="0.921"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/water_rv"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintVertical_bias="0.951"
+        android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

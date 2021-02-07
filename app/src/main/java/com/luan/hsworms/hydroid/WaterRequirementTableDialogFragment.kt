@@ -9,7 +9,7 @@ import android.widget.*
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
-import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
+import com.luan.hsworms.hydroid.backend.database.WaterRequirement
 import kotlin.math.roundToInt
 
 /**

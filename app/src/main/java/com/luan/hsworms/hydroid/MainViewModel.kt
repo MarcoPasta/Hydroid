@@ -6,9 +6,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.luan.hsworms.hydroid.Backend.Database.AppRepository
-import com.luan.hsworms.hydroid.Backend.Database.History
-import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
+import com.luan.hsworms.hydroid.backend.database.AppRepository
+import com.luan.hsworms.hydroid.backend.database.History
+import com.luan.hsworms.hydroid.backend.database.WaterRequirement
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

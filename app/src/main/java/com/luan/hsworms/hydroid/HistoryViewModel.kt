@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.luan.hsworms.hydroid.Backend.Database.AppRepository
-import com.luan.hsworms.hydroid.Backend.Database.History
+import com.luan.hsworms.hydroid.backend.database.AppRepository
+import com.luan.hsworms.hydroid.backend.database.History
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*

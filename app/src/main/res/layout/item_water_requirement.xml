@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
-        android:text="Geschlecht:"
+        android:text="@string/geschlecht"
         app:layout_constraintStart_toEndOf="@+id/divider2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="Gewicht:"
+        android:text="@string/gewicht_doppelpunkt"
         app:layout_constraintBottom_toBottomOf="@+id/item_weight_table"
         app:layout_constraintStart_toEndOf="@+id/divider2"
         app:layout_constraintTop_toTopOf="@+id/item_weight_table"
@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Wasserbedarf:"
+        android:text="@string/wasserbedarf"
         app:layout_constraintStart_toEndOf="@+id/item_gender"
         app:layout_constraintTop_toTopOf="@+id/item_gender" />
 

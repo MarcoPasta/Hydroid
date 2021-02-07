@@ -30,7 +30,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Neuen Wert hinzufügen"
+                android:text="@string/neuen_wert_hinzuf_gen"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +40,9 @@
                 android:id="@+id/tv_water_requirement_dialog_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="In diesem Dialog können Sie neue Werte zur Berechnung des Wasserbedarfs hinzufügen"
+                android:text="@string/in_diesem_dialog_k_nnen_sie_neue_werte_zur_berechnung_des_wasserbedarfs_hinzuf_gen"
                 android:textColor="@color/hydroit_primary"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/tv_water_requirement_dialog_titel"
                 app:layout_constraintTop_toBottomOf="@+id/tv_water_requirement_dialog_titel" />
 
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="#285E8A"
                     android:checked="true"
-                    android:text="@string/user_data_sex_woman"
+                    android:text="@string/weiblich"
                     android:textColor="#285E8A" />
 
                 <RadioButton
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="#285E8A"
                     android:checked="false"
-                    android:text="@string/user_data_sex_man"
+                    android:text="@string/maennlich"
                     android:textColor="#285E8A" />
             </RadioGroup>
 
@@ -101,7 +101,7 @@
                     android:id="@+id/text_input_edit_text_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Gewicht"
+                    android:hint="@string/gewicht"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +121,7 @@
                     android:id="@+id/text_input_edit_text_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Wassermenge"
+                    android:hint="@string/wassermenge"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Speichern"
+                android:text="@string/speichern"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider3" />
@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Ablehnen"
+                android:text="@string/ablehnen"
                 app:layout_constraintEnd_toStartOf="@+id/dialog_btn_save"
                 app:layout_constraintTop_toTopOf="@+id/dialog_btn_save" />
 

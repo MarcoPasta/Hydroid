@@ -14,7 +14,7 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.luan.hsworms.hydroid.Backend.Notifications.AlarmService
+import com.luan.hsworms.hydroid.backend.notifications.AlarmService
 import java.text.SimpleDateFormat
 import java.util.*
 

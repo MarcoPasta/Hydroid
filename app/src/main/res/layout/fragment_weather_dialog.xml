@@ -31,9 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Wählen Sie aktuelles Wetter"
+                android:text="@string/w_hlen_sie_aktuelles_wetter"
                 android:textColor="@color/design_default_color_primary"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Angenehmes Wetter"
+                android:text="@string/angenehmes_wetter"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -52,7 +52,7 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Warmes Wetter"
+                android:text="@string/warmes_wetter"
                 app:layout_constraintStart_toStartOf="@+id/btn_angenemes_wetter"
                 app:layout_constraintTop_toBottomOf="@+id/btn_angenemes_wetter" />
 
@@ -60,7 +60,7 @@
                 android:id="@+id/btn_kaelte"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="Kälte"
+                android:text="@string/k_lte"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_angenemes_wetter"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintTop_toTopOf="@+id/btn_angenemes_wetter" />
@@ -69,7 +69,7 @@
                 android:id="@+id/btn_hitze"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="Hitze"
+                android:text="@string/hitze"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_warmes_wettter"
                 app:layout_constraintEnd_toEndOf="@+id/btn_kaelte"
                 app:layout_constraintTop_toTopOf="@+id/btn_warmes_wettter" />
@@ -83,7 +83,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Ablehnen"
+                android:text="@string/ablehnen"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

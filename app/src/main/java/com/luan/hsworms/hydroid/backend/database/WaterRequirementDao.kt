@@ -1,5 +1,5 @@
-package com.luan.hsworms.hydroid.Backend.Database
-//TODO: Packages umnennen
+package com.luan.hsworms.hydroid.backend.database
+
 import androidx.lifecycle.LiveData
 import androidx.room.*
 

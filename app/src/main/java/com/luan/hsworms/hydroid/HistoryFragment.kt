@@ -9,8 +9,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.luan.hsworms.hydroid.Backend.Database.History
-import com.luan.hsworms.hydroid.Backend.HistoryListAdapter
+import com.luan.hsworms.hydroid.backend.database.History
+import com.luan.hsworms.hydroid.backend.HistoryListAdapter
 
 /**
  * Class for fragment HistoryFragment. Which is the output of the record from the Database History table. And also provides for deleting these records by implementing LongClickListener

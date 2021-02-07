@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroid.Backend.Notifications
+package com.luan.hsworms.hydroid.backend.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -95,7 +95,6 @@ class NotificationActivity  {
 
         }
 
-        // TODO: Create Documentation
         /**
          *
          */

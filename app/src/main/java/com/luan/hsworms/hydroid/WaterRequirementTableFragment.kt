@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.luan.hsworms.hydroid.Backend.Database.WaterRequirement
-import com.luan.hsworms.hydroid.Backend.WaterRequirementTableAdapter
+import com.luan.hsworms.hydroid.backend.database.WaterRequirement
+import com.luan.hsworms.hydroid.backend.WaterRequirementTableAdapter
 
 /**
  * A class for working with a Water Requirement Table menu section, containing a RecyclerView with records from the WaterRequirement table in the database. Implementing the ability to change, delete records from the database using Сliсks on entries. Use ActionButton to add new entries.

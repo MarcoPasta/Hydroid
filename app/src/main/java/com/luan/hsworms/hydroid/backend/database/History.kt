@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroid.Backend.Database
+package com.luan.hsworms.hydroid.backend.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

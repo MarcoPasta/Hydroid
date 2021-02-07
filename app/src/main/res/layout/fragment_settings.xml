@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="Einstellungen"
+                android:text="@string/einstellungen"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
@@ -40,7 +40,8 @@
                 android:text="Wasserbedarfstabelle"
                 android:textColor="@color/hydroit_primary"
                 android:textIsSelectable="true"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:focusable="true" />
 
             <View
                 android:id="@+id/divider4"
@@ -56,10 +57,11 @@
                 android:layout_margin="10dp"
                 android:clickable="true"
                 android:padding="10dp"
-                android:text="Geschlecht wählen"
+                android:text="@string/geschlecht_w_hlen"
                 android:textColor="@color/black"
                 android:textIsSelectable="true"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:focusable="true" />
 
             <RadioGroup
                 android:id="@+id/rg_gender"
@@ -71,13 +73,13 @@
                     android:id="@+id/rb_female"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Weiblich" />
+                    android:text="@string/weiblich" />
 
                 <RadioButton
                     android:id="@+id/rb_male"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Männlich" />
+                    android:text="@string/maennlich" />
 
             </RadioGroup>
 
@@ -95,10 +97,11 @@
                 android:layout_margin="10dp"
                 android:clickable="true"
                 android:padding="10dp"
-                android:text="Gewicht ändern"
+                android:text="@string/gewicht_ndern"
                 android:textColor="@color/black"
                 android:textIsSelectable="true"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:focusable="true" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/et_weight"
@@ -109,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:hint="Gewicht"
+                    android:hint="@string/gewicht"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,10 +129,11 @@
                 android:layout_margin="10dp"
                 android:clickable="true"
                 android:padding="10dp"
-                android:text="Auswahl der Größe der Wasserportionen"
+                android:text="@string/auswahl_der_gr_e_der_wasserportionen"
                 android:textColor="@color/black"
                 android:textIsSelectable="true"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:focusable="true" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -141,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:text="ml"
+                    android:text="@string/ml"
                     android:textColor="@color/hydroit_primary"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@+id/et_glass_big"
@@ -152,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:text="ml"
+                    android:text="@string/ml"
                     android:textColor="@color/hydroit_primary"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@+id/et_glass_huge"
@@ -206,7 +210,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Kleines Glas"
+                        android:hint="@string/kleines_glas"
                         android:inputType="numberDecimal"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -221,7 +225,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Mittleres Glas"
+                        android:hint="@string/mittleres_glas"
                         android:inputType="numberDecimal"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -236,7 +240,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Großes Glas"
+                        android:hint="@string/gro_es_glas"
                         android:inputType="numberDecimal"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -251,7 +255,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Flasche"
+                        android:hint="@string/flasche"
                         android:inputType="numberDecimal"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -260,7 +264,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:text="ml"
+                    android:text="@string/ml"
                     android:textColor="@color/hydroit_primary"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@+id/et_glass_small"
@@ -271,7 +275,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:text="ml"
+                    android:text="@string/ml"
                     android:textColor="@color/hydroit_primary"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@+id/et_glass_middle"

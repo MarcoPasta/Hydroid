@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroid.Backend.Notifications
+package com.luan.hsworms.hydroid.backend.notifications
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,9 +10,14 @@ import java.util.*
 
 /*
  *  TODO: When the User archieves his Day goal the repeating notificaion shall be cancelled
+ *
+ *  TODO: Create alarm to update database on 00:00 with own class DatabaseReceiver
  */
 
 
+/**
+ * Inherit from BroadcastReceiver so we can override onReceive method.
+ */
 class AlarmReceiver: BroadcastReceiver() {
 
     private val TAG = "AlarmReceiver"
@@ -34,7 +39,6 @@ class AlarmReceiver: BroadcastReceiver() {
         Log.d(TAG, "|setStartTime: " + setStartTime.time + " | setEndingTime: " + setEndingTime.time + " | currentTime: " + currentTime.time)
         Log.d(TAG, "|setStartTime: " + setStartTime.timeInMillis + "| setEndingTime: " + setEndingTime.timeInMillis + "| currentTime: " + currentTime.timeInMillis)
 
-        // TODO: Get referece from shared preference for starting time.
         // got rid of the context != null here, i don't know why...
         if ((setEndingTime.timeInMillis > currentTime.timeInMillis) && (currentTime.timeInMillis > setStartTime.timeInMillis)) {
             Log.d(TAG, "Zeitüberprüfung war erfolgreich")
@@ -56,6 +60,9 @@ class AlarmReceiver: BroadcastReceiver() {
         }
     }
 
+    /**
+     *
+     */
     private fun loadEndTimer(context: Context): Calendar {
         // getting a reference to the the sharedPreference (TEHE)
         val sp = context.applicationContext.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
@@ -69,6 +76,9 @@ class AlarmReceiver: BroadcastReceiver() {
         }
     }
 
+    /**
+     *
+     */
     private fun loadStartTimer(context: Context): Calendar {
         // getting a reference to the the sharedPreference (TEHE)
         val sp = context.applicationContext.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
@@ -81,8 +91,4 @@ class AlarmReceiver: BroadcastReceiver() {
             set(Calendar.SECOND, 0)
         }
     }
-
-    /*
-     * HelpDrinkNotification moved into NotificationActivity.kt
-     */
 }

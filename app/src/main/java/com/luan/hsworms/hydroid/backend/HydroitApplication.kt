@@ -1,4 +1,4 @@
-package com.luan.hsworms.hydroid.Backend
+package com.luan.hsworms.hydroid.backend
 
 import android.app.Application
 
