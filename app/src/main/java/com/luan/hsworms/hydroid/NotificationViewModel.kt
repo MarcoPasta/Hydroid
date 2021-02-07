@@ -39,6 +39,7 @@ class NotificationViewModel() : ViewModel() {
 
     /**
      * customized getter method for switchBoolHelpDrink
+     *
      * @return Always false when switchBoolNotification is false
      */
     fun canSendHelpDrinkNotification(): Boolean {

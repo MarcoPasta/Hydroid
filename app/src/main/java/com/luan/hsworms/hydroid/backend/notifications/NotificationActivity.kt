@@ -33,19 +33,14 @@ class NotificationActivity  {
          * Builds notification, checks OS-Version to create a notification channel (if needed) and then shows the notification.
          *
          * @param allowNotification     Allows the user to activate notifications. If false this function will be skipped and no notification will be shown.
-         * @param CHANNEL_ID
-         * @param NOTIFICATION_ID       This ID indicates which notification is been shown. Notifications with the same ID will be overwritten.
-         * @param context               Fragment/ViewModel context needed for notification functions. Mostly used with requireContext()
-         * @param smallIcon             The little icon displayed on the notification
-         * @param contentTitle          The notification title
-         * @param contentText           Description displayed on the notification
-         * @param contentBigText        Allows more text in the description. Nullable variable because it's not always needed.
-         * @param contentPriority       States the priority of the notification.
-         * @param channelName
-         * @param channelDescription
-         * @param channelImportance
-         *
-         *
+         * @param CHANNEL_ID            ID provided to the channel that is needed for notifications. The user can change the channels behavior in the Android settings.
+         * @param NOTIFICATION_ID       ID provided to each notification so they differ. Notifications from the same channel get overwritten.
+         * @param context               context provided from the activity this function is called from.
+         * @param smallIcon             Small icon that appears in the top bar.
+         * @param contentTitle          Notification title.
+         * @param contentText           Notifcations description.
+         * @param contentBigText        More specified and bigger notification description.
+         * @param contentPriority       Sets the priority for the notification. The higher the priority, the higher the chance for the user to see it.
          */
         fun showNotification (
             allowNotification: Boolean,
@@ -96,9 +91,18 @@ class NotificationActivity  {
         }
 
         /**
+         * Builds a notification specifically for the repeating helpDrink function.
          *
+         * @param CHANNEL_ID                ID provided to the channel that is needed for notifications. The user can change the channels behavior in the Android settings.
+         * @param NOTIFICATION_ID           ID provided to each notification so they differ. Notifications from the same channel get overwritten.
+         * @param context                   context provided from the activity this function is called from.
+         * @param smallIcon                 Small icon that appears in the top bar.
+         * @param contentTitle              Notification title.
+         * @param contentText               Notifcations description.
+         * @param contentBigText            More specified and bigger notification description.
+         * @param contentPriority           Sets the priority for the notification. The higher the priority, the higher the chance for the user to see it.
          */
-        fun HelpDrinkNotification(
+        fun helpDrinkNotification(
             CHANNEL_ID: String,
             NOTIFICATION_ID: Int,
             context: Context,
@@ -148,8 +152,6 @@ class NotificationActivity  {
             }
 
         }
-
-
 
     }
 

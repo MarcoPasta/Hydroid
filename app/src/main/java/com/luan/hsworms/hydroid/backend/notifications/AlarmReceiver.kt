@@ -20,9 +20,14 @@ import java.util.*
  */
 class AlarmReceiver: BroadcastReceiver() {
 
+    /**
+     * Debugging tag for Logcat
+     */
     private val TAG = "AlarmReceiver"
 
-    // Create an Calendar object that represents the current time
+    /**
+     * Calendar object to display the current time.
+     */
     private val currentTime: Calendar = Calendar.getInstance().apply {
         AlarmService.timeinMillis = System.currentTimeMillis()
     }
@@ -39,11 +44,11 @@ class AlarmReceiver: BroadcastReceiver() {
         Log.d(TAG, "|setStartTime: " + setStartTime.time + " | setEndingTime: " + setEndingTime.time + " | currentTime: " + currentTime.time)
         Log.d(TAG, "|setStartTime: " + setStartTime.timeInMillis + "| setEndingTime: " + setEndingTime.timeInMillis + "| currentTime: " + currentTime.timeInMillis)
 
-        // got rid of the context != null here, i don't know why...
+        // context? got declared as can't be null, so i guess i can stay here like this
         if ((setEndingTime.timeInMillis > currentTime.timeInMillis) && (currentTime.timeInMillis > setStartTime.timeInMillis)) {
             Log.d(TAG, "Zeitüberprüfung war erfolgreich")
             Log.d(TAG, "HelpDrinkNotification() called")
-            NotificationActivity.HelpDrinkNotification(
+            NotificationActivity.helpDrinkNotification(
                 "HelpDrinkNotificationChannel",
                 2,
                 context,
@@ -61,7 +66,11 @@ class AlarmReceiver: BroadcastReceiver() {
     }
 
     /**
+     * Used to load the saved timing data from SharedPreferences
      *
+     * @param context       Required to get access to the getSharedPreference() method.
+     *
+     * @return Instance loaded with the user desired expiration time for notifications.
      */
     private fun loadEndTimer(context: Context): Calendar {
         // getting a reference to the the sharedPreference (TEHE)
@@ -77,7 +86,11 @@ class AlarmReceiver: BroadcastReceiver() {
     }
 
     /**
+     * Load data provided by the TimePicker. Data is loaded from SharedPreferences
      *
+     * @param context       Required to get access to the getSharedPreference() method.
+     *
+     * @return Instance loaded with the user desired notification starting time.
      */
     private fun loadStartTimer(context: Context): Calendar {
         // getting a reference to the the sharedPreference (TEHE)
