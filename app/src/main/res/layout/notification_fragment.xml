@@ -96,8 +96,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/notification_startTime_Tv"
                 android:textSize="22sp"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -106,7 +105,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="@string/notification_endTime_Tv"
-                android:textColor="@color/black"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +114,6 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:text="@string/setStartTime_Tv"
-                android:textColor="@color/black"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -127,7 +124,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="@string/setEndTime_Tv"
-                android:textColor="@color/black"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -167,7 +163,6 @@
                 android:layout_marginBottom="102dp"
                 android:text="@string/addEndTimeText_Tv"
                 android:textAlignment="textEnd"
-                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -196,7 +191,6 @@
                 android:layout_marginBottom="165dp"
                 android:text="@string/addStartTimeText_Tv"
                 android:textAlignment="textEnd"
-                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
