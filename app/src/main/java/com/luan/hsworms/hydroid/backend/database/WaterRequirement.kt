@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 /**
  * Data class for table WaterRequirement
  *
- * @author Andrej Alpatov
 */
 @Entity
 data class WaterRequirement(

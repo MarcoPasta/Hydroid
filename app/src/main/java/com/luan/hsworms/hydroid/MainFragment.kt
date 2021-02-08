@@ -16,7 +16,6 @@ import com.luan.hsworms.hydroid.databinding.MainFragmentBinding
 /**
  * A class for handling events related to the main screen of the program.
  *
- * @author Andrej Alpatov
  */
 class MainFragment : Fragment() {
 

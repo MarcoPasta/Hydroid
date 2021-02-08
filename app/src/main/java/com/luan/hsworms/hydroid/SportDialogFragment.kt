@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 /**
  * This class handles events associated with the SportDilogFragment dialog box. With this dialog, the user can select one of three possible physical activities and thereby increase the daily water requirement. Additional water demand is preset and cannot be changed by the user.
  *
- * @author Andrej Alpatov
  */
 class SportDialogFragment : DialogFragment() {
     private lateinit var rootView: View

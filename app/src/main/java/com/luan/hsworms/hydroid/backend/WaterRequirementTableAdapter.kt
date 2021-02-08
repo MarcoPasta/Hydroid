@@ -11,7 +11,6 @@ import com.luan.hsworms.hydroid.R
 /**
  * Class - adapter for working with the recyclerView Layout and its interaction with the WaterRequirement database table
  *
- * @author Andrej Alpatov
  */
 class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):RecyclerView.Adapter<WaterRequirementTableAdapter.ViewHolder>(){
 

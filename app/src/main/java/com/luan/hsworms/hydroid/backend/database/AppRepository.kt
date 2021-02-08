@@ -8,7 +8,6 @@ import kotlinx.coroutines.withContext
 /**
  * Through this class, the rest of the classes will be able to access data from the room database.
  *
- * @author Andrej Alpatov
  */
 class AppRepository (application: Application) {
 

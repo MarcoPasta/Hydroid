@@ -16,7 +16,6 @@ import com.luan.hsworms.hydroid.backend.WaterRequirementTableAdapter
 /**
  * A class for working with a Water Requirement Table menu section, containing a RecyclerView with records from the WaterRequirement table in the database. Implementing the ability to change, delete records from the database using Сliсks on entries. Use ActionButton to add new entries.
  *
- * @author Andrej Alpatov
  */
 class WaterRequirementTableFragment: Fragment()  {
     private lateinit var rootView: View

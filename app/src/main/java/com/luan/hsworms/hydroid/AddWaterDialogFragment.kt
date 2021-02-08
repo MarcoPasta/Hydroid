@@ -16,7 +16,6 @@ import com.luan.hsworms.hydroid.backend.notifications.NotificationActivity
 /**
  * Handling user actions when invoking a AddWaterDialog. In this dialog, the user has the opportunity to choose from four different volumes of liquid to be added to the already drunk.
  *
- * @author Andrej Alpatov
  */
 class AddWaterDialogFragment: DialogFragment() {
 

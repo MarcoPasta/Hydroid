@@ -16,9 +16,7 @@ import kotlin.math.roundToInt
  *This class is used for the WaterRequirementTableDialog dialog box. Which is used to add and modify records in the WaterRequirement table of the database.
  *
  * @param waterRequirement Record in the database table WaterRequirement. Used when you need to change a database record. (type: WaterRequirement?)
- * @author Andrej Alpatov
  */
-//
 class WaterRequirementTableDialogFragment(private var waterRequirement: WaterRequirement? = null) : DialogFragment() {
     private lateinit var rootView: View
 

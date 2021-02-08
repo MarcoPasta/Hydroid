@@ -5,8 +5,6 @@ import androidx.room.*
 
 /**
  * Interface for accessing database WaterRequirement table records (Data Access Object)
- *
- * @author Andrej Alpatov
  */
 @Dao
 interface WaterRequirementDao {

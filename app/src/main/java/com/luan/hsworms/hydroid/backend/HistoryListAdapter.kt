@@ -11,7 +11,6 @@ import com.luan.hsworms.hydroid.R
 /**
  * Class - adapter for working with the recyclerView Layout and its interaction with the History database table
  *
- * @author Andrej Alpatov
  */
 class HistoryListAdapter(var content: ArrayList<History>) :
     RecyclerView.Adapter<HistoryListAdapter.ViewHolder>() {

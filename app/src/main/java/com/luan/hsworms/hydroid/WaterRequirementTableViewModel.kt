@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 /**
  * (type: AndroidViewModel) in order to be able to pass an Application-object to the view model. ViewModel to  WaterRequirementTableFragment. Contains functions for interacting with the database.
  *
- * @author Andrej Alpatov
  */
 class WaterRequirementTableViewModel(application: Application):AndroidViewModel(application) {
 

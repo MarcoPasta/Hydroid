@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 /**
  * This class handles events associated with the WeatherDilogFragment dialog box. In this dialog, the user can select one of four preset weather conditions that affect the need for water. In the class, these changes are processed and the results are saved.
  *
- * @author Andrej Alpatov
  */
 class WeatherDialogFragment : DialogFragment() {
 

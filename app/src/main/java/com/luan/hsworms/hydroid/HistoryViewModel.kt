@@ -13,7 +13,6 @@ import java.util.*
 /**
  * ViewModel class for HistoryFragment
  *
- * @author Andrej Alpatov
  */
 class HistoryViewModel(application: Application): AndroidViewModel(application) {
     ////////////////////////////////////////////////////////////////////////////////////
