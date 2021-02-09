@@ -116,6 +116,9 @@ class MainFragment : Fragment() {
             binding.tvFulfillmentPercents.text = (newDrunkWater * 100 / viewModel.dailyLiquidRequirement.value!!).toString()
             binding.progressBarFulfillment.progress = binding.tvFulfillmentPercents.text.toString().toInt()
         })
+
+        if(viewModel.isFirstStart == 1) //first start
+            showUserInputDialog()
     }
 
 
@@ -123,12 +126,7 @@ class MainFragment : Fragment() {
         super.onResume()
         //The function is called in this callback function in case, when the date changed, the application
         // was not closed and when it was resumed, a new day was recorded in the Database History table
-
-        if(viewModel.isFirstStart == 1) {//first start
-            viewModel.saveFirstStart(0)//From now is not first start
-            showUserInputDialog()
-            //viewModel.updateDataByStartActivity(60, 1)
-        }else{
+        if(viewModel.isFirstStart == 0) {//not first start
             viewModel.addEntityInHistory()
         }
     }
@@ -152,7 +150,10 @@ class MainFragment : Fragment() {
         //Cancel button -> leave the dialog
         val cancelButton = dialogView.findViewById<Button>(R.id.imageButtonUserCancel)
         cancelButton.setOnClickListener {
+
             dialog.dismiss()
+
+            viewModel.saveFirstStart(0)//From now is not first start
 
             //Update of all values
             viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
@@ -173,6 +174,8 @@ class MainFragment : Fragment() {
             }else{
                 viewModel.userGenderIsFemale.value = 0
             }
+
+            viewModel.saveFirstStart(0)//From now is not first start
 
             //Checking in case of not entered value for weight.
             //If not, there will be a Toast with a proposal to enter the weight

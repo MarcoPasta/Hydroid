@@ -69,6 +69,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         val editor = firstStart?.edit()
         editor?.putInt(R.string.isFirstStart.toString(), firstStart_in)
         editor?.apply()
+        isFirstStart = firstStart_in
     }
 
 
@@ -78,8 +79,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun populateViewModel(){
 
         userGenderIsFemale.value = ourUserData?.getInt(R.string.saved_gender_of_user.toString(), 1)
-        weightOfUser.value = ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 60)
-        dailyLiquidRequirement.value = ourUserData?.getInt(R.string.saved_liquid_requirements_of_user.toString(), 1800)
+        weightOfUser.value = ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 59)
+        dailyLiquidRequirement.value = ourUserData?.getInt(R.string.saved_liquid_requirements_of_user.toString(), 1700)
         currentlyDrunkLiquid.value = ourUserData?.getInt(R.string.saved_drunk_liquid_of_user.toString(), 0)
     }
 
