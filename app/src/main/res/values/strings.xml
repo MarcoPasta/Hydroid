@@ -126,6 +126,7 @@
     <!-- user_data_dialog_fragment.xml -->
     <string name="user_data_question">Wählen Sie Ihr Geschlecht und Gewicht</string>
     <string name="edit_text_hint_weight_input">Geben Sie ihr Gewicht ein</string>
+    <string name="toast_user_data_dont_entered">Sie haben keine Daten eingegeben. Die Standardwerte werden festgelegt. Sie können sie im Abschnitt \"Benutzereinstellungen\" ändern. Sie werden ab dem nächsten Tag wirksam.</string>
 
     <!-- water_requirement_dialog.xml -->
     <string name="neuen_wert_hinzuf_gen">Neuen Wert hinzufügen</string>
@@ -139,7 +140,6 @@
     <string name="nav_drawer_benutzerdaten">Benutzereinstellungen</string>
     <string name="nav_drawer_notifications">Benachrichtigungen</string>
     <string name="history">History</string>
-    <string name="toast_user_data_dont_entered">Sie haben keine Daten eingegeben. Die Standardwerte werden festgelegt. Sie können sie im Abschnitt \"Benutzereinstellungen\" ändern. Sie werden ab dem nächsten Tag wirksam.</string>
 
 
 </resources>
