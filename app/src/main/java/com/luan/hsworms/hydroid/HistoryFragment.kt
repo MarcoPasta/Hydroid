@@ -1,5 +1,6 @@
 package com.luan.hsworms.hydroid
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.RecyclerView
 import com.luan.hsworms.hydroid.backend.database.History
 import com.luan.hsworms.hydroid.backend.HistoryListAdapter
@@ -27,8 +28,9 @@ class HistoryFragment : Fragment() {
     private lateinit var rv:RecyclerView
     private lateinit var adapter:HistoryListAdapter
 
-    //History ViewModel
+    //ViewModels
     private lateinit var historyViewModel: HistoryViewModel
+    private lateinit var weatherDialogViewModel: WeatherDialogViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +52,18 @@ class HistoryFragment : Fragment() {
 
         initRecyclerView()
 
-        //Initializing of HistoryViewModel
+        //Initializing of ViewModels
         historyViewModel = ViewModelProvider(requireActivity(),
             HistoryViewModelFactory(requireActivity().application)).get(HistoryViewModel::class.java)
+
+        weatherDialogViewModel = WeatherDialogViewModel()
+
+
+        //Initializing an object with user data with data from a file
+        weatherDialogViewModel.weatherData = activity?.getSharedPreferences(
+            getString(R.string.preferences_file_weather),
+            Context.MODE_PRIVATE
+        )
 
         /**
          *         History LiveData observer
@@ -95,6 +106,9 @@ class HistoryFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 historyViewModel.delete(history)
+                weatherDialogViewModel.saveData(weatherDialogViewModel.currentDate(), 0)
+                weatherDialogViewModel.populateVariables()
+                //TODO: TESTEN
             }
             setNegativeButton("Ablehnen") { dialog, _ ->
                 dialog.dismiss()
