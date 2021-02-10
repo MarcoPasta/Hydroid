@@ -1,5 +1,6 @@
 package com.luan.hsworms.hydroid
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
@@ -15,13 +16,14 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
+// For debugging
+private const val TAG: String = "MainViewModel"
+
 /**
  * MainViewModel class for MainFragment
  *
  */
 class MainViewModel(application: Application): AndroidViewModel(application) {
-
-    private val TAG: String = "MainViewModel"
 
     //Repository
     private val repository = AppRepository(application)
@@ -34,7 +36,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     var isFirstStart: Int? = 1
     private var semaphore = 1
 
-
     /**
      * Used for the first start. (1 - the first start; 0 - it's not the first start
      */
@@ -44,7 +45,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * To save user data in internal storage (gender, weight, daily water requirement, currently drank water)
      */
     var ourUserData: SharedPreferences? = null
-
 
     init {
         userGenderIsFemale.value = 1
@@ -71,7 +71,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         editor?.apply()
         isFirstStart = firstStart_in
     }
-
 
     /**
      * Filling viewModel Live Data variables with values from internal storage (SharedPreferences)
@@ -148,7 +147,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                 waterRequirementsUpdate(weightIn, genderIn)
             }
         }
-
         //If there is no record in the database for the current day, then it is created
         addEntityInHistory()
     }
@@ -168,31 +166,26 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             {
                 dailyLiquidRequirement.value = waterRequirement
                 requirementReturn = waterRequirement
-            } else //if not found
-            {
+            } else {  //if not found
                 dailyLiquidRequirement.value = 1800
             }
             //Save data in local storage
             saveData(userGenderIsFemale.value!!, weightOfUser.value!!, dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
         }
-
         return requirementReturn
     }
 
     /**
      * If there is no record in the database table History for the current day, then it is created. The live date variables will also be updated. The amount of liquid you drink will be set to zero as a new day begins.
      */
-    fun addEntityInHistory()
-    {
+    fun addEntityInHistory() {
         viewModelScope.launch {
-
-            while(true){
-                if (semaphore == 1){
+            while(true) {
+                if (semaphore == 1) {
                     semaphore = 0
                     val drunk = 0
                     val history = getHistoryByDate(currentDate())
-                    if(history == null)
-                    {
+                    if(history == null) {
                         waterRequirementsUpdate(weightOfUser.value!!.toLong(), userGenderIsFemale.value!!)
                         val requirement = dailyLiquidRequirement.value!!
                         currentlyDrunkLiquid.value = drunk //A new day has begun, the value of the drink is set to zero
@@ -204,11 +197,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                     }
                     semaphore = 1
                 }
-                    break
+                break
             }
         }
     }
-
 
     /**
      * Adding the water you drink to the water already drunk today. Updating live data variables, local storage and database.
@@ -228,14 +220,13 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      *
      * @param extraRequirement The amount of water that must be additionally added to the current daily requirement due to activity. (type: int)
      */
-    fun addWaterRequirementBecauseOfSportOrWeather(extraRequirement: Int){
+    fun addWaterRequirementBecauseOfSportOrWeather(extraRequirement: Int) {
         dailyLiquidRequirement.value = dailyLiquidRequirement.value?.plus(extraRequirement)
 
         updateRequirement()
 
         saveData(userGenderIsFemale.value!!, weightOfUser.value!!,
             dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)
-
     }
 
     /**
@@ -243,7 +234,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      *
      * @return the current date in text format with patern: "dd.MM.yyyy" (type: String)
      */
-    fun currentDate():String{
+    @SuppressLint("SimpleDateFormat")
+    fun currentDate():String {
         val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy")
         val dateNow = Date()
         return simpleDateFormat.format(dateNow)
@@ -252,7 +244,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     /**
      * Filling in the table of water demand values at the first start. Values are filled in for both genders in the weight range from 20 to 140 kg.
      */
-    fun fillingTheWaterRequirementTableAtTheFirstStart(){
+    fun fillingTheWaterRequirementTableAtTheFirstStart() {
         for(i in 20..140){
             insertRequirements(true,  i,
                 (600+(i*20)))
@@ -262,23 +254,20 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-
-
     ////////////////////////////////////////////////////////////////////////////////////
     //Methods to interact with the repository:
 
     /**
      * Save in the table History of the database the values of the fluid drunk for the current day and the percentage of the goal from the lava date variables.
      */
-    private fun updateDrunk(){
-        viewModelScope.launch{
+    private fun updateDrunk() {
+        viewModelScope.launch {
             val history:History? = getHistoryByDate(currentDate())
-            if (history != null){
+            if (history != null) {
                 history.drunk = currentlyDrunkLiquid.value!!
                 history.fulfillment = currentlyDrunkLiquid.value!! * 100 / dailyLiquidRequirement.value!!
                 repository.updateHistory(history)
-            } else
-            {
+            } else {
                 addEntityInHistory()
             }
         }
@@ -287,7 +276,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     /**
      * Save in the table History of the database the values of the water requirements for the current day and the percentage of the goal from the lava date variables.
      */
-    private fun updateRequirement(){
+    private fun updateRequirement() {
         viewModelScope.launch{
             val history:History? = getHistoryByDate(currentDate())
             history?.requirements = dailyLiquidRequirement.value!!
@@ -299,10 +288,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     /**
      * Save in the table History of the database the values of the weight of user
      */
-    fun updateWeightAndRequirement(){
-        viewModelScope.launch{
+    fun updateWeightAndRequirement() {
+        viewModelScope.launch {
             //TODO:TESTEN
-            //Thread.sleep(250)
             val history:History? = getHistoryByDate(currentDate())
             history?.weight = weightOfUser.value!!
             history?.requirements = dailyLiquidRequirement.value!!
@@ -321,8 +309,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * @param fulfillment   Percentage of Daily Goal Completion (type: Int)
      * @param weight        user weight (type: Int)
      */
-    fun insert(date:String, drunk: Int, requirements: Int, fulfillment: Int, weight: Int){
-        viewModelScope.launch{
+    fun insert(date:String, drunk: Int, requirements: Int, fulfillment: Int, weight: Int) {
+        viewModelScope.launch {
             val history = History(0L, date, drunk, requirements, fulfillment, weight)
             repository.insertInHistory(history)
             updateRequirement()
@@ -336,8 +324,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * @param weight        User weight (type: Int)
      * @param requirement   daily water requirement(type: Int)
      */
-    private fun insertRequirements(genderWoman:Boolean, weight: Int, requirement: Int){
-        viewModelScope.launch{
+    private fun insertRequirements(genderWoman:Boolean, weight: Int, requirement: Int) {
+        viewModelScope.launch {
             val waterRequirement = WaterRequirement(0L, genderWoman, weight, requirement)
             repository.insertInRequirements(waterRequirement)
         }
@@ -350,9 +338,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * @param genderIn User gender (type: Int)
      * @return         daily water reyuirement (type: Int?)
      */
-    private suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int):Int?{
+    private suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int):Int? {
         var waterRequirement:Int?
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             waterRequirement = repository.getWaterRequirementByWeightAndGender(weightIn, genderIn)
         }
         return waterRequirement
@@ -364,9 +352,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * @param dateIn The date on which the data is requested (type: String)
      * @return       Entry from the Database History table (type: history?)
      */
-    private suspend fun getHistoryByDate(dateIn: String):History?{
+    private suspend fun getHistoryByDate(dateIn: String):History? {
         var history:History?
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             history = repository.getHistoryByDate(dateIn)
         }
         return history

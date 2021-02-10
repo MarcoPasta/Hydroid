@@ -9,21 +9,18 @@ import com.luan.hsworms.hydroid.R
 import java.util.*
 
 /*
- *  TODO: When the User archieves his Day goal the repeating notificaion shall be cancelled
- *
  *  TODO: Create alarm to update database on 00:00 with own class DatabaseReceiver
  */
 
+/**
+ * Debugging tag for Logcat
+ */
+private const val TAG = "AlarmReceiver"
 
 /**
  * Inherit from BroadcastReceiver so we can override onReceive method.
  */
 class AlarmReceiver: BroadcastReceiver() {
-
-    /**
-     * Debugging tag for Logcat
-     */
-    private val TAG = "AlarmReceiver"
 
     /**
      * Calendar object to display the current time.
@@ -70,7 +67,7 @@ class AlarmReceiver: BroadcastReceiver() {
      *
      * @param context       Required to get access to the getSharedPreference() method.
      *
-     * @return Instance loaded with the user desired expiration time for notifications.
+     * @return              Instance loaded with the user desired expiration time for notifications.
      */
     private fun loadEndTimer(context: Context): Calendar {
         // getting a reference to the the sharedPreference (TEHE)
@@ -90,7 +87,7 @@ class AlarmReceiver: BroadcastReceiver() {
      *
      * @param context       Required to get access to the getSharedPreference() method.
      *
-     * @return Instance loaded with the user desired notification starting time.
+     * @return              Instance loaded with the user desired notification starting time.
      */
     private fun loadStartTimer(context: Context): Calendar {
         // getting a reference to the the sharedPreference (TEHE)

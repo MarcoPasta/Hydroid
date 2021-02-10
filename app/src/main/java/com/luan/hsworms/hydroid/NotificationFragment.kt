@@ -1,5 +1,6 @@
 package com.luan.hsworms.hydroid
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
@@ -18,27 +19,23 @@ import com.luan.hsworms.hydroid.backend.notifications.AlarmService
 import java.text.SimpleDateFormat
 import java.util.*
 
+// Constants for easiert debuggin usage
+private const val TAG = "NotificationFragment"
+
 class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
-    companion object {
-        fun newInstance() = NotificationFragment()
-    }
-
-    // Constants for easiert debuggin usage
-    private val TAG = "NotificationFragment"
-
     // Initialization of needed variables for interactive ViewModel usage
     // Switches
     private lateinit var notificationViewModel: NotificationViewModel
     private lateinit var switchBtnNotification: SwitchCompat
     private lateinit var switchBtnHelpDrink: SwitchCompat
 
-    // TextView
+    // TextViews
     private lateinit var tvStartTime: TextView
     private lateinit var tvEndTime: TextView
     private lateinit var tvSetStartTime: TextView
     private lateinit var tvSetEndTime: TextView
 
-    // ActionButton
+    // ActionButtons
     private lateinit var actionButton: FloatingActionButton
     private lateinit var startTimeButton: FloatingActionButton
     private lateinit var endTimeButton: FloatingActionButton
@@ -52,25 +49,21 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
     // Click checker
     private var clicked: Boolean = false
 
-
     // Time variables that will be used to show the current time
     private var nowHour: Int = 0
     private var nowMinute: Int = 0
 
-
-    // It works without creating an object, but i let it stay like this for now...
+    // Implementing a NotificationViewModel object for fast access to SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         notificationViewModel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
         notificationViewModel.notificationPreference = activity?.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
     }
 
-
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.notification_fragment, container, false)
     }
 
-    // @SuppressLint("CutPasteId")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated() called")
@@ -79,7 +72,6 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         notificationViewModel.loadData()
         Log.d(TAG, "Funktioniert nur bei neuinstallation der App")
         Log.d(TAG, "Hour: " + notificationViewModel.startHour + ", minute: " + notificationViewModel.startMinute)
-
 
         // Initializing SwitchButtons
         switchBtnNotification = view.findViewById(R.id.switch_allow_notification)
@@ -129,7 +121,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         switchBtnHelpDrink.isEnabled = notificationViewModel.switchBoolNotification
 
         // OnClickListener for Notification Button
-        switchBtnNotification.setOnCheckedChangeListener() { _ , isChecked ->
+        switchBtnNotification.setOnCheckedChangeListener { _ , isChecked ->
             // Checks if Notification button is being pressed
             notificationViewModel.switchBoolNotification = isChecked
 
@@ -171,7 +163,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         }
 
         // OnClickListener for HelpDrink Button
-        switchBtnHelpDrink.setOnCheckedChangeListener() { _ , isChecked ->
+        switchBtnHelpDrink.setOnCheckedChangeListener { _ , isChecked ->
             // Checks if HelpDrink button is being pressed
             notificationViewModel.switchBoolHelpDrink = isChecked
 
@@ -203,15 +195,15 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
             }
         }
 
-
         // OnClickListener for actionButton that will display the other buttons
-        actionButton.setOnClickListener() {
+        actionButton.setOnClickListener {
             Log.d(TAG, "ActionButton pressed")
+            // contains callback functions so correctly initialize button works
             onAddButtonClicked()
         }
 
         // OnClickListener for startTimeButton
-        startTimeButton.setOnClickListener() {
+        startTimeButton.setOnClickListener {
             Log.d(TAG, "startTimeButton pressed")
 
             // get the  actual time into nowHour and nowMinute
@@ -228,7 +220,6 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
                     "Benachrichtigungen fangen um " + formatDate(hourOfDay, minute) + " an",
                     Toast.LENGTH_SHORT
                 ).show()
-                //activity?.recreate()
             }
             // Opens the TimePickerDialog
             TimePickerDialog(
@@ -248,7 +239,8 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
             )
         }
 
-        endTimeButton.setOnClickListener() {
+        // onClickListener for endTimeButton
+        endTimeButton.setOnClickListener {
             Log.d(TAG, "endTimeButton pressed")
             getTime()
             // This Listener is used to get the returned TimePickerValues and save them inside the SP
@@ -262,7 +254,6 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
                     "Benachrichtigungen enden um " + formatDate(hourOfDay, minute),
                     Toast.LENGTH_SHORT
                 ).show()
-                // activity?.recreate()
             }
             // Opens the TimePickerDialog
             TimePickerDialog(
@@ -283,7 +274,9 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         }
     }
 
-    // this function will call the functions needed to make the invisible buttons work
+    /**
+     * contains callback functions to make all 3 action buttons work
+     */
     private fun onAddButtonClicked() {
         setVisibility(clicked)
         setAnimation(clicked)
@@ -291,7 +284,11 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         clicked = !clicked
     }
 
-    // sets the visibility for the floating ActionButtons
+    /**
+     * sets the layout visibility for 2 actionButtons startTime and endTime
+     *
+     * @param clicked   changes visibility of actionButton on click
+     */
     private fun setVisibility(clicked: Boolean) {
         if(!clicked) {
             startTimeButton.visibility = View.VISIBLE
@@ -306,7 +303,11 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         }
     }
 
-    // sets the animation for the floating ActionButtons
+    /**
+     * starts an rotation animation on click
+     *
+     * @param clicked   Rolling animation that makes button visible with animation when true.
+     */
     private fun setAnimation(clicked: Boolean) {
         if(!clicked) {
             startTimeButton.startAnimation(fromBottom)
@@ -323,7 +324,11 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         }
     }
 
-    // If the buttons are displayed, they will be clickable
+    /**
+     * Makes buttons unclickable when invisible
+     *
+     * @param clicked   If false, button cant be clicked when invisible.
+     */
     private fun setClickable(clicked: Boolean) {
         if(!clicked) {
             startTimeButton.isClickable = true
@@ -334,8 +339,10 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         }
     }
 
-    // writes the current time inside nowHour and nowMinute. Displayed in TimePickerDialog
-     private fun getTime() {
+    /**
+     * Saves the actual time into time variables.
+     */
+    private fun getTime() {
         Log.d(TAG, "getting the actual time...")
         nowHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         nowMinute = Calendar.getInstance().get(Calendar.MINUTE)
@@ -346,17 +353,26 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         Log.d(TAG, "Calling onTimeSet() Callback Function")
     }
 
-    // Updates the onscreen time that when notifications shall start
+    /**
+     * When fragment is opened, notification startTime is being updated to the last value safed in SharedPreference
+     */
     private fun updateStartText() {
         tvStartTime.text = formatDate(notificationViewModel.startHour, notificationViewModel.startMinute)
     }
 
-    // Updates the onscreen time that when notifications shall end
+    /**
+     * When fragment is opened, notification endTime is being updated to the last value safed in SharedPreference
+     */
     private fun updateEndText() {
         tvEndTime.text = formatDate(notificationViewModel.endHour, notificationViewModel.endMinute)
     }
 
-    // Saves the time set with TimePickerDialog into SharedPreferences so it can be called and reload again
+    /**
+     * Saves the startTime set with TimePickerDialog into SharedPreferences
+     *
+     * @param toSaveStartHour       Starting hour thats going to be saved.
+     * @param toSaveStartMinute     Starting minute thats going to be saved.
+     */
     private fun saveStartTime(toSaveStartHour: Int, toSaveStartMinute: Int) {
         Log.d(TAG, "called saveStartTime()")
         notificationViewModel.startHour = toSaveStartHour
@@ -367,7 +383,12 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         notificationViewModel.saveData()
     }
 
-    // Saves the time notifications shall end
+    /**
+     * Saves the endTime set with TimePickerDialog into SharedPreferences
+     *
+     * @param toSaveEndHour     Ending hour thats going to be saved
+     * @param toSaveEndMinute   Ending minute thats going to be saved
+     */
     private fun saveEndTime(toSaveEndHour: Int, toSaveEndMinute: Int) {
         Log.d(TAG, "called saveEndTime()")
         notificationViewModel.endHour = toSaveEndHour
@@ -378,12 +399,20 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
         notificationViewModel.saveData()
     }
 
-    // Function to format date before output, even if deprecated
-    private fun formatDate(hour: Int, minute: Int): String {
+    /**
+     * formats the current time into an readable string
+     *
+     * @param hour      Hour that is going to be printed
+     * @param minute    Minute that is going to be printed
+     *
+     * @return Readable string for Toasts and Debug
+     */
+    @SuppressLint("SimpleDateFormat")
+    fun formatDate(hour: Int, minute: Int): String {
         Log.d(TAG, "formatting date...")
         val simpleFormat = SimpleDateFormat("HH:mm")
 
-        val timeNow: Date = Date()
+        val timeNow = Date()
         timeNow.hours = hour
         timeNow.minutes = minute
 

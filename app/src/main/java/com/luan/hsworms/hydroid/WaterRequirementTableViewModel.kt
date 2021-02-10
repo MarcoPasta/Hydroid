@@ -29,8 +29,8 @@ class WaterRequirementTableViewModel(application: Application):AndroidViewModel(
      * @param weight        user weight (type: Int)
      * @param requirement   water demand (type: Int)
      */
-    fun insert(genderWoman:Boolean, weight: Int, requirement: Int){
-        viewModelScope.launch{
+    fun insert(genderWoman:Boolean, weight: Int, requirement: Int) {
+        viewModelScope.launch {
             val waterRequirement = WaterRequirement(0L, genderWoman, weight, requirement)
             repository.insertInRequirements(waterRequirement)
         }
@@ -41,7 +41,7 @@ class WaterRequirementTableViewModel(application: Application):AndroidViewModel(
      *
      * @param waterRequirement an entry in the WaterRequirement Database table, to be changed
      */
-    fun update(waterRequirement: WaterRequirement){
+    fun update(waterRequirement: WaterRequirement) {
         viewModelScope.launch {
             repository.updateRequirements(waterRequirement)
         }
@@ -52,7 +52,7 @@ class WaterRequirementTableViewModel(application: Application):AndroidViewModel(
      *
      * @param waterRequirement an entry in the WaterRequirement Database table, to be deleted
      */
-    fun delete(waterRequirement: WaterRequirement){
+    fun delete(waterRequirement: WaterRequirement) {
         viewModelScope.launch {
             repository.deleteRequirements(waterRequirement)
         }
@@ -66,7 +66,7 @@ class WaterRequirementTableViewModel(application: Application):AndroidViewModel(
      * @param genderIn  user gender (type: Int) 1 - female, 0 - male
      * @return          The record from the Database WaterRequirement tavble, which you want to get. (type: Int?)
      */
-    fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int): Int?{
+    fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int): Int? {
         var waterRequirement: Int? = null
         viewModelScope.launch {
             waterRequirement = repository.getWaterRequirementByWeightAndGender(weightIn, genderIn)
@@ -80,7 +80,7 @@ class WaterRequirementTableViewModel(application: Application):AndroidViewModel(
      *
      * @return List of WaterRequirement table entities (type: List<WaterRequirement>?)
      */
-    fun getWaterRequirements():List<WaterRequirement>?{
+    fun getWaterRequirements():List<WaterRequirement>? {
         var waterRequirement:List<WaterRequirement>? = null
         viewModelScope.launch {
             waterRequirement = repository.getWaterRequirements()

@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.luan.hsworms.hydroid.backend.notifications.NotificationActivity
 
 /**
  * Handling user actions when invoking a AddWaterDialog. In this dialog, the user has the opportunity to choose from four different volumes of liquid to be added to the already drunk.
@@ -38,7 +36,6 @@ class AddWaterDialogFragment: DialogFragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var settingsViewModel: SettingsViewModel
     private lateinit var notificationViewModel: NotificationViewModel  // Create a NotificationViewModel object to get access to Notification data
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,8 +85,6 @@ class AddWaterDialogFragment: DialogFragment() {
 
         //Initializing textView with values
         initTextViewsWithValues()
-
-
 
         btnSave.setOnClickListener{
             //Storing data in variables and local storage (SharedPreferences)

@@ -18,7 +18,6 @@ class SettingsViewModel: ViewModel() {
 
     var glasses: SharedPreferences? = null      //To save user data in internal storage
 
-
     init {
         glassSmall.value = 50
         glassMiddle.value = 100
@@ -40,10 +39,10 @@ class SettingsViewModel: ViewModel() {
     /**
      * Here we change the data in the local storage(SharedPreferences), in case of changing the actual data (Preset volumes of water for consumption)
      *
-     * @param small  samll glass
-     * @param middle middle glass
-     * @param big    big glass
-     * @param huge   bottle
+     * @param small     samll glass
+     * @param middle    middle glass
+     * @param big       big glass
+     * @param huge      bottle
      */
     fun saveData(small: Int, middle: Int, big: Int, huge: Int){
         val editor = glasses?.edit()

@@ -1,5 +1,6 @@
 package com.luan.hsworms.hydroid
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import kotlin.math.roundToInt
  * @param waterRequirement Record in the database table WaterRequirement. Used when you need to change a database record. (type: WaterRequirement?)
  */
 class WaterRequirementTableDialogFragment(private var waterRequirement: WaterRequirement? = null) : DialogFragment() {
+
     private lateinit var rootView: View
 
     //Views
@@ -35,7 +37,6 @@ class WaterRequirementTableDialogFragment(private var waterRequirement: WaterReq
     //ViewModel
     private lateinit var waterRequirementTableViewModel: WaterRequirementTableViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
@@ -51,6 +52,7 @@ class WaterRequirementTableDialogFragment(private var waterRequirement: WaterReq
         return rootView
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         waterRequirementTableViewModel = ViewModelProvider(requireActivity(),
@@ -64,13 +66,13 @@ class WaterRequirementTableDialogFragment(private var waterRequirement: WaterReq
         initTextView()
 
         //Check if the dialog is used to add or change values. If update, then the input parameter is != null.
-        if(waterRequirement != null){
+        if(waterRequirement != null) {
             //If gender == woman =>true else false
             val gender:Boolean = waterRequirement!!.genderWoman
 
-            if(gender){
+            if(gender) {
                 rgGender.check(R.id.radioButtonWoman)
-            }else{
+            }else {
                 rgGender.check(R.id.radioButtonMan)
             }
 
@@ -104,14 +106,14 @@ class WaterRequirementTableDialogFragment(private var waterRequirement: WaterReq
     /**
      * Initializing of RadioGroup Object
      */
-    private fun initRadioButton(){
+    private fun initRadioButton() {
         rgGender = rootView.findViewById(R.id.radioGroupGender)
     }
 
     /**
      * Initializing of TextView Objects for titel and Comment
      */
-    private fun initTextView(){
+    private fun initTextView() {
         tvTitel = rootView.findViewById(R.id.tv_water_requirement_dialog_titel)
         tvComment = rootView.findViewById(R.id.tv_water_requirement_dialog_comment)
     }
@@ -129,7 +131,7 @@ class WaterRequirementTableDialogFragment(private var waterRequirement: WaterReq
         if (!TextUtils.isEmpty(etWeight.editText?.text.toString())
             && !TextUtils.isEmpty(etWater.editText?.text.toString())) {
 
-                if (waterRequirement != null){//In case of entity change
+                if (waterRequirement != null) {     //In case of entity change
 
                     waterRequirement?.requirements = etWater.editText?.text.toString().toFloat().roundToInt()
                     waterRequirement?.weight = etWeight.editText?.text.toString().toFloat().roundToInt()
@@ -138,7 +140,7 @@ class WaterRequirementTableDialogFragment(private var waterRequirement: WaterReq
                     waterRequirementTableViewModel.update(waterRequirement!!)
                     dismiss()
 
-                } else{//In case of add new entity
+                } else {//In case of add new entity
                     waterRequirementTableViewModel.insert(gender,
                         etWeight.editText?.text.toString().toFloat().roundToInt(),
                         etWater.editText?.text.toString().toFloat().roundToInt())
@@ -147,7 +149,7 @@ class WaterRequirementTableDialogFragment(private var waterRequirement: WaterReq
                     dismiss()
                 }
             //Otherwise, display a message about the need to fill in the fields
-        }else{
+        } else {
             Toast.makeText(requireContext(), "Bitte füllen Sie beide Felder aus", Toast.LENGTH_SHORT).show()
         }
     }

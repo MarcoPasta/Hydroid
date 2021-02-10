@@ -78,11 +78,11 @@ class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):Rec
         //Implementation of 2 ClickListener
         init {
             itemView.setOnClickListener {
-                mItemListener?.setOnItemClickListener(adapterPosition)
+                mItemListener.setOnItemClickListener(adapterPosition)
             }
 
             itemView.setOnLongClickListener {
-                mItemLongClickListener?.setOnItemLongClickListener(adapterPosition)
+                mItemLongClickListener.setOnItemLongClickListener(adapterPosition)
 
                 true
             }
@@ -119,7 +119,7 @@ class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):Rec
     /**
      * Implementation of clicksListener
      *
-     * @param mLongClickListener interface for LongClickListener
+     * @param mItemListener     interface for LongClickListener
      */
     fun setOnItemClickListener(mItemListener:OnItemClickListener){
         this.mItemListener = mItemListener

@@ -49,13 +49,11 @@ class SplashScreen : AppCompatActivity() {
         //Populate ScharedPreferences to check if the start is first
         viewModel.populateFirstStart()
 
-
         //Check if the Strat is first, if first calls fillingTheWaterRequirementTableAtTheFirstStart() function
         if(viewModel.isFirstStart == 1){//first start
             //viewModel.clearFile()
                 viewModel.fillingTheWaterRequirementTableAtTheFirstStart()
         }
-
 
         /**
          * We used the postDelayed(Runnable, time) method to send a message with a delayed time.

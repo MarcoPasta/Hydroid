@@ -5,14 +5,13 @@ import android.util.Log
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 
+// For debugging
+private const val TAG = "NotifivationViewModel"
 
 /**
  * Class for storing the switch button statements after the app was closed
  */
-class NotificationViewModel() : ViewModel() {
-
-    private val TAG = "NotifivationViewModel"
-
+class NotificationViewModel : ViewModel() {
     /**
      * Boolean for the NotificationFragment switch button that asks if the app is allowed to send the user some notifications
      */
@@ -30,7 +29,6 @@ class NotificationViewModel() : ViewModel() {
     var startMinute: Int = 1
     var endHour: Int = 1
     var endMinute: Int = 1
-
 
     /**
      * Object needed to safe the state of the switches locally
@@ -58,7 +56,6 @@ class NotificationViewModel() : ViewModel() {
             putInt("STARTMINUTE", startMinute)
             putInt("ENDHOUR", endHour)
             putInt("ENDMINUTE", endMinute)
-
             apply()
         }
 
@@ -69,14 +66,12 @@ class NotificationViewModel() : ViewModel() {
      * loads the saved buttons when loading a fragment
      */
     fun loadData() {
-
         val savedNotificationSwitch = notificationPreference?.getBoolean("NOTIFICATION", false)
         val savedHelpDrinkSwitch = notificationPreference?.getBoolean("HELPDRINK", false)
         val savedStartHour = notificationPreference?.getInt("STARTHOUR", 100)
         val savedStartMinute = notificationPreference?.getInt("STARTMINUTE", 100)
         val savedEndingHour = notificationPreference?.getInt("ENDHOUR", 100)
         val savedEndingMinute = notificationPreference?.getInt("ENDMINUTE", 100)
-
 
         if (savedNotificationSwitch != null) {
             switchBoolNotification = savedNotificationSwitch

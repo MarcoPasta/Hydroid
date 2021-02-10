@@ -49,7 +49,7 @@ class AppRepository (application: Application) {
     }
 
     /**
-     *Update WaterRequirement table entry
+     * Update WaterRequirement table entry
      *
      * @param waterRequirement An entry in a DB table WaterRequirement to be changed
      */
@@ -100,7 +100,7 @@ class AppRepository (application: Application) {
      * @return          Water requirement matching the search criteria (type Int?)
      */
     suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int):Int?{
-        var waterRequirement:Int? = null
+        var waterRequirement: Int?
         withContext(Dispatchers.IO){
             waterRequirement = waterRequirementDao.getWaterRequirementByWeightAndGender(weightIn, genderIn)
         }
@@ -115,7 +115,7 @@ class AppRepository (application: Application) {
      * @return          An entry in a DB table History matching the search criteria
      */
     suspend fun getHistoryByDate(dateIn: String):History?{
-        var history:History? = null
+        var history: History?
         withContext(Dispatchers.IO){
             history = historyDao.getHistoryByDate(dateIn)
         }
@@ -128,7 +128,7 @@ class AppRepository (application: Application) {
      * @return All records from the table WaterRequirement (type List<WaterRequirement>?)
      */
     suspend fun getWaterRequirements():List<WaterRequirement>?{
-        var waterRequirements:List<WaterRequirement>? = null
+        var waterRequirements: List<WaterRequirement>?
         withContext(Dispatchers.IO){
             waterRequirements = waterRequirementDao.getWaterRequirements()
         }
@@ -141,7 +141,7 @@ class AppRepository (application: Application) {
      * @return All records from the table History (type List<History>?)
      */
     suspend fun getHistoryAll():List<History>?{
-        var history:List<History>? = null
+        var history: List<History>?
         withContext(Dispatchers.IO){
             history = historyDao.getHistoryAll()
         }

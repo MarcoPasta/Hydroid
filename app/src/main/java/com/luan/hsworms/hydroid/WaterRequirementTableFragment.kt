@@ -17,7 +17,7 @@ import com.luan.hsworms.hydroid.backend.WaterRequirementTableAdapter
  * A class for working with a Water Requirement Table menu section, containing a RecyclerView with records from the WaterRequirement table in the database. Implementing the ability to change, delete records from the database using Сliсks on entries. Use ActionButton to add new entries.
  *
  */
-class WaterRequirementTableFragment: Fragment()  {
+class WaterRequirementTableFragment: Fragment() {
     private lateinit var rootView: View
 
     //RecyclerView
@@ -68,15 +68,15 @@ class WaterRequirementTableFragment: Fragment()  {
     /**
      * Initializing of RecyclerView. Implementing click and long click handlers
      */
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         rv = rootView.findViewById(R.id.water_rv)
         adapter = WaterRequirementTableAdapter(ArrayList())
         rv.adapter = adapter
 
         /**
-         * Implement ClickListener. Change Entity in BD by short click
+         * Implement ClickListener. Change Entity in DB by short click
          */
-        adapter.setOnItemClickListener(object: WaterRequirementTableAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object: WaterRequirementTableAdapter.OnItemClickListener {
             override fun setOnItemClickListener(position: Int) {
                 val dialog = WaterRequirementTableDialogFragment(adapter.content[position])
                 dialog.show(parentFragmentManager, "update WaterRequirementsDialog")
@@ -84,9 +84,9 @@ class WaterRequirementTableFragment: Fragment()  {
         })
 
         /**
-         * Implement LongClickListener. Delete Entity in BD by long click
+         * Implement LongClickListener. Delete Entity in DB by long click
          */
-        adapter.setOnItemLongClickListener(object: WaterRequirementTableAdapter.OnItemLongClickListener{
+        adapter.setOnItemLongClickListener(object: WaterRequirementTableAdapter.OnItemLongClickListener {
             override fun setOnItemLongClickListener(position: Int) {
                 startAlarmDialog(adapter.content[position])
             }
@@ -96,7 +96,7 @@ class WaterRequirementTableFragment: Fragment()  {
     /**
      * Displays a dialog warning about deleting a record in the database. With two buttons "ok" and "cancel"
      */
-    private fun startAlarmDialog(waterReqirement: WaterRequirement){
+    private fun startAlarmDialog(waterReqirement: WaterRequirement) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.apply {
             setMessage("Warnung - Eintrag wird gelöscht")

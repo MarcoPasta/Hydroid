@@ -53,7 +53,6 @@ class SettingsFragment : Fragment() {
 
         weatherDialogViewModel = WeatherDialogViewModel()
 
-
         //Initializing of SharedPreferences
         settingsViewModel.glasses = activity?.getSharedPreferences(
             getString(R.string.preferences_glasses),
@@ -64,7 +63,6 @@ class SettingsFragment : Fragment() {
             getString(R.string.preferences_file_weather),
             Context.MODE_PRIVATE
         )
-
 
         // Filling temporary variables with values from internal storage (SharedPreferences)
         settingsViewModel.populateViewModel()
@@ -77,7 +75,6 @@ class SettingsFragment : Fragment() {
         return rootView
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             view.findViewById<TextView>(R.id.text_view_water_requirement_table)?.setOnClickListener(
@@ -85,13 +82,11 @@ class SettingsFragment : Fragment() {
         )
     }
 
-
     override fun onPause() {
         super.onPause()
         saveSettings()
         //TODO:TESTEN
     }
-
 
     /**
      * Initialising of widgets
@@ -109,7 +104,6 @@ class SettingsFragment : Fragment() {
      * Filling of the fragment fields
      */
     private fun fillingOfTheFragmentFields(){
-
         //Filling of Gender-field
         if(viewModel.userGenderIsFemale.value == 1){
             rgGender.check(R.id.rb_female)
@@ -119,12 +113,10 @@ class SettingsFragment : Fragment() {
             rgGender.check(R.id.rb_male)
             genderAtFirst = 0
         }
-
         //Filling of Weight fields
         etWeight.editText?.setText(viewModel.weightOfUser.value.toString())
         //TODO:TESTEN
         weightAtFirst = viewModel.weightOfUser.value
-
         //Filling of Water-portions
         etGlassSmall.editText?.setText(settingsViewModel.glassSmall.value.toString())
         etGlassMiddle.editText?.setText(settingsViewModel.glassMiddle.value.toString())
@@ -146,12 +138,10 @@ class SettingsFragment : Fragment() {
         val gender = viewModel.userGenderIsFemale.value!!
         viewModel.saveGender(gender)
 
-
         //Weight settings
         val weight = view?.findViewById<TextInputLayout>(R.id.et_weight)?.editText?.text.toString().toFloat().roundToInt()
         viewModel.weightOfUser.value = weight
         viewModel.saveWeight(weight)
-
 
         //TODO: Weiter testen
         viewModel.waterRequirementsUpdate(weight.toLong(), gender)
@@ -163,7 +153,6 @@ class SettingsFragment : Fragment() {
             weatherDialogViewModel.saveData(weatherDialogViewModel.currentDate(), 0)
             weatherDialogViewModel.populateVariables()
         }
-
 
         //Glass volumes
         settingsViewModel.saveData(etGlassSmall.editText?.text.toString().toFloat().roundToInt(),

@@ -1,5 +1,6 @@
 package com.luan.hsworms.hydroid
 
+import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -88,18 +89,17 @@ class HistoryViewModel(application: Application): AndroidViewModel(application) 
         return history
     }
 
-
     /**
      * Get-Method for LiveData. Returns all records from History table when the table changes
      */
     fun getHistoryLiveData(): LiveData<List<History>> = historyLiveData
-
 
     ////////////////////////////////////////////////////////////////////////////////////
     //Utils:
     /**
      * Returns a curent date in text format with a pattern: "dd.MM.yyyy"
      */
+    @SuppressLint("SimpleDateFormat")
     private fun Date.toStringFormat(pattern: String = "dd.MM.yyyy"): String{
         return SimpleDateFormat(pattern).format(this)
     }

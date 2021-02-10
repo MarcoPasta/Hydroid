@@ -10,6 +10,13 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.luan.hsworms.hydroid.AddWaterDialogFragment
+import com.luan.hsworms.hydroid.MainActivity
+import com.luan.hsworms.hydroid.MainFragment
+
+/**
+ * Debugging tag for Logcat
+ */
+private const val TAG = "NotificationActivity"
 
 /**
  * Notification Class-Model for systemnotifications.
@@ -19,16 +26,12 @@ class NotificationActivity  {
     /**
      * Private empty constructor so no object of this class can be instatiated
      */
-    private constructor(){}
+    // private constructor(){}
 
     /**
      * Companion object so the functions can be called without any objects.
      */
     companion object {
-
-        private val TAG = "NotificationActivity"
-
-
         /**
          * Builds notification, checks OS-Version to create a notification channel (if needed) and then shows the notification.
          *
@@ -42,7 +45,7 @@ class NotificationActivity  {
          * @param contentBigText        More specified and bigger notification description.
          * @param contentPriority       Sets the priority for the notification. The higher the priority, the higher the chance for the user to see it.
          */
-        fun showNotification (
+        fun goalAchievedNotification (
             allowNotification: Boolean,
             CHANNEL_ID: String,
             NOTIFICATION_ID: Int,
@@ -57,6 +60,12 @@ class NotificationActivity  {
             if(!allowNotification)
                 return
 
+            // val intent: Intent? = AlarmService.setNewIntent(context)
+            val intent: Intent = Intent(context, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+
             // Build notification
             // apply allows us to specify more methods within a method
             val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
@@ -67,14 +76,15 @@ class NotificationActivity  {
                 contentBigText?.let {
                     setStyle(NotificationCompat.BigTextStyle().bigText(it))
                 }
+                setContentIntent(pendingIntent)
                 setAutoCancel(true)
                 setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
             }
 
             // Create channel (only needed if OS > Oreo/Android 8
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val channelName: String = "Notifications"
-                val channelDescription: String = "Standard Notification System"
+                val channelName = "Notifications"
+                val channelDescription = "Standard Notification System"
                 val channelImportance: Int = NotificationManager.IMPORTANCE_DEFAULT
                 val channel = NotificationChannel(CHANNEL_ID, channelName, channelImportance).apply {
                     description = channelDescription
@@ -87,7 +97,6 @@ class NotificationActivity  {
             NotificationManagerCompat.from(context).apply {
                 notify(NOTIFICATION_ID, builder.build())
             }
-
         }
 
         /**
@@ -114,7 +123,7 @@ class NotificationActivity  {
         ) {
 
             // val intent: Intent? = AlarmService.setNewIntent(context)
-            val intent: Intent = Intent(context, AddWaterDialogFragment::class.java).apply {
+            val intent: Intent = Intent(context, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
             val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
@@ -136,8 +145,8 @@ class NotificationActivity  {
 
             // Create channel (only needed if OS > Oreo/Android 8
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val channelName: String = "AlarmManager"
-                val channelDescription: String = "AlarmManager Notification System"
+                val channelName = "AlarmManager"
+                val channelDescription = "AlarmManager Notification System"
                 val channelImportance: Int = NotificationManager.IMPORTANCE_DEFAULT
                 val channel = NotificationChannel(CHANNEL_ID, channelName, channelImportance).apply {
                     description = channelDescription
@@ -150,9 +159,6 @@ class NotificationActivity  {
             NotificationManagerCompat.from(context).apply {
                 notify(NOTIFICATION_ID, builder.build())
             }
-
         }
-
     }
-
 }

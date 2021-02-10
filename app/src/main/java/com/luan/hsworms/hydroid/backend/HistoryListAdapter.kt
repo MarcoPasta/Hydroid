@@ -70,7 +70,7 @@ class HistoryListAdapter(var content: ArrayList<History>) :
         //Implement longClickListener
         init {
             itemView.setOnLongClickListener {
-                mItemLongClickListener?.setOnItemLongClickListener(adapterPosition)
+                mItemLongClickListener.setOnItemLongClickListener(adapterPosition)
 
                 true
             }

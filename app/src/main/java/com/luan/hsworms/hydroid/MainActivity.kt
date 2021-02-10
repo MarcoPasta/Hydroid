@@ -15,9 +15,10 @@ import com.google.android.material.navigation.NavigationView
 import com.luan.hsworms.hydroid.backend.notifications.AlarmService
 import com.luan.hsworms.hydroid.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+// TAG for debugging
+private const val TAG = "MainActivityFile"
 
-    private val TAG = "MainActivityFile"
+class MainActivity : AppCompatActivity() {
 
     //Navigation components
     private lateinit var binding: ActivityMainBinding
@@ -31,14 +32,13 @@ class MainActivity : AppCompatActivity() {
     // create a variable to get access to shared preference
     private lateinit var notificationViewModel: NotificationViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Log.d(TAG, "onCreate called")
 
         //setContentView(R.layout.activity_main)
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         //Verbinden Menu mit NavController
         navView.setupWithNavController(navController)
 
+        /////////////////////////////////////////////////////////////////////////////
+        // Notification:
         // Area Reserve for calling the AlarmManager on Creating the application.
         Log.d(TAG, "Entering reserved AlarmManager space")
 

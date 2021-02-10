@@ -24,15 +24,13 @@ class SportDialogFragment : DialogFragment() {
     //ViewModel
     private lateinit var mainViewModel: MainViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View
-    {
+    ): View {
         rootView = inflater.inflate(R.layout.fragment_sport_dialog, container, false)
         return rootView
     }
@@ -50,7 +48,7 @@ class SportDialogFragment : DialogFragment() {
     /**
      * Initializing buttons and setting click handlers for the three sports activity select buttons and the cancel button.
      */
-    private fun initButtons(){
+    private fun initButtons() {
         btnCancel = rootView.findViewById(R.id.btn_cancel)
         btnFitness = rootView.findViewById(R.id.btn_fitness)
         btnRun = rootView.findViewById(R.id.btn_joggen)
@@ -67,7 +65,7 @@ class SportDialogFragment : DialogFragment() {
      *
      * @param addWater The amount of water to add to the current daily requirement (type: Int)
      */
-    private fun changeWaterRequirementBecauseOfSport(addWater: Int){
+    private fun changeWaterRequirementBecauseOfSport(addWater: Int) {
         mainViewModel.addWaterRequirementBecauseOfSportOrWeather(addWater)
         dismiss()
     }

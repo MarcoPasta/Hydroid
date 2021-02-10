@@ -10,8 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
+import com.luan.hsworms.hydroid.backend.notifications.NotificationActivity
 import com.luan.hsworms.hydroid.databinding.MainFragmentBinding
+
+// For debugging
+private const val TAG = "MainFragment"
 
 /**
  * A class for handling events related to the main screen of the program.
@@ -21,8 +26,9 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var notificationViewModel: NotificationViewModel
     private lateinit var waterRequirementTableViewModel: WaterRequirementTableViewModel
-
+    private var notiToken = 1
 
     //TODO: MainActivity dokumentieren
     override fun onCreateView(
@@ -34,6 +40,11 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity(),
         MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
+
+        // Initialization of notificationViewModel
+        notificationViewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
+        notificationViewModel.notificationPreference = context?.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
+        notificationViewModel.loadData()
 
         //Initializing an object with user data with data from a file
         viewModel.firstStart = activity?.getSharedPreferences(
@@ -74,19 +85,16 @@ class MainFragment : Fragment() {
             newFragment.show(parentFragmentManager, "add water")
         }
 
-
         /////for debugging///////////////////
         //viewModel.clearFile()
         //viewModel.saveFirstStart(1)
         /////////////////////////////////////
-
 
         //Populate ScharedPreferences to check if the start is first
         viewModel.populateFirstStart()
 
         //Calling the function of initializing variables with values from internal storage
         viewModel.populateViewModel()
-
 
         //Check if the Start is first
         if(viewModel.isFirstStart == 1){//first start
@@ -115,6 +123,24 @@ class MainFragment : Fragment() {
         viewModel.currentlyDrunkLiquid.observe(viewLifecycleOwner, { newDrunkWater ->
             binding.tvDrunk.text = newDrunkWater.toString()
             binding.tvFulfillmentPercents.text = (newDrunkWater * 100 / viewModel.dailyLiquidRequirement.value!!).toString()
+            Log.d(TAG, "Prozent: " + binding.tvFulfillmentPercents.text.toString().toInt())
+            if(binding.tvFulfillmentPercents.text.toString().toInt() == 0)
+                notiToken = 0
+            Log.d(TAG, "notiToken: $notiToken")
+            if(binding.tvFulfillmentPercents.text.toString().toInt() >= 100 && notiToken < 1) {
+                NotificationActivity.goalAchievedNotification(
+                    notificationViewModel.switchBoolNotification,
+                    "Send Notification on 100 percent",
+                    1,
+                    requireContext(),
+                    R.drawable.ic_drop_48,
+                    "Du hast dein Ziel erreicht",
+                    "Du hast dein Tagesziel erreicht, sehr gut!",
+                    "Wenn du weiterhin so viel trinkst, wirkt sich das Positiv auf deine Gesundheit aus!",
+                    NotificationCompat.PRIORITY_DEFAULT
+                )
+                notiToken = 1
+            }
             binding.progressBarFulfillment.progress = binding.tvFulfillmentPercents.text.toString().toInt()
         })
 
@@ -122,7 +148,6 @@ class MainFragment : Fragment() {
         if(viewModel.isFirstStart == 1) //first start
             showUserInputDialog()
     }
-
 
     override fun onResume() {
         super.onResume()

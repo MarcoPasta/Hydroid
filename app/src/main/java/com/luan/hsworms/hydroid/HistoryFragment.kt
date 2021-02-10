@@ -58,7 +58,6 @@ class HistoryFragment : Fragment() {
 
         weatherDialogViewModel = WeatherDialogViewModel()
 
-
         //Initializing an object with user data with data from a file
         weatherDialogViewModel.weatherData = activity?.getSharedPreferences(
             getString(R.string.preferences_file_weather),
@@ -66,7 +65,7 @@ class HistoryFragment : Fragment() {
         )
 
         /**
-         *         History LiveData observer
+         * History LiveData observer
          */
         historyViewModel.getHistoryLiveData().observe(viewLifecycleOwner, {
             items ->

@@ -28,13 +28,10 @@ class WeatherDialogFragment : DialogFragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var weatherDialogViewModel: WeatherDialogViewModel
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
     }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -72,7 +69,7 @@ class WeatherDialogFragment : DialogFragment() {
     /**
      * Initializing All Dialog Box Buttons (Cancel button and four weather selection buttons). Implementing and setting a click handler
      */
-    private fun initButtons(){
+    private fun initButtons() {
         btnCancel = rootView.findViewById(R.id.btn_cancel)
         btnHeat = rootView.findViewById(R.id.btn_hitze)
         btnCold = rootView.findViewById(R.id.btn_kaelte)
@@ -86,26 +83,23 @@ class WeatherDialogFragment : DialogFragment() {
         btnHeat.setOnClickListener { changeWaterRequirementBecauseOfWeather(300) }
     }
 
-
     /**
      * Adds to the daily water requirement, an additional amount passed as a parameter. Closes the dialog.
      *
      * @param addWater The amount of water to be added to the standard daily requirement due to weather conditions (type: Int)
      */
-    private fun changeWaterRequirementBecauseOfWeather(addWater: Int){
-        if (weatherDialogViewModel.date != mainViewModel.currentDate()){//It is the first change of weather today
+    private fun changeWaterRequirementBecauseOfWeather(addWater: Int) {
+        if (weatherDialogViewModel.date != mainViewModel.currentDate()) {   //It is the first change of weather today
             mainViewModel.addWaterRequirementBecauseOfSportOrWeather(addWater)
             weatherDialogViewModel.date = mainViewModel.currentDate()
             weatherDialogViewModel.waterAddBecauseOfWeather = addWater
             weatherDialogViewModel.saveData(mainViewModel.currentDate(), weatherDialogViewModel.waterAddBecauseOfWeather)
-        } else //It is not the first change of weather today
-        {
+        } else {    //It is not the first change of weather today
             mainViewModel.addWaterRequirementBecauseOfSportOrWeather(-1 * weatherDialogViewModel.waterAddBecauseOfWeather)
             mainViewModel.addWaterRequirementBecauseOfSportOrWeather(addWater)
             weatherDialogViewModel.waterAddBecauseOfWeather = addWater
             weatherDialogViewModel.saveData(mainViewModel.currentDate(), weatherDialogViewModel.waterAddBecauseOfWeather)
         }
-
         dismiss()
     }
 }
