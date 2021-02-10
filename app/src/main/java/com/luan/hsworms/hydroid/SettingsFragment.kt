@@ -21,6 +21,7 @@ class SettingsFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var settingsViewModel: SettingsViewModel
+    private lateinit var weatherDialogViewModel: WeatherDialogViewModel
 
     private lateinit var rgGender: RadioGroup
     private lateinit var etWeight: TextInputLayout
@@ -29,6 +30,9 @@ class SettingsFragment : Fragment() {
     private lateinit var etGlassBig: TextInputLayout
     private lateinit var etGlassHuge: TextInputLayout
 
+
+    private var weightAtFirst:Int? = null
+    private var genderAtFirst:Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,14 +43,15 @@ class SettingsFragment : Fragment() {
         // Layout inflate
         rootView = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        //Initializing of MainViewModel
+        //Initializing of ViewModels
         viewModel = ViewModelProvider(requireActivity(),
             MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
 
-        //Initializing of SettingsViewModel
         settingsViewModel = ViewModelProvider(requireActivity(),SettingsViewModelFactory(requireActivity().application)
         ).get(SettingsViewModel::class.java)
+
+        weatherDialogViewModel = WeatherDialogViewModel()
 
 
         //Initializing of SharedPreferences
@@ -54,6 +59,12 @@ class SettingsFragment : Fragment() {
             getString(R.string.preferences_glasses),
             Context.MODE_PRIVATE
         )
+
+        weatherDialogViewModel.weatherData = activity?.getSharedPreferences(
+            getString(R.string.preferences_file_weather),
+            Context.MODE_PRIVATE
+        )
+
 
         // Filling temporary variables with values from internal storage (SharedPreferences)
         settingsViewModel.populateViewModel()
@@ -75,11 +86,12 @@ class SettingsFragment : Fragment() {
     }
 
 
-    override fun onStop() {
-        super.onStop()
-        //Saving data when the user leaves this menu section
+    override fun onPause() {
+        super.onPause()
         saveSettings()
+        //TODO:TESTEN
     }
+
 
     /**
      * Initialising of widgets
@@ -101,12 +113,17 @@ class SettingsFragment : Fragment() {
         //Filling of Gender-field
         if(viewModel.userGenderIsFemale.value == 1){
             rgGender.check(R.id.rb_female)
+            //TODO:TESTEN
+            genderAtFirst = 1
         } else {
             rgGender.check(R.id.rb_male)
+            genderAtFirst = 0
         }
 
         //Filling of Weight fields
         etWeight.editText?.setText(viewModel.weightOfUser.value.toString())
+        //TODO:TESTEN
+        weightAtFirst = viewModel.weightOfUser.value
 
         //Filling of Water-portions
         etGlassSmall.editText?.setText(settingsViewModel.glassSmall.value.toString())
@@ -129,10 +146,24 @@ class SettingsFragment : Fragment() {
         val gender = viewModel.userGenderIsFemale.value!!
         viewModel.saveGender(gender)
 
+
         //Weight settings
         val weight = view?.findViewById<TextInputLayout>(R.id.et_weight)?.editText?.text.toString().toFloat().roundToInt()
         viewModel.weightOfUser.value = weight
         viewModel.saveWeight(weight)
+
+
+        //TODO: Weiter testen
+        viewModel.waterRequirementsUpdate(weight.toLong(), gender)
+        viewModel.saveData(gender,weight, viewModel.dailyLiquidRequirement.value!!, viewModel.currentlyDrunkLiquid.value!!)
+        viewModel.updateWeightAndRequirement()
+
+        //If weather had been changed and then Data in Settings menue was changed
+        if(weightAtFirst != weight || genderAtFirst != gender){
+            weatherDialogViewModel.saveData(weatherDialogViewModel.currentDate(), 0)
+            weatherDialogViewModel.populateVariables()
+        }
+
 
         //Glass volumes
         settingsViewModel.saveData(etGlassSmall.editText?.text.toString().toFloat().roundToInt(),

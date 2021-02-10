@@ -87,12 +87,13 @@ class MainFragment : Fragment() {
         //Calling the function of initializing variables with values from internal storage
         viewModel.populateViewModel()
 
+
         //Check if the Start is first
         if(viewModel.isFirstStart == 1){//first start
             viewModel.clearFile()
             //viewModel.saveFirstStart(0)//From now is not first start
             //showUserInputDialog()
-        }else{//not first start was realised in SplashScreenActivity
+        }else{//not first start
             viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
                 viewModel.userGenderIsFemale.value!!)
         }
@@ -116,6 +117,7 @@ class MainFragment : Fragment() {
             binding.tvFulfillmentPercents.text = (newDrunkWater * 100 / viewModel.dailyLiquidRequirement.value!!).toString()
             binding.progressBarFulfillment.progress = binding.tvFulfillmentPercents.text.toString().toInt()
         })
+
 
         if(viewModel.isFirstStart == 1) //first start
             showUserInputDialog()
