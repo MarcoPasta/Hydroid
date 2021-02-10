@@ -9,9 +9,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.luan.hsworms.hydroid.AddWaterDialogFragment
 import com.luan.hsworms.hydroid.MainActivity
-import com.luan.hsworms.hydroid.MainFragment
 
 /**
  * Debugging tag for Logcat

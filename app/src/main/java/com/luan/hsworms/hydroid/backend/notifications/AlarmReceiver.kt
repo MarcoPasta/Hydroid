@@ -67,8 +67,9 @@ class AlarmReceiver: BroadcastReceiver() {
      *
      * @param context       Required to get access to the getSharedPreference() method.
      *
-     * @return              Instance loaded with the user desired expiration time for notifications.
+     * @return Instance loaded with the user desired expiration time for notifications.
      */
+
     private fun loadEndTimer(context: Context): Calendar {
         // getting a reference to the the sharedPreference (TEHE)
         val sp = context.applicationContext.getSharedPreferences("NotificationPreference", Context.MODE_PRIVATE)
