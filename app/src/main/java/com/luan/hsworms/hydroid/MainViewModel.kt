@@ -56,7 +56,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     /**
      * Assigning a value to a variable "isFirstStart" from local storage(SharedPrefereces).
      */
-    fun populateFirstStart(){
+    fun populateFirstStart() {
         isFirstStart = firstStart?.getInt(R.string.isFirstStart.toString(), 1)
     }
 
@@ -65,7 +65,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      *
      * @param firstStart_in The value, to be stored. 1 - first start; 0- not first start
      */
-    fun saveFirstStart(firstStart_in: Int){
+    fun saveFirstStart(firstStart_in: Int) {
         val editor = firstStart?.edit()
         editor?.putInt(R.string.isFirstStart.toString(), firstStart_in)
         editor?.apply()
@@ -75,7 +75,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     /**
      * Filling viewModel Live Data variables with values from internal storage (SharedPreferences)
      */
-    fun populateViewModel(){
+    fun populateViewModel() {
 
         userGenderIsFemale.value = ourUserData?.getInt(R.string.saved_gender_of_user.toString(), 1)
         weightOfUser.value = ourUserData?.getInt(R.string.saved_weight_of_user.toString(), 59)
@@ -91,7 +91,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * @param newLiquidRequirements   water demand (type: Int)
      * @param newDrunkLiquid          amount of water drunk (type: Int)
      */
-    fun saveData(newGender: Int, newWeight: Int, newLiquidRequirements: Int, newDrunkLiquid: Int){
+    fun saveData(newGender: Int, newWeight: Int, newLiquidRequirements: Int, newDrunkLiquid: Int) {
         val editor = ourUserData?.edit()
 
         editor?.putInt(R.string.saved_gender_of_user.toString(), newGender)
@@ -107,7 +107,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      *
      *  @param newGender user gender (type: Int) 1 - female, 0 - male
      */
-    fun saveGender(newGender: Int){
+    fun saveGender(newGender: Int) {
         val editor = ourUserData?.edit()
         editor?.putInt(R.string.saved_gender_of_user.toString(), newGender)
         editor?.apply()
@@ -118,7 +118,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      *
      *  @param newWeight user weight (type: Int)
      */
-    fun saveWeight(newWeight: Int){
+    fun saveWeight(newWeight: Int) {
         val editor = ourUserData?.edit()
         editor?.putInt(R.string.saved_weight_of_user.toString(), newWeight)
         editor?.apply()
@@ -127,7 +127,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     /**
      * Helper function for debugging. Clears the local storage (SharedPreferences) with user data (gender, weight, daily water requirement, amount of water drunk per day).
      */
-    fun clearFile(){
+    fun clearFile() {
         val editor = ourUserData?.edit()
         editor?.clear()
         editor?.apply()
@@ -139,8 +139,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * @param weightIn user weight (type: Int)
      * @param genderIn user gender (type: Int) 1 - female, 0 - male
      */
-    fun updateDataByStartActivity(weightIn: Long, genderIn: Int)
-    {
+    fun updateDataByStartActivity(weightIn: Long, genderIn: Int) {
         //Search the database for water requirements by weight and gender. Setss 1800 if didn't find.
         viewModelScope.launch {
             if(getHistoryByDate(currentDate()) == null) {//Should only be executed if there is no database record for today
@@ -157,7 +156,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * @param weightIn user weight (type: Int)
      * @param genderIn user gender (type: Int) 1 - female, 0 - male
      */
-    fun waterRequirementsUpdate(weightIn: Long, genderIn: Int): Int{
+    fun waterRequirementsUpdate(weightIn: Long, genderIn: Int): Int {
         var requirementReturn = 1800
         viewModelScope.launch {
             val waterRequirement: Int? = getWaterRequirementByWeightAndGender(weightIn, genderIn)
@@ -207,8 +206,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      *
      * @param waterIn the water you drink (type: int)
      */
-    fun addDrunkWater(waterIn:Int)
-    {
+    fun addDrunkWater(waterIn:Int) {
         currentlyDrunkLiquid.value = currentlyDrunkLiquid.value?.plus(waterIn)
         saveData(userGenderIsFemale.value!!, weightOfUser.value!!,
             dailyLiquidRequirement.value!!, currentlyDrunkLiquid.value!!)

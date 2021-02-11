@@ -94,7 +94,7 @@ class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):Rec
      *
      * @param content new content (ArrayList of WaterRequirement database table records)
      */
-    fun updateContent(content: ArrayList<WaterRequirement>){
+    fun updateContent(content: ArrayList<WaterRequirement>) {
         this.content = content
         //Update of content
         notifyDataSetChanged()
@@ -107,7 +107,7 @@ class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):Rec
     /**
      * Implementation of interface for ClickListener
      */
-    interface OnItemClickListener{
+    interface OnItemClickListener {
         /**
          * Implementation of ClickListener for a specific position
          *
@@ -121,14 +121,14 @@ class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):Rec
      *
      * @param mItemListener     interface for LongClickListener
      */
-    fun setOnItemClickListener(mItemListener:OnItemClickListener){
+    fun setOnItemClickListener(mItemListener:OnItemClickListener) {
         this.mItemListener = mItemListener
     }
 
     /**
      * Implementation of interface for LongClickListener
      */
-    interface OnItemLongClickListener{
+    interface OnItemLongClickListener {
         /**
          * Implementation of LongClickListener for a specific position
          *
@@ -142,7 +142,7 @@ class WaterRequirementTableAdapter (var content:ArrayList<WaterRequirement>):Rec
      *
      * @param mLongClickListener interface for LongClickListener
      */
-    fun setOnItemLongClickListener(mLongClickListener: OnItemLongClickListener){
+    fun setOnItemLongClickListener(mLongClickListener: OnItemLongClickListener) {
         this.mItemLongListener = mLongClickListener
     }
 }

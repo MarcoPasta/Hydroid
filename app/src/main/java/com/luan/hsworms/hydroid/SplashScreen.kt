@@ -50,7 +50,7 @@ class SplashScreen : AppCompatActivity() {
         viewModel.populateFirstStart()
 
         //Check if the Strat is first, if first calls fillingTheWaterRequirementTableAtTheFirstStart() function
-        if(viewModel.isFirstStart == 1){//first start
+        if(viewModel.isFirstStart == 1) {//first start
             //viewModel.clearFile()
                 viewModel.fillingTheWaterRequirementTableAtTheFirstStart()
         }

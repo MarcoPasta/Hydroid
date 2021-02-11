@@ -73,7 +73,7 @@ class HistoryFragment : Fragment() {
         })
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         rv = rootView.findViewById(R.id.history_rv)
 
         adapter = HistoryListAdapter(ArrayList())
@@ -82,7 +82,7 @@ class HistoryFragment : Fragment() {
         /**
          * LongClickListener Delete Entity in BD by long click
          */
-        adapter.setOnItemLongClickListener(object: HistoryListAdapter.OnItemLongClickListener{
+        adapter.setOnItemLongClickListener(object: HistoryListAdapter.OnItemLongClickListener {
             override fun setOnItemLongClickListener(position: Int) {
                 startAlarmDialog(adapter.content[position])
             }
@@ -94,7 +94,7 @@ class HistoryFragment : Fragment() {
      *
      * @param history Entry of History data base table
      */
-    private fun startAlarmDialog(history: History){
+    private fun startAlarmDialog(history: History) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.apply {
             setMessage("Warnung - Eintrag wird gelöscht")

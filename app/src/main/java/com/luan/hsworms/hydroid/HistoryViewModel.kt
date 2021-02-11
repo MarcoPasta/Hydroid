@@ -31,7 +31,7 @@ class HistoryViewModel(application: Application): AndroidViewModel(application) 
      * @param requirement   water demand (type: Int)
      * @param weight        user weight (type: Int)
      */
-    fun insert(drunk: Int, requirement: Int, weight: Int){
+    fun insert(drunk: Int, requirement: Int, weight: Int) {
         viewModelScope.launch{
             val history = History(0L, Date().toStringFormat(), drunk, requirement, (drunk/requirement)*100, weight)
             repository.insertInHistory(history)
@@ -43,7 +43,7 @@ class HistoryViewModel(application: Application): AndroidViewModel(application) 
      *
      * @param history an entry in the History Database table, to be changed
      */
-    fun update(history: History){
+    fun update(history: History) {
         viewModelScope.launch {
             repository.updateHistory(history)
         }
@@ -54,7 +54,7 @@ class HistoryViewModel(application: Application): AndroidViewModel(application) 
      *
      * @param history an entry in the History Database table, to be deleted
      */
-    fun delete(history: History){
+    fun delete(history: History) {
         viewModelScope.launch {
             repository.deleteHistory(history)
         }
@@ -67,7 +67,7 @@ class HistoryViewModel(application: Application): AndroidViewModel(application) 
      * @param date   The date, the record for which you want to get from the Database History table. (type: Date)
      * @return       The record from the Database History tavble, which you want to get. (type: History?)
      */
-    fun getHistoryByDate(date:Date): History?{
+    fun getHistoryByDate(date:Date): History? {
         var history:History? = null
         viewModelScope.launch {
             history = repository.getHistoryByDate(date.toStringFormat())
@@ -81,7 +81,7 @@ class HistoryViewModel(application: Application): AndroidViewModel(application) 
      *
      * @return List of History table entities (type: List<History>?)
      */
-    fun getHistoryAll():List<History>?{
+    fun getHistoryAll():List<History>? {
         var history:List<History>? = null
         viewModelScope.launch {
             history = repository.getHistoryAll()
@@ -100,7 +100,7 @@ class HistoryViewModel(application: Application): AndroidViewModel(application) 
      * Returns a curent date in text format with a pattern: "dd.MM.yyyy"
      */
     @SuppressLint("SimpleDateFormat")
-    private fun Date.toStringFormat(pattern: String = "dd.MM.yyyy"): String{
+    private fun Date.toStringFormat(pattern: String = "dd.MM.yyyy"): String {
         return SimpleDateFormat(pattern).format(this)
     }
     ////////////////////////////////////////////////////////////////////////////////////

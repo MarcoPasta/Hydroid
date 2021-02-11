@@ -82,7 +82,7 @@ class HistoryListAdapter(var content: ArrayList<History>) :
      *
      * @param content new content (ArrayList of History database table records)
      */
-    fun updateContent(content: ArrayList<History>){
+    fun updateContent(content: ArrayList<History>) {
         this.content = content
         //Update of content
         notifyDataSetChanged()
@@ -93,7 +93,7 @@ class HistoryListAdapter(var content: ArrayList<History>) :
     /**
      * Implementation of interface for LongClickListener
      */
-    interface OnItemLongClickListener{
+    interface OnItemLongClickListener {
 
         /**
          * Implementation of LongClickListener for a specific position
@@ -108,7 +108,7 @@ class HistoryListAdapter(var content: ArrayList<History>) :
      *
      * @param mLongClickListener interface for LongClickListener
      */
-    fun setOnItemLongClickListener(mLongClickListener: OnItemLongClickListener){
+    fun setOnItemLongClickListener(mLongClickListener: OnItemLongClickListener) {
         this.mItemLongListener = mLongClickListener
     }
 }

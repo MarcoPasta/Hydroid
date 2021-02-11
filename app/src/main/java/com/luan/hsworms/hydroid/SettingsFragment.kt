@@ -91,7 +91,7 @@ class SettingsFragment : Fragment() {
     /**
      * Initialising of widgets
      */
-    private fun initWidgets(){
+    private fun initWidgets() {
         rgGender = rootView.findViewById(R.id.rg_gender)
         etWeight = rootView.findViewById(R.id.et_weight)
         etGlassSmall = rootView.findViewById(R.id.et_glass_small)
@@ -103,7 +103,7 @@ class SettingsFragment : Fragment() {
     /**
      * Filling of the fragment fields
      */
-    private fun fillingOfTheFragmentFields(){
+    private fun fillingOfTheFragmentFields() {
         //Filling of Gender-field
         if(viewModel.userGenderIsFemale.value == 1){
             rgGender.check(R.id.rb_female)
@@ -127,7 +127,7 @@ class SettingsFragment : Fragment() {
     /**
      * Saving data specified in the "User Settings" menu section in variables and in local storage (SharedPreferences)
      */
-    private fun saveSettings(){
+    private fun saveSettings() {
         //Gender settings
         val genderSelected = view?.findViewById<RadioGroup>(R.id.rg_gender)?.checkedRadioButtonId
         if(genderSelected == R.id.rb_female){         //If gender == woman =>1 else 0
@@ -149,7 +149,7 @@ class SettingsFragment : Fragment() {
         viewModel.updateWeightAndRequirement()
 
         //If weather had been changed and then Data in Settings menue was changed
-        if(weightAtFirst != weight || genderAtFirst != gender){
+        if(weightAtFirst != weight || genderAtFirst != gender) {
             weatherDialogViewModel.saveData(weatherDialogViewModel.currentDate(), 0)
             weatherDialogViewModel.populateVariables()
         }

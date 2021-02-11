@@ -34,8 +34,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View
-    {
+    ): View {
         //Initializing of ViewModel
         viewModel = ViewModelProvider(requireActivity(),
         MainViewModelFactory(requireActivity().application)
@@ -97,11 +96,11 @@ class MainFragment : Fragment() {
         viewModel.populateViewModel()
 
         //Check if the Start is first
-        if(viewModel.isFirstStart == 1){//first start
+        if(viewModel.isFirstStart == 1) {  //first start
             viewModel.clearFile()
             //viewModel.saveFirstStart(0)//From now is not first start
             //showUserInputDialog()
-        }else{//not first start
+        }else {//not first start
             viewModel.updateDataByStartActivity(viewModel.weightOfUser.value!!.toLong(),
                 viewModel.userGenderIsFemale.value!!)
         }
@@ -136,7 +135,7 @@ class MainFragment : Fragment() {
                     R.drawable.ic_drop_48,
                     "Du hast dein Ziel erreicht",
                     "Du hast dein Tagesziel erreicht, sehr gut!",
-                    "Wenn du weiterhin so viel trinkst, wirkt sich das Positiv auf deine Gesundheit aus!",
+                    "Vergiss nicht weiterhin etwas zu trinken, denn viel Trinken ist gesund!",
                     NotificationCompat.PRIORITY_DEFAULT
                 )
                 notiToken = 1
@@ -162,8 +161,7 @@ class MainFragment : Fragment() {
     /**
      * This function will be called at the first start of the program to display a dialog in which the user can enter his gender and weight.
      */
-    private fun showUserInputDialog()
-    {
+    private fun showUserInputDialog() {
         //Set Dialog variable and inflate ViewModel
         val dialogView = layoutInflater.inflate(R.layout.user_data_dialog_fragment, null)
         val dialogBuilder = AlertDialog.Builder(activity)
@@ -192,7 +190,7 @@ class MainFragment : Fragment() {
         //Ok Button -> saving the entered parameters in the internal storage
         val okButton = dialogView.findViewById<Button>(R.id.imageButtonUserOk)
 
-        okButton.setOnClickListener{
+        okButton.setOnClickListener {
             //If gender == woman =>1 else 0
             val genderSelected =
                 dialogView.findViewById<RadioGroup>(R.id.radioGroupGender).checkedRadioButtonId
@@ -219,8 +217,7 @@ class MainFragment : Fragment() {
                 dialog.dismiss()
 
                 Toast.makeText(activity, getString(R.string.toast_daten_gesichert), Toast.LENGTH_SHORT).show()
-            } else
-            {
+            } else {
                 Toast.makeText(activity, getString(R.string.toast_gewicht_eingeben), Toast.LENGTH_SHORT).show()
             }
         }

@@ -28,7 +28,7 @@ class SettingsViewModel: ViewModel() {
     /**
      * Filling viewModel variables (Four preset user volumes of water) with values from internal storage (SharedPreferences)
      */
-    fun populateViewModel(){
+    fun populateViewModel() {
 
         glassSmall.value = glasses?.getInt((R.string.savedSmallGlass).toString(), 50)
         glassMiddle.value = glasses?.getInt((R.string.savedMiddleGlass).toString(), 100)
@@ -44,7 +44,7 @@ class SettingsViewModel: ViewModel() {
      * @param big       big glass
      * @param huge      bottle
      */
-    fun saveData(small: Int, middle: Int, big: Int, huge: Int){
+    fun saveData(small: Int, middle: Int, big: Int, huge: Int) {
         val editor = glasses?.edit()
 
         editor?.putInt(R.string.savedSmallGlass.toString(), small)

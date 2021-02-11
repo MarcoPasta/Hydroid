@@ -31,8 +31,8 @@ class AppRepository (application: Application) {
      *
      * @param waterRequirement An entry in a DB table WaterRequirement to be added
      */
-    suspend fun insertInRequirements(waterRequirement: WaterRequirement){
-        withContext(Dispatchers.IO){
+    suspend fun insertInRequirements(waterRequirement: WaterRequirement) {
+        withContext(Dispatchers.IO) {
             waterRequirementDao.insert(waterRequirement)
         }
     }
@@ -42,8 +42,8 @@ class AppRepository (application: Application) {
      *
      * @param history An entry in a DB table History to be added
      */
-    suspend fun insertInHistory(history: History){
-        withContext(Dispatchers.IO){
+    suspend fun insertInHistory(history: History) {
+        withContext(Dispatchers.IO) {
             historyDao.insert(history)
         }
     }
@@ -53,8 +53,8 @@ class AppRepository (application: Application) {
      *
      * @param waterRequirement An entry in a DB table WaterRequirement to be changed
      */
-    suspend fun updateRequirements(waterRequirement: WaterRequirement){
-        withContext(Dispatchers.IO){
+    suspend fun updateRequirements(waterRequirement: WaterRequirement) {
+        withContext(Dispatchers.IO) {
             waterRequirementDao.update(waterRequirement)
         }
     }
@@ -64,8 +64,8 @@ class AppRepository (application: Application) {
      *
      * @param history An entry in a DB table History to be changed
      */
-    suspend fun updateHistory(history: History){
-        withContext(Dispatchers.IO){
+    suspend fun updateHistory(history: History) {
+        withContext(Dispatchers.IO) {
             historyDao.update(history)
         }
     }
@@ -75,8 +75,8 @@ class AppRepository (application: Application) {
      *
      * @param waterRequirement An entry in a DB table WaterRequirement to be deleted
      */
-    suspend fun deleteRequirements(waterRequirement: WaterRequirement){
-        withContext(Dispatchers.IO){
+    suspend fun deleteRequirements(waterRequirement: WaterRequirement) {
+        withContext(Dispatchers.IO) {
             waterRequirementDao.delete(waterRequirement)
         }
     }
@@ -86,8 +86,8 @@ class AppRepository (application: Application) {
      *
      * @param history An entry in a DB table History to be deleted
      */
-    suspend fun deleteHistory(history: History){
-        withContext(Dispatchers.IO){
+    suspend fun deleteHistory(history: History) {
+        withContext(Dispatchers.IO) {
             historyDao.delete(history)
         }
     }
@@ -99,9 +99,9 @@ class AppRepository (application: Application) {
      *
      * @return          Water requirement matching the search criteria (type Int?)
      */
-    suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int):Int?{
+    suspend fun getWaterRequirementByWeightAndGender(weightIn: Long, genderIn: Int):Int? {
         var waterRequirement: Int?
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             waterRequirement = waterRequirementDao.getWaterRequirementByWeightAndGender(weightIn, genderIn)
         }
         return waterRequirement
@@ -114,7 +114,7 @@ class AppRepository (application: Application) {
      *
      * @return          An entry in a DB table History matching the search criteria
      */
-    suspend fun getHistoryByDate(dateIn: String):History?{
+    suspend fun getHistoryByDate(dateIn: String):History? {
         var history: History?
         withContext(Dispatchers.IO){
             history = historyDao.getHistoryByDate(dateIn)
@@ -127,7 +127,7 @@ class AppRepository (application: Application) {
      *
      * @return All records from the table WaterRequirement (type List<WaterRequirement>?)
      */
-    suspend fun getWaterRequirements():List<WaterRequirement>?{
+    suspend fun getWaterRequirements():List<WaterRequirement>? {
         var waterRequirements: List<WaterRequirement>?
         withContext(Dispatchers.IO){
             waterRequirements = waterRequirementDao.getWaterRequirements()
@@ -140,7 +140,7 @@ class AppRepository (application: Application) {
      *
      * @return All records from the table History (type List<History>?)
      */
-    suspend fun getHistoryAll():List<History>?{
+    suspend fun getHistoryAll():List<History>? {
         var history: List<History>?
         withContext(Dispatchers.IO){
             history = historyDao.getHistoryAll()

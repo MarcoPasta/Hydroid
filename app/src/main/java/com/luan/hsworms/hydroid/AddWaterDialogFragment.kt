@@ -86,7 +86,7 @@ class AddWaterDialogFragment: DialogFragment() {
         //Initializing textView with values
         initTextViewsWithValues()
 
-        btnSave.setOnClickListener{
+        btnSave.setOnClickListener {
             //Storing data in variables and local storage (SharedPreferences)
             saveData(tvQuantity.text.toString().toInt())
         }
@@ -96,7 +96,7 @@ class AddWaterDialogFragment: DialogFragment() {
     /**
      * Initializing of ok and Cancel buttons and implementation of clickLisener for the cancel button
      */
-    private fun initButtons(){
+    private fun initButtons() {
         btnSave = rootView.findViewById(R.id.btn_add_water_ok)
         btnAbort = rootView.findViewById(R.id.btn_add_water_cancel)
 
@@ -106,7 +106,7 @@ class AddWaterDialogFragment: DialogFragment() {
     /**
      * Initializing of imageViews and implementation of clicksListener for them
      */
-    private fun initImageViews(){
+    private fun initImageViews() {
         //Initialization of imageViews
         imgSmall = rootView.findViewById(R.id.iv_glass_small)
         imgMiddle = rootView.findViewById(R.id.iv_glass_middle)
@@ -123,7 +123,7 @@ class AddWaterDialogFragment: DialogFragment() {
     /**
      * Initializing of TextViews and set value on tvQuantity
      */
-    private fun initTextView(){
+    private fun initTextView() {
         tvQuantitySmall = rootView.findViewById(R.id.tv_volume_small)
         tvQuantityMiddle = rootView.findViewById(R.id.tv_volume_middle)
         tvQuantityBig = rootView.findViewById(R.id.tv_volume_big)
@@ -137,7 +137,7 @@ class AddWaterDialogFragment: DialogFragment() {
      *
      * @param waterIn The amount of added (drunk) water (type: Int)
      */
-    private fun saveData(waterIn:Int){
+    private fun saveData(waterIn:Int) {
         mainViewModel.addDrunkWater(waterIn)
         dismiss()
     }
@@ -145,7 +145,7 @@ class AddWaterDialogFragment: DialogFragment() {
     /**
      * Initializing of TextViews with values
      */
-    private fun initTextViewsWithValues(){
+    private fun initTextViewsWithValues() {
         tvQuantitySmall.text = settingsViewModel.glassSmall.value.toString()
         tvQuantityMiddle.text = settingsViewModel.glassMiddle.value.toString()
         tvQuantityBig.text = settingsViewModel.glassBig.value.toString()
