@@ -43,7 +43,7 @@ class AlarmService {
          * @param hour                      User defined value. States when notifications shall start
          * @param minute                    User defined value. States when notifications shall start
          */
-        fun setHelpDrinkAlarm(context: Context, helpDrinkSwitchState: Boolean, hour: Int, minute: Int) {
+        fun setHelpDrinkAlarm(context: Context, helpDrinkSwitchState: Boolean) {
 
             Log.d(TAG, "setAlarm called")
             Log.d(TAG, "AlarmManager created")
@@ -59,8 +59,6 @@ class AlarmService {
             // This Calendar objects converts the user desired notification time into a Calendar object.
             val setExactTime: Calendar = Calendar.getInstance().apply {
                 timeinMillis = System.currentTimeMillis()
-                set(Calendar.HOUR_OF_DAY, hour)
-                set(Calendar.MINUTE, minute)
             }
 
             /*

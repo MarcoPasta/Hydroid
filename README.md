@@ -20,7 +20,7 @@ You can find the documentation for this project [here](https://luca.0x5245.de/hy
 ---
 
 Created by: 
-| Name           | Email                |
-| -------------  | --------------------
-| Andrej Alpatov | inf3407@hs-worms.de  |
-| Luca Chiarelli | inf3398@hs-worms.de  |
+| Name           |
+| -------------  |
+| Andrej Alpatov |
+| Luca Chiarelli |

@@ -12,7 +12,5 @@ It features:
 * Add and customize your own profile. Provide us your weight so we calculate how much you should drink per day! 
 ---
 Created by: 
-| Name           | Email                |
-| -------------  | -------------------- |
-| Andrej Alpatov | inf3407@hs-worms.de  |
-| Luca Chiarelli | inf3398@hs-worms.de  |
+* Andrej Alpatov - inf3407.hs-worms.de
+* Luca Chiarelli - inf3398@hs-worms.de

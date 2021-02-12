@@ -141,9 +141,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
                 Log.d(TAG, "AlarmService::setHelpDrinkAlarm() called")
                 AlarmService.setHelpDrinkAlarm(
                     requireContext(),
-                    notificationViewModel.canSendHelpDrinkNotification(),
-                    notificationViewModel.startHour,
-                    notificationViewModel.startMinute
+                    notificationViewModel.canSendHelpDrinkNotification()
                 )
             } else {
                 Toast.makeText(
@@ -155,9 +153,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
                 Log.d(TAG, "AlarmService::setHelpDrinkAlarm() called")
                 AlarmService.setHelpDrinkAlarm(
                     requireContext(),
-                    notificationViewModel.canSendHelpDrinkNotification(),
-                    notificationViewModel.startHour,
-                    notificationViewModel.startMinute
+                    notificationViewModel.canSendHelpDrinkNotification()
                 )
             }
         }
@@ -176,9 +172,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
                 Log.d(TAG, "AlarmService::setHelpDrinkAlarm() called")
                 AlarmService.setHelpDrinkAlarm(
                     requireContext(),
-                    notificationViewModel.canSendHelpDrinkNotification(),
-                    notificationViewModel.startHour,
-                    notificationViewModel.startMinute
+                    notificationViewModel.canSendHelpDrinkNotification()
                 )
             }
             else {
@@ -188,9 +182,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
 
                 AlarmService.setHelpDrinkAlarm(
                     requireContext(),
-                    notificationViewModel.canSendHelpDrinkNotification(),
-                    notificationViewModel.startHour,
-                    notificationViewModel.startMinute
+                    notificationViewModel.canSendHelpDrinkNotification()
                 )
             }
         }
@@ -233,9 +225,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
             Log.d(TAG, "AlarmService::setHelpDrinkAlarm() called")
             AlarmService.setHelpDrinkAlarm(
                 requireContext(),
-                notificationViewModel.canSendHelpDrinkNotification(),
-                notificationViewModel.startHour,
-                notificationViewModel.startMinute
+                notificationViewModel.canSendHelpDrinkNotification()
             )
         }
 
@@ -267,9 +257,7 @@ class NotificationFragment : Fragment() , TimePickerDialog.OnTimeSetListener {
             Log.d(TAG, "AlarmService::setHelpDrinkAlarm() called")
             AlarmService.setHelpDrinkAlarm(
                 requireContext(),
-                notificationViewModel.canSendHelpDrinkNotification(),
-                notificationViewModel.startHour,
-                notificationViewModel.startMinute
+                notificationViewModel.canSendHelpDrinkNotification()
             )
         }
     }

@@ -14,6 +14,7 @@ import androidx.navigation.ui.*
 import com.google.android.material.navigation.NavigationView
 import com.luan.hsworms.hydroid.backend.notifications.AlarmService
 import com.luan.hsworms.hydroid.databinding.ActivityMainBinding
+import java.util.*
 
 // TAG for debugging
 private const val TAG = "MainActivityFile"
@@ -65,9 +66,7 @@ class MainActivity : AppCompatActivity() {
         // Initial call so the alarm is at least send one time on opening the application.
         AlarmService.setHelpDrinkAlarm(
             this,
-            notificationViewModel.canSendHelpDrinkNotification(),
-            notificationViewModel.startHour,
-            notificationViewModel.startMinute
+            notificationViewModel.canSendHelpDrinkNotification()
         )
         Log.d(TAG, "End of onCreate")
         //////////////////////////////////////////////////////////////////////////
